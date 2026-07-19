@@ -4,7 +4,7 @@
 
 ## 投影片結構
 
-全套共 21 張投影片：
+全套共 17 張投影片：
 
 1. 用 AI 打造全端網站
 2. 今天做出可被找到的網站
@@ -18,15 +18,11 @@
 10. Claude Code 或 Codex 連動 repo
 11. Vercel 部署前端
 12. Supabase 串資料，持續修改到完成
-13. 貼給 AI 的 key，視為已曝光
-14. 新 key：手動更新 Vercel
-15. 有自動化才更新 GitHub Secrets
-16. 同步本地 `.env.local`，測試後再推送
-17. 讓 Claude Code 協助維護
-18. Chrome 上的 AI 助手
-19. 推送即部署
-20. 網站完成後的三件事
-21. 完成一個可持續維護的網站
+13. 讓 Claude Code 協助維護
+14. 推送即部署
+15. 網站完成後的三件事
+16. 網站上線後，用 AI 處理安全設定
+17. 完成一個可持續維護的網站
 
 ## 本機預覽
 
@@ -49,7 +45,7 @@ npm test
 - 桌機可使用方向鍵、Page Up、Page Down、Home、End 與空白鍵翻頁。
 - 可使用右側圓點直接前往指定頁面。
 - 手機與觸控裝置可上下滑動，投影片會自動吸附至完整頁面。
-- 網址會同步目前頁數，例如 `#slide-21`；複製完整網址即可分享指定投影片。
+- 網址會同步目前頁數，例如 `#slide-17`；複製完整網址即可分享指定投影片。
 - 使用瀏覽器的「列印」功能，可直接列印或另存為 PDF；每張投影片會輸出成獨立頁面。
 
 ## 部署到 Vercel
@@ -76,8 +72,8 @@ npm test
 - 不應將任何 token commit 到 repository。
 - API key、部署憑證與其他秘密資料不得寫入 HTML、CSS、JavaScript、README 或 Vercel 設定。
 - 曾貼給 AI 的 token 與 API key 應視為已暴露，正式上線前重新產生，並撤銷舊憑證。
-- 新 key 的更新順序是：Vercel Environment Variables → GitHub Actions Secrets（僅在 workflow 有使用時）→ 本機 `.env.local` → 重新部署與測試。
-- `service-role key`、private API key 與 Vercel token 不可放在前端、commit 進 GitHub，或提供給 AI；前端僅能使用搭配 RLS 的 Supabase anon key。
+- 上線後可由 Claude on Chrome 或 Codex on Chrome 帶領瀏覽器操作：重新產生 key、更新 Vercel Environment Variables、更新 GitHub Actions Secrets（僅在 workflow 有使用時）、將 repository 設為 Private，最後重新部署與測試。
+- `service-role key`、private API key、密碼與 Vercel token 不可放在前端、commit 進 GitHub 或交給 AI；真正輸入私密值時由老師手動處理。
 - 建議讓 Claude Code / Codex 在本地端執行修改、測試、commit 與 push；以 GitHub 連動 Vercel 自動建立 Preview，`main` 的 push 則發布 Production。
 - 確認自動部署成功後，將 GitHub repository 設為 Private，避免原始碼意外公開。
 

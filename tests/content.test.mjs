@@ -15,15 +15,31 @@ const requiredSlideTitles = [
   "Claude Code 或 Codex 連動 repo",
   "Vercel 部署前端",
   "Supabase 串資料，持續修改到完成",
-  "貼給 AI 的 key，視為已曝光",
-  "新 key：手動更新 Vercel",
-  "有自動化才更新 GitHub Secrets",
-  "同步本地 .env.local，測試後再推送",
   "讓 Claude Code 協助維護",
-  "Chrome 上的 AI 助手",
   "推送即部署",
   "網站完成後的三件事",
+  "網站上線後，用 AI 處理安全設定",
   "完成一個可持續維護的網站",
+];
+
+const requiredSlideSummaries = [
+  "AI 幫你把想法做成網站。",
+  "做出能用、能分享、能被找到的網站。",
+  "跟著五步驟，完成網站。",
+  "先準備帳號和 key。",
+  "每個工具各做一件事。",
+  "說清楚需求，AI 幫你做畫面。",
+  "確認手機、分享和搜尋都正常。",
+  "把第一版存到 GitHub。",
+  "在電腦保留專案資料夾。",
+  "讓 AI 先看懂，再幫你改。",
+  "用 Vercel 把網站公開。",
+  "串上資料，持續修改。",
+  "一次改一件事，先測試。",
+  "推送程式，網站自動更新。",
+  "接網域、GA 和 Search Console。",
+  "上線後，請 AI 用瀏覽器把安全設定做完。",
+  "網站完成後，持續優化。",
 ];
 
 async function loadIndexHtml() {
@@ -136,10 +152,10 @@ function getSlideText(html, slideIndex) {
   return getVisibleText(slide);
 }
 
-test("contains exactly 21 sections with the slide class", async () => {
+test("contains exactly 17 sections with the slide class", async () => {
   const html = await loadIndexHtml();
 
-  assert.equal(getSlideSections(html).length, 21);
+  assert.equal(getSlideSections(html).length, 17);
 });
 
 test("places every approved title in its corresponding slide section", async () => {
@@ -151,6 +167,23 @@ test("places every approved title in its corresponding slide section", async () 
     assert.ok(
       slideText.includes(title),
       `slide ${index + 1} must contain its required title: ${title}`,
+    );
+  }
+});
+
+test("places a child-friendly summary at the bottom of every slide", async () => {
+  const slides = getSlideSections(await loadIndexHtml());
+
+  assert.equal(slides.length, requiredSlideSummaries.length);
+  for (const [index, summary] of requiredSlideSummaries.entries()) {
+    assert.match(
+      slides[index],
+      /class="slide-summary"/,
+      `slide ${index + 1} must include a summary element`,
+    );
+    assert.ok(
+      getVisibleText(slides[index]).includes(summary),
+      `slide ${index + 1} must include its child-friendly summary`,
     );
   }
 });
@@ -176,27 +209,6 @@ test("introduces the five-step website production flow after the outcome", async
   assert.match(visibleText, /持續優化/);
 });
 
-test("requires every AI-shared token and API key to be regenerated after launch", async () => {
-  const visibleText = getSlideText(await loadIndexHtml(), 12);
-
-  assert.match(visibleText, /(?:所有|每一把|全部)/);
-  assert.match(visibleText, /(?:貼給|提供給|分享給|交給)/);
-  assert.match(visibleText, /\bAI\b/i);
-  assert.match(visibleText, /\btoken\b/i);
-  assert.match(visibleText, /\bAPI key\b/i);
-  assert.match(visibleText, /(?:上線前|正式上線)/);
-  assert.match(visibleText, /(?:重新產生|重新生成|重新更換|換一把)/);
-});
-
-test("forbids private and service-role keys in frontend code", async () => {
-  const visibleText = getSlideText(await loadIndexHtml(), 12);
-
-  assert.match(visibleText, /\bprivate key\b/i);
-  assert.match(visibleText, /\bservice-role key\b/i);
-  assert.match(visibleText, /(?:不能|不可|禁止|絕不)/);
-  assert.match(visibleText, /(?:前端|frontend)/i);
-});
-
 test("checks Meta information, Open Graph, and RWD before storing the frontend", async () => {
   const visibleText = getSlideText(await loadIndexHtml(), 6);
 
@@ -205,39 +217,34 @@ test("checks Meta information, Open Graph, and RWD before storing the frontend",
   assert.match(visibleText, /RWD/);
 });
 
-test("teaches the ordered rotation of Vercel, GitHub, and local secrets", async () => {
-  const vercelText = getSlideText(await loadIndexHtml(), 13);
-  const githubText = getSlideText(await loadIndexHtml(), 14);
-  const localText = getSlideText(await loadIndexHtml(), 15);
-
-  assert.match(vercelText, /Vercel/);
-  assert.match(vercelText, /Environment Variables/);
-  assert.match(vercelText, /重新部署/);
-  assert.match(githubText, /GitHub Actions Secrets/);
-  assert.match(githubText, /(?:有自動化|只有.*自動化)/);
-  assert.match(localText, /\.env\.local/);
-  assert.match(localText, /(?:不要|不可|絕不).*commit/);
-});
-
-test("introduces Chrome AI assistants and Git-driven Vercel deployment", async () => {
-  const claudeText = getSlideText(await loadIndexHtml(), 16);
-  const chromeText = getSlideText(await loadIndexHtml(), 17);
-  const deployText = getSlideText(await loadIndexHtml(), 18);
+test("teaches AI maintenance and Git-driven Vercel deployment", async () => {
+  const claudeText = getSlideText(await loadIndexHtml(), 12);
+  const deployText = getSlideText(await loadIndexHtml(), 13);
 
   assert.match(claudeText, /Claude Code/);
   assert.match(claudeText, /(?:測試|檢查)/);
   assert.match(claudeText, /commit/);
   assert.match(claudeText, /push/);
-  assert.match(chromeText, /Claude on Chrome/);
-  assert.match(chromeText, /Codex on Chrome/);
-  assert.match(chromeText, /(?:操控|控制).*瀏覽器/);
-  assert.match(chromeText, /(?:設定卡住|卡住)/);
-  assert.match(chromeText, /(?:不要|不可|絕不).*敏感/);
   assert.match(deployText, /Preview/);
   assert.match(deployText, /main/);
   assert.match(deployText, /Production/);
   assert.match(deployText, /repository.*Private|repo.*Private/i);
   assert.match(deployText, /自動部署.*成功|部署.*成功.*repository/i);
+});
+
+test("uses browser-connected AI to complete all post-launch safety tasks", async () => {
+  const visibleText = getSlideText(await loadIndexHtml(), 15);
+
+  assert.match(visibleText, /網站上線後/);
+  assert.match(visibleText, /Claude on Chrome/);
+  assert.match(visibleText, /Codex on Chrome/);
+  assert.match(visibleText, /(?:操控|控制).*瀏覽器/);
+  assert.match(visibleText, /學生只要看著/);
+  assert.match(visibleText, /(?:重新產生|換新).*key/);
+  assert.match(visibleText, /Vercel/);
+  assert.match(visibleText, /GitHub Actions Secrets/);
+  assert.match(visibleText, /repository.*Private|repo.*Private/i);
+  assert.match(visibleText, /(?:不要|不可|絕不).*token/);
 });
 
 test("omits prohibited brand names from visible content", async () => {

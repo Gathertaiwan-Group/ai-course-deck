@@ -86,7 +86,7 @@ test("sets conservative security headers for every route", async () => {
 test("documents local use, navigation, sharing, printing, and deployment", async () => {
   const readme = await readProjectFile("README.md");
 
-  assert.match(readme, /21\s*張投影片/);
+  assert.match(readme, /17\s*張投影片/);
   assert.match(readme, /python3 -m http\.server 4173/);
   assert.match(readme, /npm test/);
   assert.match(readme, /方向鍵/);

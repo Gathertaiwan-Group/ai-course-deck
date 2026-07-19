@@ -267,7 +267,7 @@ test("uses browser-connected AI to complete all post-launch safety tasks", async
   assert.match(visibleText, /Claude on Chrome/);
   assert.match(visibleText, /Codex on Chrome/);
   assert.match(visibleText, /(?:操控|控制).*瀏覽器/);
-  assert.match(visibleText, /學生只要看著/);
+  assert.match(visibleText, /我們只要看著/);
   assert.match(visibleText, /(?:重新產生|換新).*key/);
   assert.match(visibleText, /Vercel/);
   assert.match(visibleText, /GitHub Actions Secrets/);

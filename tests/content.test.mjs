@@ -246,9 +246,16 @@ test("checks Meta information, Open Graph, and RWD before storing the frontend",
 });
 
 test("teaches AI maintenance and Git-driven Vercel deployment", async () => {
+  const slides = getSlideSections(await loadIndexHtml());
+  const localRepoMarkup = slides[8];
+  const claudeMarkup = slides[11];
   const claudeText = getSlideText(await loadIndexHtml(), 11);
   const deployText = getSlideText(await loadIndexHtml(), 12);
 
+  assert.match(localRepoMarkup, /assets\/logos\/claude\.svg/);
+  assert.match(localRepoMarkup, /assets\/logos\/codex\.svg/);
+  assert.match(claudeMarkup, /assets\/logos\/claude\.svg/);
+  assert.match(claudeMarkup, /assets\/logos\/codex\.svg/);
   assert.match(claudeText, /Claude Code/);
   assert.match(claudeText, /(?:測試|檢查)/);
   assert.match(claudeText, /commit/);

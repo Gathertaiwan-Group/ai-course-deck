@@ -304,15 +304,20 @@ strong {
 
 .tool-logo-pair {
   display: grid;
-  width: min(100%, 264px);
+  width: min(88%, 420px);
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  gap: clamp(26px, 4vw, 44px);
   align-items: center;
 }
 
 .tool-logo-pair img {
   width: 100%;
   height: auto;
+}
+
+.visual-card--tool .tool-logo-pair img {
+  width: 100%;
+  max-height: none;
 }
 
 .visual-card--tool img {

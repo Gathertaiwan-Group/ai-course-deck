@@ -224,6 +224,8 @@ test("introduces Chrome AI assistants and Git-driven Vercel deployment", async (
   assert.match(deployText, /Preview/);
   assert.match(deployText, /main/);
   assert.match(deployText, /Production/);
+  assert.match(deployText, /repository.*Private|repo.*Private/i);
+  assert.match(deployText, /自動部署.*成功|部署.*成功.*repository/i);
 });
 
 test("omits prohibited brand names from visible content", async () => {

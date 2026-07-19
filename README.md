@@ -78,6 +78,7 @@ npm test
 - 新 key 的更新順序是：Vercel Environment Variables → GitHub Actions Secrets（僅在 workflow 有使用時）→ 本機 `.env.local` → 重新部署與測試。
 - `service-role key`、private API key 與 Vercel token 不可放在前端、commit 進 GitHub，或提供給 AI；前端僅能使用搭配 RLS 的 Supabase anon key。
 - 建議讓 Claude Code / Codex 在本地端執行修改、測試、commit 與 push；以 GitHub 連動 Vercel 自動建立 Preview，`main` 的 push 則發布 Production。
+- 確認自動部署成功後，將 GitHub repository 設為 Private，避免原始碼意外公開。
 
 ## 素材來源
 

@@ -153,6 +153,15 @@ test("places every approved title in its corresponding slide section", async () 
   }
 });
 
+test("lists required Vercel and Supabase credentials before class", async () => {
+  const visibleText = getSlideText(await loadIndexHtml(), 2);
+
+  assert.match(visibleText, /開好 Vercel 帳號/);
+  assert.match(visibleText, /取得 Vercel token/);
+  assert.match(visibleText, /開好 Supabase 帳號/);
+  assert.match(visibleText, /取得 Supabase (?:token|API key)/);
+});
+
 test("requires every AI-shared token and API key to be regenerated after launch", async () => {
   const visibleText = getSlideText(await loadIndexHtml(), 11);
 

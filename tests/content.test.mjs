@@ -5,7 +5,6 @@ import test from "node:test";
 const requiredSlideTitles = [
   "用 AI 打造全端網站",
   "今天做出可被找到的網站",
-  "今天會用五步驟完成網站",
   "前置準備",
   "5 步完成網站",
   "AI Studio：快速做出前端",
@@ -15,7 +14,7 @@ const requiredSlideTitles = [
   "Claude Code 或 Codex 連動 repo",
   "Vercel 部署前端",
   "Supabase 串資料，持續修改到完成",
-  "讓 Claude Code 協助維護",
+  "讓 Claude Code 或 Codex 協助維護",
   "推送即部署",
   "網站完成後的三件事",
   "網站上線後，用 AI 處理安全設定",
@@ -25,7 +24,6 @@ const requiredSlideTitles = [
 const requiredSlideSummaries = [
   "AI 幫你把想法做成網站。",
   "做出能用、能分享、能被找到的網站。",
-  "跟著五步驟，完成網站。",
   "先準備帳號和 key。",
   "每個工具各做一件事。",
   "說清楚需求，AI 幫你做畫面。",
@@ -152,10 +150,10 @@ function getSlideText(html, slideIndex) {
   return getVisibleText(slide);
 }
 
-test("contains exactly 17 sections with the slide class", async () => {
+test("contains exactly 16 sections with the slide class", async () => {
   const html = await loadIndexHtml();
 
-  assert.equal(getSlideSections(html).length, 17);
+  assert.equal(getSlideSections(html).length, 16);
 });
 
 test("places every approved title in its corresponding slide section", async () => {
@@ -189,7 +187,7 @@ test("places a child-friendly summary at the bottom of every slide", async () =>
 });
 
 test("lists required Vercel and Supabase credentials before class", async () => {
-  const visibleText = getSlideText(await loadIndexHtml(), 3);
+  const visibleText = getSlideText(await loadIndexHtml(), 2);
 
   assert.match(visibleText, /開好 Vercel 帳號/);
   assert.match(visibleText, /取得 Vercel token/);
@@ -199,9 +197,9 @@ test("lists required Vercel and Supabase credentials before class", async () => 
 });
 
 test("introduces the five-step website production flow after the outcome", async () => {
-  const visibleText = getSlideText(await loadIndexHtml(), 2);
+  const visibleText = getSlideText(await loadIndexHtml(), 3);
 
-  assert.match(visibleText, /五步驟/);
+  assert.match(visibleText, /(?:5 步|五步驟)/);
   assert.match(visibleText, /生成前端/);
   assert.match(visibleText, /存進 GitHub/);
   assert.match(visibleText, /本地開發/);
@@ -209,8 +207,38 @@ test("introduces the five-step website production flow after the outcome", async
   assert.match(visibleText, /持續優化/);
 });
 
+test("uses consistent Step and chapter numbers across every workflow page", async () => {
+  const chapters = [
+    [4, "01", "1-1"],
+    [5, "01", "1-2"],
+    [6, "02", "2-1"],
+    [7, "03", "3-1"],
+    [8, "03", "3-2"],
+    [9, "04", "4-1"],
+    [10, "04", "4-2"],
+    [11, "04", "4-3"],
+    [12, "04", "4-4"],
+    [13, "05", "5-1"],
+    [14, "05", "5-2"],
+  ];
+  const slides = getSlideSections(await loadIndexHtml());
+
+  for (const [index, step, chapter] of chapters) {
+    assert.match(
+      slides[index],
+      new RegExp(`class="chapter-badge">STEP ${step}<`),
+      `slide ${index + 1} must show STEP ${step} in the upper-left index`,
+    );
+    assert.match(
+      slides[index],
+      new RegExp(`class="chapter-large-number"[^>]*>${chapter}<`),
+      `slide ${index + 1} must show chapter ${chapter} in the lower-left index`,
+    );
+  }
+});
+
 test("checks Meta information, Open Graph, and RWD before storing the frontend", async () => {
-  const visibleText = getSlideText(await loadIndexHtml(), 6);
+  const visibleText = getSlideText(await loadIndexHtml(), 5);
 
   assert.match(visibleText, /Meta/);
   assert.match(visibleText, /Open Graph/);
@@ -218,8 +246,8 @@ test("checks Meta information, Open Graph, and RWD before storing the frontend",
 });
 
 test("teaches AI maintenance and Git-driven Vercel deployment", async () => {
-  const claudeText = getSlideText(await loadIndexHtml(), 12);
-  const deployText = getSlideText(await loadIndexHtml(), 13);
+  const claudeText = getSlideText(await loadIndexHtml(), 11);
+  const deployText = getSlideText(await loadIndexHtml(), 12);
 
   assert.match(claudeText, /Claude Code/);
   assert.match(claudeText, /(?:測試|檢查)/);
@@ -233,7 +261,7 @@ test("teaches AI maintenance and Git-driven Vercel deployment", async () => {
 });
 
 test("uses browser-connected AI to complete all post-launch safety tasks", async () => {
-  const visibleText = getSlideText(await loadIndexHtml(), 15);
+  const visibleText = getSlideText(await loadIndexHtml(), 14);
 
   assert.match(visibleText, /網站上線後/);
   assert.match(visibleText, /Claude on Chrome/);

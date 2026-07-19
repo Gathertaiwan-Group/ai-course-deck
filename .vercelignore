@@ -16,4 +16,5 @@ node_modules/
 .vscode/
 
 test-results/
+test-artifacts/
 playwright-report/

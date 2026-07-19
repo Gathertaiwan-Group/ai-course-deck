@@ -55,7 +55,15 @@ npm test
 4. Framework Preset 選擇 `Other`，根目錄維持 repository root。
 5. 不需 Build Command、Output Directory 或環境變數，直接部署即可。
 
-`vercel.json` 已設定靜態網站所需的乾淨網址、資產快取與保守安全標頭。根目錄的 `index.html` 會作為網站首頁。
+`vercel.json` 已設定靜態網站所需的乾淨網址、資產快取與保守安全標頭。根目錄的 `index.html` 會作為網站首頁；`.vercelignore` 則排除測試、規格文件、套件中繼資料與本機工具檔，部署內容只保留執行簡報需要的 HTML、CSS、JavaScript、設定與 `assets/`。
+
+### 快取策略
+
+目前圖片與 SVG 的檔名未使用內容雜湊，因此不能設定一年期 `immutable` 快取。`assets/` 採用 `public, max-age=3600, must-revalidate`：
+
+- 瀏覽器最多直接使用快取一小時。
+- 快取到期後必須向 Vercel 重新驗證；檔案未變時可沿用，檔案更新時會取得新版。
+- 若要讓重要素材更新立即生效，可更換檔名或在 Vercel 清除快取後重新部署。
 
 ## 安全注意事項
 
@@ -65,6 +73,13 @@ npm test
 
 ## 素材來源
 
-- `assets/hero.jpg`：由原始投影片素材提供的 hero artwork。
-- 工具圖示：取自 Simple Icons 或各工具官方提供的標誌。
+- `assets/hero.jpg`：由原始投影片素材提供的 hero artwork；SHA-256 為 `fb4f36a58af2dcb6412cdfe2ba20a3cb05644ffbd2a23831bc8cfc327ff07b18`。
+- `assets/logos/claude.svg`：Simple Icons 的 Anthropic 圖示；SHA-256 為 `1c10881e4729127e1a86e569613d786240acae13eacfa01860be065b66260e36`。
+- `assets/logos/gemini.svg` 與 `assets/logos/google-ai-studio.svg`：Simple Icons 的 Google Gemini 圖示；SHA-256 均為 `404eba6940a54e63d40edcce2d2e7cb2b3dbfec765e7a1d523662b6f4e0d6747`。
+- `assets/logos/github.svg`：Simple Icons 的 GitHub 圖示；SHA-256 為 `476ba7aa67b86da7d6e7567b08a4bf0eb1a2fd28da5fc243f8ee39a2f1ea6773`。
+- `assets/logos/supabase.svg`：Simple Icons 的 Supabase 圖示；SHA-256 為 `75f9566421d97d4f1d8d7f34526189fd6e727ca83987432fc2477c2fc8388086`。
+- `assets/logos/vercel.svg`：Simple Icons 的 Vercel 圖示；SHA-256 為 `075b9d221ef5a7ea63d85f140bd2d63007f31d3ed8ceec011abc3ffd529827e3`。
+- `assets/logos/codex.svg`：依官方產品標誌整理的課程用向量圖；SHA-256 為 `d506bd59770e2daed3cd039b04686f8818884c0cd8c00686f44a3889eb09c8c2`。
+- 可用 `shasum -a 256 assets/hero.jpg assets/logos/*.svg` 重現並核對以上雜湊；Simple Icons 圖示可由 `https://cdn.simpleicons.org/<slug>` 重新取得。
 - 所有產品名稱與商標仍屬各自所有權人所有，本專案僅用於課程識別與教學說明。
+- 來源註記只存在專案文件，不會在可見投影片加入網站或公司品牌。

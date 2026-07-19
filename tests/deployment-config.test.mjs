@@ -1,8 +1,16 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { fileURLToPath } from "node:url";
+
+import {
+  findCredentialFindings,
+  scanGitHistory,
+  scanTrackedTextFiles,
+} from "./secret-scan.mjs";
 
 const projectRoot = new URL("../", import.meta.url);
+const projectRootPath = fileURLToPath(projectRoot);
 
 async function readProjectFile(path) {
   try {
@@ -34,13 +42,15 @@ test("configures a framework-free static Vercel deployment", async () => {
   assert.ok(Array.isArray(config.headers));
 });
 
-test("applies an immutable one-year cache to static assets", async () => {
+test("uses a revalidating browser cache for unhashed static assets", async () => {
   const config = await loadVercelConfig();
   const cacheControl = getHeader(config, "/assets/(.*)", "Cache-Control");
+  const maxAge = Number(cacheControl?.match(/\bmax-age=(\d+)\b/i)?.[1]);
 
   assert.match(cacheControl ?? "", /\bpublic\b/i);
-  assert.match(cacheControl ?? "", /\bmax-age=31536000\b/i);
-  assert.match(cacheControl ?? "", /\bimmutable\b/i);
+  assert.ok(maxAge > 0 && maxAge <= 86_400);
+  assert.match(cacheControl ?? "", /\bmust-revalidate\b/i);
+  assert.doesNotMatch(cacheControl ?? "", /\bimmutable\b/i);
 });
 
 test("sets conservative security headers for every route", async () => {
@@ -86,40 +96,96 @@ test("documents local use, navigation, sharing, printing, and deployment", async
   assert.match(readme, /Vercel/);
   assert.match(readme, /main/);
   assert.match(readme, /不應.*token.*commit|不可.*token.*提交/i);
+  assert.match(readme, /未使用.*內容雜湊|檔名.*未.*hash/i);
+  assert.match(readme, /max-age=3600/);
+  assert.match(readme, /must-revalidate/);
 });
 
 test("documents bundled asset provenance and trademark ownership", async () => {
   const readme = await readProjectFile("README.md");
 
   assert.match(readme, /hero.*原始投影片素材/i);
+  assert.match(readme, /fb4f36a58af2dcb6412cdfe2ba20a3cb05644ffbd2a23831bc8cfc327ff07b18/i);
   assert.match(readme, /Simple Icons/);
   assert.match(readme, /官方.*標誌/);
+  assert.match(readme, /SHA-256/);
   assert.match(readme, /商標.*各自.*所有權人/);
 });
 
-test("does not include credential-shaped values in deployment files", async () => {
-  const contents = [
-    await readProjectFile("vercel.json"),
-    await readProjectFile("README.md"),
-  ].join("\n");
-  const credentialPrefixes = [
-    ["v", "cp_"].join(""),
-    ["g", "hp_"].join(""),
-    ["g", "ho_"].join(""),
-  ];
+test("excludes non-runtime files from Vercel uploads", async () => {
+  const patterns = (await readProjectFile(".vercelignore"))
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter((line) => line && !line.startsWith("#"));
 
-  for (const prefix of credentialPrefixes) {
-    assert.doesNotMatch(contents, new RegExp(`${prefix}[A-Za-z0-9]{16,}`));
-  }
-
-  const secretAssignmentNames = [
-    ["service", "_role"].join(""),
-    ["PRIVATE", "_KEY"].join(""),
-  ];
-  for (const name of secretAssignmentNames) {
-    assert.doesNotMatch(
-      contents,
-      new RegExp(`${name}\\s*[:=]\\s*["']?[A-Za-z0-9_./+=-]{12,}`, "i"),
+  for (const requiredPattern of [
+    "docs/",
+    "tests/",
+    "README.md",
+    "package*.json",
+    "design-system/",
+    ".git/",
+    ".vercel/",
+    ".env*",
+    ".DS_Store",
+  ]) {
+    assert.ok(
+      patterns.includes(requiredPattern),
+      `.vercelignore must exclude ${requiredPattern}`,
     );
   }
+
+  for (const runtimePath of [
+    "index.html",
+    "styles.css",
+    "deck.js",
+    "deck-state.js",
+    "vercel.json",
+    "assets/",
+  ]) {
+    assert.ok(
+      !patterns.includes(runtimePath) && !patterns.includes(`/${runtimePath}`),
+      `.vercelignore must keep ${runtimePath} deployable`,
+    );
+  }
+});
+
+test("detects supported credential shapes without flagging instructional copy", () => {
+  const serviceRole = ["service", "_role"].join("");
+  const jwt = [
+    Buffer.from('{"alg":"HS256","typ":"JWT"}').toString("base64url"),
+    Buffer.from(JSON.stringify({ role: serviceRole, iss: "supabase" })).toString(
+      "base64url",
+    ),
+    "s".repeat(43),
+  ].join(".");
+  const credentialSamples = [
+    ["v", "cp_"].join("") + "V".repeat(40),
+    ["g", "hp_"].join("") + "G".repeat(36),
+    ["github", "_pat_"].join("") + "P".repeat(60),
+    ["s", "k-proj-"].join("") + "O".repeat(48),
+    ["AK", "IA"].join("") + "A".repeat(16),
+    ["-----BEGIN ", "PRIVATE KEY-----"].join(""),
+    ["sb", "_secret_"].join("") + "S".repeat(40),
+    jwt,
+  ];
+
+  for (const sample of credentialSamples) {
+    assert.ok(
+      findCredentialFindings(sample, "fixture").length > 0,
+      "each credential fixture must be detected",
+    );
+  }
+
+  const instructionalCopy =
+    "上線後更換 token 與 API key；private key 和 service-role key 不可放前端。";
+  assert.deepEqual(findCredentialFindings(instructionalCopy, "copy"), []);
+});
+
+test("finds no credential-shaped values in tracked text files", () => {
+  assert.deepEqual(scanTrackedTextFiles(projectRootPath), []);
+});
+
+test("finds no credential-shaped values in Git history patches or text blobs", () => {
+  assert.deepEqual(scanGitHistory(projectRootPath), []);
 });

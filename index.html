@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-Hant">
   <head>
     <meta charset="utf-8">
@@ -8,6 +8,13 @@
       content="用 AI 完成網站前端、資料庫、版本控制、部署與後續維護的兩小時實作課程。"
     >
     <meta name="theme-color" content="#f5f5f7">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_TW">
+    <meta property="og:title" content="用 AI 打造全端網站｜線上課程簡報">
+    <meta
+      property="og:description"
+      content="兩小時完成網站前端、資料庫、版本控制、部署與後續維護。"
+    >
     <title>用 AI 打造全端網站｜線上課程簡報</title>
     <link rel="stylesheet" href="styles.css">
   </head>
@@ -52,23 +59,23 @@
         <div class="slide__content">
           <p class="eyebrow">TODAY’S GOAL</p>
           <h2 id="slide-2-title">今天做出上線網站</h2>
-          <div class="outcome-flow" aria-label="課程成果流程">
-            <div class="outcome-flow__item">
-              <span class="step-number">01</span>
+          <ol class="outcome-flow">
+            <li class="outcome-flow__item">
+              <span class="step-number" aria-hidden="true">01</span>
               <strong>生成前端</strong>
               <span>把想法變成畫面</span>
-            </div>
-            <div class="outcome-flow__item">
-              <span class="step-number">02</span>
+            </li>
+            <li class="outcome-flow__item">
+              <span class="step-number" aria-hidden="true">02</span>
               <strong>連接資料</strong>
               <span>讓網站可以記住內容</span>
-            </div>
-            <div class="outcome-flow__item">
-              <span class="step-number">03</span>
+            </li>
+            <li class="outcome-flow__item">
+              <span class="step-number" aria-hidden="true">03</span>
               <strong>部署上線</strong>
               <span>取得可分享的網址</span>
-            </div>
-          </div>
+            </li>
+          </ol>
         </div>
       </section>
 
@@ -90,17 +97,36 @@
               <li>準備可收驗證信的信箱</li>
             </ul>
           </div>
-          <figure class="tool-cluster" aria-label="課前需要的三個服務">
+          <figure class="tool-cluster">
+            <figcaption class="sr-only">課前需要的三個服務</figcaption>
             <div class="tool-mark">
-              <img src="assets/logos/github.svg" alt="GitHub 圖示" width="160" height="160">
+              <img
+                src="assets/logos/github.svg"
+                alt=""
+                width="160"
+                height="160"
+                aria-hidden="true"
+              >
               <span>GitHub</span>
             </div>
             <div class="tool-mark">
-              <img src="assets/logos/vercel.svg" alt="Vercel 圖示" width="160" height="160">
+              <img
+                src="assets/logos/vercel.svg"
+                alt=""
+                width="160"
+                height="160"
+                aria-hidden="true"
+              >
               <span>Vercel</span>
             </div>
             <div class="tool-mark">
-              <img src="assets/logos/supabase.svg" alt="Supabase 圖示" width="160" height="160">
+              <img
+                src="assets/logos/supabase.svg"
+                alt=""
+                width="160"
+                height="160"
+                aria-hidden="true"
+              >
               <span>Supabase</span>
             </div>
           </figure>
@@ -164,17 +190,18 @@
             <h2 id="slide-6-title">AI Studio 生成前端</h2>
             <p class="lede">先說清楚，再讓 AI 動手。</p>
             <ol class="mini-steps">
-              <li><span>01</span>網站要給誰使用</li>
-              <li><span>02</span>使用者要完成什麼</li>
-              <li><span>03</span>畫面要有哪些區塊</li>
+              <li><span aria-hidden="true">01</span>網站要給誰使用</li>
+              <li><span aria-hidden="true">02</span>使用者要完成什麼</li>
+              <li><span aria-hidden="true">03</span>畫面要有哪些區塊</li>
             </ol>
           </div>
           <figure class="visual-card visual-card--tool">
             <img
               src="assets/logos/google-ai-studio.svg"
-              alt="Google AI Studio 星形圖示"
+              alt=""
               width="360"
               height="360"
+              aria-hidden="true"
             >
           </figure>
         </div>
@@ -189,19 +216,16 @@
         <div class="slide__content">
           <div class="chapter-heading">
             <span class="chapter-badge">CH.1-2</span>
-            <span class="chapter-heading__number">1-2</span>
+            <span class="chapter-heading__number" aria-hidden="true">1-2</span>
           </div>
           <h2 id="slide-7-title">預覽，再微調</h2>
           <p class="lede">一次只改一件事，AI 才知道哪裡要更好。</p>
-          <div class="iteration-loop" aria-label="網站微調循環">
-            <span>預覽</span>
-            <span aria-hidden="true">→</span>
-            <span>指出問題</span>
-            <span aria-hidden="true">→</span>
-            <span>請 AI 修改</span>
-            <span aria-hidden="true">→</span>
-            <span>再次確認</span>
-          </div>
+          <ol class="iteration-loop">
+            <li>預覽</li>
+            <li>指出問題</li>
+            <li>請 AI 修改</li>
+            <li>再次確認</li>
+          </ol>
         </div>
       </section>
 
@@ -241,11 +265,12 @@
         <div class="slide__content">
           <div class="chapter-heading">
             <span class="chapter-badge">CH.1-3</span>
-            <span class="chapter-heading__number">1-3</span>
+            <span class="chapter-heading__number" aria-hidden="true">1-3</span>
           </div>
           <h2 id="slide-9-title">前端讀寫資料</h2>
           <p class="lede">網站畫面與資料庫，透過 API 對話。</p>
-          <div class="data-flow" aria-label="前端與資料庫交換資料">
+          <figure class="data-flow">
+            <figcaption class="sr-only">前端與資料庫交換資料</figcaption>
             <div class="data-flow__node">
               <strong>前端</strong>
               <span>表單與畫面</span>
@@ -258,7 +283,7 @@
               <strong>資料庫</strong>
               <span>新增、查詢、更新、刪除</span>
             </div>
-          </div>
+          </figure>
         </div>
       </section>
 
@@ -286,7 +311,13 @@
             </div>
           </div>
           <figure class="visual-card visual-card--tool">
-            <img src="assets/logos/github.svg" alt="GitHub 章魚貓圖示" width="360" height="360">
+            <img
+              src="assets/logos/github.svg"
+              alt=""
+              width="360"
+              height="360"
+              aria-hidden="true"
+            >
           </figure>
         </div>
       </section>
@@ -322,13 +353,19 @@
             <p class="eyebrow">DEPLOY</p>
             <h2 id="slide-12-title">Vercel 一鍵上線</h2>
             <ol class="mini-steps">
-              <li><span>01</span>匯入 GitHub 專案</li>
-              <li><span>02</span>加入環境變數</li>
-              <li><span>03</span>部署並測試網址</li>
+              <li><span aria-hidden="true">01</span>匯入 GitHub 專案</li>
+              <li><span aria-hidden="true">02</span>加入環境變數</li>
+              <li><span aria-hidden="true">03</span>部署並測試網址</li>
             </ol>
           </div>
           <figure class="visual-card visual-card--tool">
-            <img src="assets/logos/vercel.svg" alt="Vercel 黑色三角形圖示" width="360" height="360">
+            <img
+              src="assets/logos/vercel.svg"
+              alt=""
+              width="360"
+              height="360"
+              aria-hidden="true"
+            >
           </figure>
         </div>
       </section>
@@ -342,30 +379,25 @@
         <div class="slide__content">
           <div class="chapter-heading">
             <span class="chapter-badge">CH.2-2</span>
-            <span class="chapter-heading__number">2-2</span>
+            <span class="chapter-heading__number" aria-hidden="true">2-2</span>
           </div>
           <p class="eyebrow">SECURITY FIRST</p>
           <h2 id="slide-13-title">上線後，先換 key</h2>
           <p class="security-callout">
-            所有貼給 AI 的 token 與 API key，上線後都要重新產生。
+            所有貼給 AI 的 token 與 API key 都視為已暴露，正式上線前要重新產生。
           </p>
-          <div class="security-grid">
-            <div>
-              <span class="step-number">01</span>
-              <strong>撤銷舊 key</strong>
-              <p>確認舊憑證立即失效。</p>
-            </div>
-            <div>
-              <span class="step-number">02</span>
-              <strong>更新 Vercel</strong>
-              <p>把新值放進環境變數，再重新部署。</p>
-            </div>
-            <div>
-              <span class="step-number">03</span>
-              <strong>私密憑證不上前端</strong>
+          <ol class="security-grid">
+            <li>
+              <span class="step-number" aria-hidden="true">01</span>
+              <strong>撤銷並更新</strong>
+              <p>上線後確認舊 key 已撤銷，Vercel 已更新。</p>
+            </li>
+            <li>
+              <span class="step-number" aria-hidden="true">02</span>
+              <strong>私密 key 不進前端</strong>
               <p>private key 與 Supabase service-role key 絕不可放進前端。</p>
-            </div>
-          </div>
+            </li>
+          </ol>
         </div>
       </section>
 
@@ -385,13 +417,19 @@
             <h2 id="slide-14-title">Claude Code 修改網站</h2>
             <p class="lede">先描述現況，再說明想要的結果。</p>
             <ol class="mini-steps">
-              <li><span>01</span>讀懂現有專案</li>
-              <li><span>02</span>修改指定問題</li>
-              <li><span>03</span>測試後再提交</li>
+              <li><span aria-hidden="true">01</span>讀懂現有專案</li>
+              <li><span aria-hidden="true">02</span>修改指定問題</li>
+              <li><span aria-hidden="true">03</span>測試後再提交</li>
             </ol>
           </div>
           <figure class="visual-card visual-card--tool">
-            <img src="assets/logos/claude.svg" alt="Claude AI 放射線圖示" width="360" height="360">
+            <img
+              src="assets/logos/claude.svg"
+              alt=""
+              width="360"
+              height="360"
+              aria-hidden="true"
+            >
           </figure>
         </div>
       </section>
@@ -412,13 +450,19 @@
             <h2 id="slide-15-title">Codex 新增功能</h2>
             <p class="lede">把需求拆小，讓每一步都能驗證。</p>
             <ol class="mini-steps">
-              <li><span>01</span>說清楚使用情境</li>
-              <li><span>02</span>一次完成一個功能</li>
-              <li><span>03</span>測試、檢查、再上線</li>
+              <li><span aria-hidden="true">01</span>說清楚使用情境</li>
+              <li><span aria-hidden="true">02</span>一次完成一個功能</li>
+              <li><span aria-hidden="true">03</span>測試、檢查、再上線</li>
             </ol>
           </div>
           <figure class="visual-card visual-card--tool">
-            <img src="assets/logos/codex.svg" alt="Codex 幾何花結圖示" width="360" height="360">
+            <img
+              src="assets/logos/codex.svg"
+              alt=""
+              width="360"
+              height="360"
+              aria-hidden="true"
+            >
           </figure>
         </div>
       </section>
@@ -433,11 +477,11 @@
           <p class="eyebrow">KEEP BUILDING</p>
           <h2 id="slide-16-title">以後做網站，先走這 5 步</h2>
           <ol class="closing-steps">
-            <li><span>01</span><strong>說清楚</strong></li>
-            <li><span>02</span><strong>做出來</strong></li>
-            <li><span>03</span><strong>接資料</strong></li>
-            <li><span>04</span><strong>存版本</strong></li>
-            <li><span>05</span><strong>安全上線</strong></li>
+            <li><span aria-hidden="true">01</span><strong>說清楚</strong></li>
+            <li><span aria-hidden="true">02</span><strong>做出來</strong></li>
+            <li><span aria-hidden="true">03</span><strong>接資料</strong></li>
+            <li><span aria-hidden="true">04</span><strong>存版本</strong></li>
+            <li><span aria-hidden="true">05</span><strong>安全上線</strong></li>
           </ol>
           <p class="closing-line">小步完成，持續迭代。</p>
         </div>

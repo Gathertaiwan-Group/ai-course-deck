@@ -192,8 +192,6 @@ function initializeDeck() {
   const dotNav = document.querySelector("[data-dot-nav]");
   const currentSlideStatus = document.querySelector("[data-current-slide]");
   const totalSlidesStatus = document.querySelector("[data-total-slides]");
-  const previousButton = document.querySelector("[data-deck-previous]");
-  const nextButton = document.querySelector("[data-deck-next]");
   const reducedMotionQuery = window.matchMedia?.(
     "(prefers-reduced-motion: reduce)",
   );
@@ -242,14 +240,6 @@ function initializeDeck() {
 
     if (totalSlidesStatus) {
       totalSlidesStatus.textContent = String(slides.length);
-    }
-
-    if (previousButton) {
-      previousButton.disabled = nextIndex === 0;
-    }
-
-    if (nextButton) {
-      nextButton.disabled = nextIndex === slides.length - 1;
     }
 
     dotButtons.forEach((button, buttonIndex) => {
@@ -406,14 +396,6 @@ function initializeDeck() {
 
     dotNav.replaceChildren(fragment);
   }
-
-  previousButton?.addEventListener("click", () => {
-    navigateTo(activeIndex - 1);
-  });
-
-  nextButton?.addEventListener("click", () => {
-    navigateTo(activeIndex + 1);
-  });
 
   const handleKeydown = createDeckKeyboardHandler({
     getActiveIndex: () => activeIndex,

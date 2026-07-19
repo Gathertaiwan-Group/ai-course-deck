@@ -45,7 +45,6 @@ The security slide must explicitly state that every token or API key shared with
 
 - Vertical scrolling uses mandatory scroll snapping, one slide per viewport.
 - Arrow keys, Page Up, Page Down, Home, End, and Space navigate slides.
-- Clicking the left or right side of the viewport moves backward or forward.
 - Touch users swipe vertically and retain native scrolling behavior.
 - A fixed progress line indicates overall progress.
 - Desktop users get a right-side dot navigation with accessible labels.
@@ -92,4 +91,3 @@ This architecture matches the reference repository while avoiding unnecessary de
 - Run browser checks for keyboard navigation, click navigation, hash updates, responsive layout, and console errors.
 - Inspect desktop and mobile screenshots.
 - Validate deployment status and production URL after pushing `main`.
-

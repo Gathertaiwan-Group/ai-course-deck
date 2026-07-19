@@ -1,16 +1,21 @@
 import assert from "node:assert/strict";
+import { access } from "node:fs/promises";
 import test from "node:test";
+
+const deckStateUrl = new URL("../deck-state.js", import.meta.url);
 
 async function loadDeckState() {
   try {
-    return await import("../deck-state.js");
+    await access(deckStateUrl);
   } catch (error) {
-    if (error?.code === "ERR_MODULE_NOT_FOUND") {
+    if (error?.code === "ENOENT") {
       assert.fail("deck-state.js must exist before navigation behavior can pass");
     }
 
     throw error;
   }
+
+  return import(deckStateUrl);
 }
 
 test("clamps slide indices to the available 16-slide range", async () => {
@@ -21,10 +26,19 @@ test("clamps slide indices to the available 16-slide range", async () => {
   assert.equal(clampSlideIndex(16, 16), 15);
 });
 
-test("reports 100% progress on the last of 16 slides", async () => {
+test("calculates progress for the first, middle, and last of 16 slides", async () => {
   const { calculateProgress } = await loadDeckState();
 
+  assert.equal(calculateProgress(0, 16), 6.25);
+  assert.equal(calculateProgress(7, 16), 50);
   assert.equal(calculateProgress(15, 16), 100);
+});
+
+test("calculates progress from clamped out-of-range slide indices", async () => {
+  const { calculateProgress } = await loadDeckState();
+
+  assert.equal(calculateProgress(-4, 16), 6.25);
+  assert.equal(calculateProgress(42, 16), 100);
 });
 
 test("formats zero-based slide indices as one-based slide hashes", async () => {

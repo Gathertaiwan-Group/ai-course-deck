@@ -18,27 +18,27 @@ async function loadDeckState() {
   return import(deckStateUrl);
 }
 
-test("clamps slide indices to the available 16-slide range", async () => {
+test("clamps slide indices to the available 19-slide range", async () => {
   const { clampSlideIndex } = await loadDeckState();
 
-  assert.equal(clampSlideIndex(-1, 16), 0);
-  assert.equal(clampSlideIndex(7, 16), 7);
-  assert.equal(clampSlideIndex(16, 16), 15);
+  assert.equal(clampSlideIndex(-1, 19), 0);
+  assert.equal(clampSlideIndex(9, 19), 9);
+  assert.equal(clampSlideIndex(19, 19), 18);
 });
 
-test("calculates progress for the first, middle, and last of 16 slides", async () => {
+test("calculates progress for the first, middle, and last of 19 slides", async () => {
   const { calculateProgress } = await loadDeckState();
 
-  assert.equal(calculateProgress(0, 16), 6.25);
-  assert.equal(calculateProgress(7, 16), 50);
-  assert.equal(calculateProgress(15, 16), 100);
+  assert.equal(calculateProgress(0, 19), (1 / 19) * 100);
+  assert.equal(calculateProgress(9, 19), (10 / 19) * 100);
+  assert.equal(calculateProgress(18, 19), 100);
 });
 
 test("calculates progress from clamped out-of-range slide indices", async () => {
   const { calculateProgress } = await loadDeckState();
 
-  assert.equal(calculateProgress(-4, 16), 6.25);
-  assert.equal(calculateProgress(42, 16), 100);
+  assert.equal(calculateProgress(-4, 19), (1 / 19) * 100);
+  assert.equal(calculateProgress(42, 19), 100);
 });
 
 test("formats zero-based slide indices as one-based slide hashes", async () => {

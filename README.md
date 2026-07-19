@@ -4,24 +4,27 @@
 
 ## 投影片結構
 
-全套共 16 張投影片：
+全套共 19 張投影片：
 
 1. 用 AI 打造全端網站
-2. 今天做出上線網站
+2. 今天做出可被找到的網站
 3. 前置準備
-4. 第一堂：做出網站雛形
-5. 5 大工具，各有位置
-6. AI Studio 生成前端
-7. 預覽，再微調
-8. 資料庫像一張表
-9. 前端讀寫資料
-10. GitHub 保留每次修改
-11. 第二堂：上線與維護
-12. Vercel 一鍵上線
-13. 上線後，先換 key
-14. Claude Code 修改網站
-15. Codex 新增功能
-16. 以後做網站，先走這 5 步
+4. 5 步完成網站
+5. AI Studio：快速做出前端
+6. 前端完成前，先檢查 3 件事
+7. 從 AI Studio 存到 GitHub
+8. 本地端專案資料夾
+9. Claude Code 或 Codex 連動 repo
+10. Vercel 部署前端
+11. Supabase 串資料，持續修改到完成
+12. 貼給 AI 的 key，視為已曝光
+13. 新 key：手動更新 Vercel
+14. 有自動化才更新 GitHub Secrets
+15. 同步本地 `.env.local`，測試後再推送
+16. 讓 Claude Code 協助維護
+17. 推送即部署
+18. 網站完成後的三件事
+19. 完成一個可持續維護的網站
 
 ## 本機預覽
 
@@ -44,7 +47,7 @@ npm test
 - 桌機可使用方向鍵、Page Up、Page Down、Home、End 與空白鍵翻頁。
 - 可使用右側圓點直接前往指定頁面。
 - 手機與觸控裝置可上下滑動，投影片會自動吸附至完整頁面。
-- 網址會同步目前頁數，例如 `#slide-13`；複製完整網址即可分享指定投影片。
+- 網址會同步目前頁數，例如 `#slide-19`；複製完整網址即可分享指定投影片。
 - 使用瀏覽器的「列印」功能，可直接列印或另存為 PDF；每張投影片會輸出成獨立頁面。
 
 ## 部署到 Vercel
@@ -71,6 +74,9 @@ npm test
 - 不應將任何 token commit 到 repository。
 - API key、部署憑證與其他秘密資料不得寫入 HTML、CSS、JavaScript、README 或 Vercel 設定。
 - 曾貼給 AI 的 token 與 API key 應視為已暴露，正式上線前重新產生，並撤銷舊憑證。
+- 新 key 的更新順序是：Vercel Environment Variables → GitHub Actions Secrets（僅在 workflow 有使用時）→ 本機 `.env.local` → 重新部署與測試。
+- `service-role key`、private API key 與 Vercel token 不可放在前端、commit 進 GitHub，或提供給 AI；前端僅能使用搭配 RLS 的 Supabase anon key。
+- 建議讓 Claude Code / Codex 在本地端執行修改、測試、commit 與 push；以 GitHub 連動 Vercel 自動建立 Preview，`main` 的 push 則發布 Production。
 
 ## 素材來源
 

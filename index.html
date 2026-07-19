@@ -3,500 +3,176 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta
-      name="description"
-      content="用 AI 完成網站前端、資料庫、版本控制、部署與後續維護的兩小時實作課程。"
-    >
+    <meta name="description" content="用 AI 生成前端、串接資料、版本控制、部署與後續維護的實作課程。">
     <meta name="theme-color" content="#f5f5f7">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="zh_TW">
     <meta property="og:title" content="用 AI 打造全端網站｜線上課程簡報">
-    <meta
-      property="og:description"
-      content="兩小時完成網站前端、資料庫、版本控制、部署與後續維護。"
-    >
+    <meta property="og:description" content="從 AI 生成前端，到可被搜尋與持續維護的網站。">
     <title>用 AI 打造全端網站｜線上課程簡報</title>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <a class="skip-link" href="#slide-1">跳到簡報內容</a>
-
-    <div class="deck-progress" aria-hidden="true">
-      <span class="deck-progress__bar" data-progress-bar></span>
-    </div>
+    <div class="deck-progress" aria-hidden="true"><span class="deck-progress__bar" data-progress-bar></span></div>
 
     <main class="deck" id="deck" aria-label="AI 全端網站實戰課程簡報">
-      <section
-        class="slide slide--cover"
-        id="slide-1"
-        data-label="用 AI 打造全端網站"
-        aria-labelledby="slide-1-title"
-      >
+      <section class="slide slide--cover" id="slide-1" data-label="用 AI 打造全端網站" aria-labelledby="slide-1-title">
         <div class="slide__content slide__content--split">
           <div class="slide__copy">
             <p class="eyebrow">AI WEB COURSE</p>
             <h1 id="slide-1-title">用 AI 打造全端網站</h1>
             <p class="lede">從一句想法，到真正上線。</p>
-            <p class="tool-line">AI Studio × Supabase × GitHub × Vercel × AI Coding</p>
+            <p class="tool-line">AI Studio × GitHub × AI Coding × Vercel × Supabase</p>
           </div>
           <figure class="visual-card visual-card--hero">
-            <img
-              src="assets/hero.jpg"
-              alt="筆電畫面呈現正在製作的現代網站介面"
-              width="1600"
-              height="1200"
-            >
+            <img src="assets/hero.jpg" alt="筆電畫面呈現正在製作的現代網站介面" width="1600" height="1200">
           </figure>
         </div>
       </section>
 
-      <section
-        class="slide"
-        id="slide-2"
-        data-label="今天做出上線網站"
-        aria-labelledby="slide-2-title"
-      >
+      <section class="slide" id="slide-2" data-label="今天做出可被找到的網站" aria-labelledby="slide-2-title">
         <div class="slide__content">
-          <p class="eyebrow">TODAY’S GOAL</p>
-          <h2 id="slide-2-title">今天做出上線網站</h2>
+          <p class="eyebrow">TODAY’S OUTCOME</p>
+          <h2 id="slide-2-title">今天做出可被找到的網站</h2>
           <ol class="outcome-flow">
-            <li class="outcome-flow__item">
-              <span class="step-number" aria-hidden="true">01</span>
-              <strong>生成前端</strong>
-              <span>把想法變成畫面</span>
-            </li>
-            <li class="outcome-flow__item">
-              <span class="step-number" aria-hidden="true">02</span>
-              <strong>連接資料</strong>
-              <span>讓網站可以記住內容</span>
-            </li>
-            <li class="outcome-flow__item">
-              <span class="step-number" aria-hidden="true">03</span>
-              <strong>部署上線</strong>
-              <span>取得可分享的網址</span>
-            </li>
+            <li class="outcome-flow__item"><span class="step-number" aria-hidden="true">01</span><strong>能被使用</strong><span>有完整的前端與資料</span></li>
+            <li class="outcome-flow__item"><span class="step-number" aria-hidden="true">02</span><strong>能被分享</strong><span>有公開網址與網域</span></li>
+            <li class="outcome-flow__item"><span class="step-number" aria-hidden="true">03</span><strong>能被找到</strong><span>有 GA 與 Search Console</span></li>
           </ol>
         </div>
       </section>
 
-      <section
-        class="slide"
-        id="slide-3"
-        data-label="前置準備"
-        aria-labelledby="slide-3-title"
-      >
+      <section class="slide" id="slide-3" data-label="前置準備" aria-labelledby="slide-3-title">
         <div class="slide__content slide__content--split">
           <div class="slide__copy">
             <p class="eyebrow">BEFORE CLASS</p>
             <h2 id="slide-3-title">前置準備</h2>
             <p class="lede">三個帳號，一台電腦。</p>
             <ul class="check-list">
-              <li>開好 GitHub 帳號</li>
-              <li>開好 Vercel 帳號</li>
-              <li>開好 Supabase 帳號</li>
-              <li>準備可收驗證信的信箱</li>
+              <li>開好 GitHub 帳號</li><li>開好 Vercel 帳號</li><li>開好 Supabase 帳號</li><li>準備可收驗證信的信箱</li>
             </ul>
           </div>
-          <figure class="tool-cluster">
-            <figcaption class="sr-only">課前需要的三個服務</figcaption>
-            <div class="tool-mark">
-              <img
-                src="assets/logos/github.svg"
-                alt=""
-                width="160"
-                height="160"
-                aria-hidden="true"
-              >
-              <span>GitHub</span>
-            </div>
-            <div class="tool-mark">
-              <img
-                src="assets/logos/vercel.svg"
-                alt=""
-                width="160"
-                height="160"
-                aria-hidden="true"
-              >
-              <span>Vercel</span>
-            </div>
-            <div class="tool-mark">
-              <img
-                src="assets/logos/supabase.svg"
-                alt=""
-                width="160"
-                height="160"
-                aria-hidden="true"
-              >
-              <span>Supabase</span>
-            </div>
+          <figure class="tool-cluster"><figcaption class="sr-only">課前需要的服務</figcaption>
+            <div class="tool-mark"><img src="assets/logos/github.svg" alt="" width="160" height="160" aria-hidden="true"><span>GitHub</span></div>
+            <div class="tool-mark"><img src="assets/logos/vercel.svg" alt="" width="160" height="160" aria-hidden="true"><span>Vercel</span></div>
+            <div class="tool-mark"><img src="assets/logos/supabase.svg" alt="" width="160" height="160" aria-hidden="true"><span>Supabase</span></div>
           </figure>
         </div>
       </section>
 
-      <section
-        class="slide slide--chapter"
-        id="slide-4"
-        data-label="第一堂：做出網站雛形"
-        aria-labelledby="slide-4-title"
-      >
+      <section class="slide slide--chapter" id="slide-4" data-label="5 步完成網站" aria-labelledby="slide-4-title">
         <div class="slide__content slide__content--chapter">
-          <p class="chapter-kicker">LESSON 01 · 60 MIN</p>
-          <p class="chapter-number" aria-hidden="true">01</p>
-          <div class="chapter-copy">
-            <h2 id="slide-4-title">第一堂：做出網站雛形</h2>
-            <p>工具定位 → 前端 → 資料庫 → GitHub</p>
-          </div>
+          <p class="chapter-kicker">THE WORKFLOW</p><p class="chapter-number" aria-hidden="true">05</p>
+          <div class="chapter-copy"><h2 id="slide-4-title">5 步完成網站</h2><p>生成前端 → 存進 GitHub → 本地開發 → 部署完成 → 追蹤成效</p></div>
         </div>
       </section>
 
-      <section
-        class="slide"
-        id="slide-5"
-        data-label="5 大工具，各有位置"
-        aria-labelledby="slide-5-title"
-      >
+      <section class="slide" id="slide-5" data-label="AI Studio：快速做出前端" aria-labelledby="slide-5-title">
         <div class="slide__content slide__content--chapter-detail">
-          <div class="chapter-index">
-            <span class="chapter-badge">CH.1-1</span>
-            <span class="chapter-large-number" aria-hidden="true">1-1</span>
+          <div class="chapter-index"><span class="chapter-badge">STEP 01</span><span class="chapter-large-number" aria-hidden="true">01</span></div>
+          <div class="slide__copy"><p class="eyebrow">AI STUDIO</p><h2 id="slide-5-title">AI Studio：快速做出前端</h2><p class="lede">先把需求講清楚，再讓 AI 產出第一版。</p>
+            <ol class="mini-steps"><li><span aria-hidden="true">01</span>誰會使用這個網站</li><li><span aria-hidden="true">02</span>使用者要完成什麼</li><li><span aria-hidden="true">03</span>需要哪些畫面與區塊</li></ol>
           </div>
-          <div class="slide__copy">
-            <p class="eyebrow">OVERVIEW</p>
-            <h2 id="slide-5-title">5 大工具，各有位置</h2>
-            <ul class="tool-list">
-              <li><strong>AI Studio</strong><span>生成網站前端</span></li>
-              <li><strong>Supabase</strong><span>保存網站資料</span></li>
-              <li><strong>GitHub</strong><span>保留每次版本</span></li>
-              <li><strong>Vercel</strong><span>部署網站上線</span></li>
-              <li><strong>AI Coding</strong><span>修改與新增功能</span></li>
-            </ul>
-          </div>
+          <figure class="visual-card visual-card--tool"><img src="assets/logos/google-ai-studio.svg" alt="AI Studio 圖示" width="360" height="360"></figure>
         </div>
       </section>
 
-      <section
-        class="slide"
-        id="slide-6"
-        data-label="AI Studio 生成前端"
-        aria-labelledby="slide-6-title"
-      >
+      <section class="slide" id="slide-6" data-label="前端完成前，先檢查 3 件事" aria-labelledby="slide-6-title">
+        <div class="slide__content"><div class="chapter-heading"><span class="chapter-badge">STEP 01</span><span class="chapter-heading__number" aria-hidden="true">01</span></div>
+          <h2 id="slide-6-title">前端完成前，先檢查 3 件事</h2><p class="lede">畫面好看之外，也要讓分享與搜尋正常運作。</p>
+          <ol class="iteration-loop"><li>Meta 資訊<br><small>title、description</small></li><li>Open Graph<br><small>分享預覽圖與文字</small></li><li>RWD<br><small>手機、平板、桌機</small></li><li>逐頁預覽<br><small>一次只改一件事</small></li></ol>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-7" data-label="從 AI Studio 存到 GitHub" aria-labelledby="slide-7-title">
         <div class="slide__content slide__content--chapter-detail">
-          <div class="chapter-index">
-            <span class="chapter-badge">CH.1-2</span>
-            <span class="chapter-large-number" aria-hidden="true">1-2</span>
-          </div>
-          <div class="slide__copy">
-            <p class="eyebrow">PROMPT TO UI</p>
-            <h2 id="slide-6-title">AI Studio 生成前端</h2>
-            <p class="lede">先說清楚，再讓 AI 動手。</p>
-            <ol class="mini-steps">
-              <li><span aria-hidden="true">01</span>網站要給誰使用</li>
-              <li><span aria-hidden="true">02</span>使用者要完成什麼</li>
-              <li><span aria-hidden="true">03</span>畫面要有哪些區塊</li>
-            </ol>
-          </div>
-          <figure class="visual-card visual-card--tool">
-            <img
-              src="assets/logos/google-ai-studio.svg"
-              alt=""
-              width="360"
-              height="360"
-              aria-hidden="true"
-            >
-          </figure>
+          <div class="chapter-index"><span class="chapter-badge">STEP 02</span><span class="chapter-large-number" aria-hidden="true">02</span></div>
+          <div class="slide__copy"><p class="eyebrow">SAVE THE FRONTEND</p><h2 id="slide-7-title">從 AI Studio 存到 GitHub</h2><p class="lede">用 AI Studio 的匯出功能，把前端放進自己的 GitHub repository。</p><div class="version-flow"><span>AI Studio</span><span aria-hidden="true">→</span><span>GitHub repo</span><span aria-hidden="true">→</span><span>第一版</span></div></div>
+          <figure class="visual-card visual-card--tool"><img src="assets/logos/github.svg" alt="GitHub 圖示" width="360" height="360"></figure>
         </div>
       </section>
 
-      <section
-        class="slide"
-        id="slide-7"
-        data-label="預覽，再微調"
-        aria-labelledby="slide-7-title"
-      >
-        <div class="slide__content">
-          <div class="chapter-heading">
-            <span class="chapter-badge">CH.1-2</span>
-            <span class="chapter-heading__number" aria-hidden="true">1-2</span>
-          </div>
-          <h2 id="slide-7-title">預覽，再微調</h2>
-          <p class="lede">一次只改一件事，AI 才知道哪裡要更好。</p>
-          <ol class="iteration-loop">
-            <li>預覽</li>
-            <li>指出問題</li>
-            <li>請 AI 修改</li>
-            <li>再次確認</li>
-          </ol>
-        </div>
-      </section>
-
-      <section
-        class="slide"
-        id="slide-8"
-        data-label="資料庫像一張表"
-        aria-labelledby="slide-8-title"
-      >
+      <section class="slide" id="slide-8" data-label="本地端專案資料夾" aria-labelledby="slide-8-title">
         <div class="slide__content slide__content--chapter-detail">
-          <div class="chapter-index">
-            <span class="chapter-badge">CH.1-3</span>
-            <span class="chapter-large-number" aria-hidden="true">1-3</span>
-          </div>
-          <div class="slide__copy">
-            <p class="eyebrow">DATABASE BASICS</p>
-            <h2 id="slide-8-title">資料庫像一張表</h2>
-            <p class="lede">先想「要記住什麼」，再設計欄位。</p>
-            <div class="concept-row">
-              <span><strong>一列</strong>一筆資料</span>
-              <span><strong>一欄</strong>一種內容</span>
-              <span><strong>ID</strong>唯一識別</span>
-            </div>
-          </div>
-          <figure class="visual-card visual-card--tool">
-            <img src="assets/logos/supabase.svg" alt="Supabase 閃電圖示" width="360" height="360">
-          </figure>
+          <div class="chapter-index"><span class="chapter-badge">STEP 03</span><span class="chapter-large-number" aria-hidden="true">03</span></div>
+          <div class="slide__copy"><p class="eyebrow">LOCAL FIRST</p><h2 id="slide-8-title">本地端專案資料夾</h2><p class="lede">在自己的電腦建立專案資料夾，再把 repository clone 下來。</p><ol class="mini-steps"><li><span aria-hidden="true">01</span>建立一個清楚命名的資料夾</li><li><span aria-hidden="true">02</span>clone GitHub repository</li><li><span aria-hidden="true">03</span>用本機預覽確認前端</li></ol></div>
+          <figure class="visual-card visual-card--tool"><img src="assets/logos/github.svg" alt="GitHub 圖示" width="360" height="360"></figure>
         </div>
       </section>
 
-      <section
-        class="slide"
-        id="slide-9"
-        data-label="前端讀寫資料"
-        aria-labelledby="slide-9-title"
-      >
-        <div class="slide__content">
-          <div class="chapter-heading">
-            <span class="chapter-badge">CH.1-3</span>
-            <span class="chapter-heading__number" aria-hidden="true">1-3</span>
-          </div>
-          <h2 id="slide-9-title">前端讀寫資料</h2>
-          <p class="lede">網站畫面與資料庫，透過 API 對話。</p>
-          <figure class="data-flow">
-            <figcaption class="sr-only">前端與資料庫交換資料</figcaption>
-            <div class="data-flow__node">
-              <strong>前端</strong>
-              <span>表單與畫面</span>
-            </div>
-            <div class="data-flow__arrows">
-              <span>送出資料 →</span>
-              <span>← 讀取結果</span>
-            </div>
-            <div class="data-flow__node data-flow__node--accent">
-              <strong>資料庫</strong>
-              <span>新增、查詢、更新、刪除</span>
-            </div>
-          </figure>
-        </div>
-      </section>
-
-      <section
-        class="slide"
-        id="slide-10"
-        data-label="GitHub 保留每次修改"
-        aria-labelledby="slide-10-title"
-      >
+      <section class="slide" id="slide-9" data-label="Claude Code 或 Codex 連動 repo" aria-labelledby="slide-9-title">
         <div class="slide__content slide__content--chapter-detail">
-          <div class="chapter-index">
-            <span class="chapter-badge">CH.1-4</span>
-            <span class="chapter-large-number" aria-hidden="true">1-4</span>
-          </div>
-          <div class="slide__copy">
-            <p class="eyebrow">VERSION CONTROL</p>
-            <h2 id="slide-10-title">GitHub 保留每次修改</h2>
-            <p class="lede">每完成一個小段落，就存一個版本。</p>
-            <div class="version-flow">
-              <span>修改</span>
-              <span aria-hidden="true">→</span>
-              <span>Commit</span>
-              <span aria-hidden="true">→</span>
-              <span>Push</span>
-            </div>
-          </div>
-          <figure class="visual-card visual-card--tool">
-            <img
-              src="assets/logos/github.svg"
-              alt=""
-              width="360"
-              height="360"
-              aria-hidden="true"
-            >
-          </figure>
+          <div class="chapter-index"><span class="chapter-badge">STEP 03</span><span class="chapter-large-number" aria-hidden="true">03</span></div>
+          <div class="slide__copy"><p class="eyebrow">AI CODING</p><h2 id="slide-9-title">Claude Code 或 Codex 連動 repo</h2><p class="lede">在本地端打開專案，讓 AI 理解程式後協助你修改。</p><ul class="tool-list"><li><strong>Claude Code</strong><span>讀專案、修改、測試</span></li><li><strong>Codex</strong><span>新增功能、檢查、提交</span></li></ul></div>
+          <figure class="visual-card visual-card--tool"><img src="assets/logos/codex.svg" alt="Codex 圖示" width="360" height="360"></figure>
         </div>
       </section>
 
-      <section
-        class="slide slide--chapter"
-        id="slide-11"
-        data-label="第二堂：上線與維護"
-        aria-labelledby="slide-11-title"
-      >
-        <div class="slide__content slide__content--chapter">
-          <p class="chapter-kicker">LESSON 02 · 60 MIN</p>
-          <p class="chapter-number" aria-hidden="true">02</p>
-          <div class="chapter-copy">
-            <h2 id="slide-11-title">第二堂：上線與維護</h2>
-            <p>Vercel → 安全換 key → 維護 → 新功能</p>
-          </div>
-        </div>
-      </section>
-
-      <section
-        class="slide"
-        id="slide-12"
-        data-label="Vercel 一鍵上線"
-        aria-labelledby="slide-12-title"
-      >
+      <section class="slide" id="slide-10" data-label="Vercel 部署前端" aria-labelledby="slide-10-title">
         <div class="slide__content slide__content--chapter-detail">
-          <div class="chapter-index">
-            <span class="chapter-badge">CH.2-1</span>
-            <span class="chapter-large-number" aria-hidden="true">2-1</span>
-          </div>
-          <div class="slide__copy">
-            <p class="eyebrow">DEPLOY</p>
-            <h2 id="slide-12-title">Vercel 一鍵上線</h2>
-            <ol class="mini-steps">
-              <li><span aria-hidden="true">01</span>匯入 GitHub 專案</li>
-              <li><span aria-hidden="true">02</span>加入環境變數</li>
-              <li><span aria-hidden="true">03</span>部署並測試網址</li>
-            </ol>
-          </div>
-          <figure class="visual-card visual-card--tool">
-            <img
-              src="assets/logos/vercel.svg"
-              alt=""
-              width="360"
-              height="360"
-              aria-hidden="true"
-            >
-          </figure>
+          <div class="chapter-index"><span class="chapter-badge">STEP 04</span><span class="chapter-large-number" aria-hidden="true">04</span></div>
+          <div class="slide__copy"><p class="eyebrow">DEPLOY</p><h2 id="slide-10-title">Vercel 部署前端</h2><p class="lede">匯入 GitHub repository，取得第一個公開網址。</p><ol class="mini-steps"><li><span aria-hidden="true">01</span>Import Git Repository</li><li><span aria-hidden="true">02</span>設定 Environment Variables</li><li><span aria-hidden="true">03</span>部署並測試網址</li></ol></div>
+          <figure class="visual-card visual-card--tool"><img src="assets/logos/vercel.svg" alt="Vercel 圖示" width="360" height="360"></figure>
         </div>
       </section>
 
-      <section
-        class="slide slide--security"
-        id="slide-13"
-        data-label="上線後，先換 key"
-        aria-labelledby="slide-13-title"
-      >
-        <div class="slide__content">
-          <div class="chapter-heading">
-            <span class="chapter-badge">CH.2-2</span>
-            <span class="chapter-heading__number" aria-hidden="true">2-2</span>
-          </div>
-          <p class="eyebrow">SECURITY FIRST</p>
-          <h2 id="slide-13-title">上線後，先換 key</h2>
-          <p class="security-callout">
-            所有貼給 AI 的 token 與 API key 都視為已暴露，正式上線前要重新產生。
-          </p>
-          <ol class="security-grid">
-            <li>
-              <span class="step-number" aria-hidden="true">01</span>
-              <strong>撤銷並更新</strong>
-              <p>上線後確認舊 key 已撤銷，Vercel 已更新。</p>
-            </li>
-            <li>
-              <span class="step-number" aria-hidden="true">02</span>
-              <strong>私密 key 不進前端</strong>
-              <p>private key 與 Supabase service-role key 絕不可放進前端。</p>
-            </li>
-          </ol>
-        </div>
-      </section>
-
-      <section
-        class="slide"
-        id="slide-14"
-        data-label="Claude Code 修改網站"
-        aria-labelledby="slide-14-title"
-      >
+      <section class="slide" id="slide-11" data-label="Supabase 串資料，持續修改到完成" aria-labelledby="slide-11-title">
         <div class="slide__content slide__content--chapter-detail">
-          <div class="chapter-index">
-            <span class="chapter-badge">CH.2-3</span>
-            <span class="chapter-large-number" aria-hidden="true">2-3</span>
-          </div>
-          <div class="slide__copy">
-            <p class="eyebrow">MAINTAIN</p>
-            <h2 id="slide-14-title">Claude Code 修改網站</h2>
-            <p class="lede">先描述現況，再說明想要的結果。</p>
-            <ol class="mini-steps">
-              <li><span aria-hidden="true">01</span>讀懂現有專案</li>
-              <li><span aria-hidden="true">02</span>修改指定問題</li>
-              <li><span aria-hidden="true">03</span>測試後再提交</li>
-            </ol>
-          </div>
-          <figure class="visual-card visual-card--tool">
-            <img
-              src="assets/logos/claude.svg"
-              alt=""
-              width="360"
-              height="360"
-              aria-hidden="true"
-            >
-          </figure>
+          <div class="chapter-index"><span class="chapter-badge">STEP 04</span><span class="chapter-large-number" aria-hidden="true">04</span></div>
+          <div class="slide__copy"><p class="eyebrow">DATA + ITERATION</p><h2 id="slide-11-title">Supabase 串資料，持續修改到完成</h2><p class="lede">先接上需要的資料，再反覆修改、測試、推送。</p><div class="version-flow"><span>修改</span><span aria-hidden="true">→</span><span>測試</span><span aria-hidden="true">→</span><span>push</span></div></div>
+          <figure class="visual-card visual-card--tool"><img src="assets/logos/supabase.svg" alt="Supabase 圖示" width="360" height="360"></figure>
         </div>
       </section>
 
-      <section
-        class="slide"
-        id="slide-15"
-        data-label="Codex 新增功能"
-        aria-labelledby="slide-15-title"
-      >
-        <div class="slide__content slide__content--chapter-detail">
-          <div class="chapter-index">
-            <span class="chapter-badge">CH.2-4</span>
-            <span class="chapter-large-number" aria-hidden="true">2-4</span>
-          </div>
-          <div class="slide__copy">
-            <p class="eyebrow">BUILD NEXT</p>
-            <h2 id="slide-15-title">Codex 新增功能</h2>
-            <p class="lede">把需求拆小，讓每一步都能驗證。</p>
-            <ol class="mini-steps">
-              <li><span aria-hidden="true">01</span>說清楚使用情境</li>
-              <li><span aria-hidden="true">02</span>一次完成一個功能</li>
-              <li><span aria-hidden="true">03</span>測試、檢查、再上線</li>
-            </ol>
-          </div>
-          <figure class="visual-card visual-card--tool">
-            <img
-              src="assets/logos/codex.svg"
-              alt=""
-              width="360"
-              height="360"
-              aria-hidden="true"
-            >
-          </figure>
+      <section class="slide slide--security" id="slide-12" data-label="貼給 AI 的 key，視為已曝光" aria-labelledby="slide-12-title">
+        <div class="slide__content"><div class="chapter-heading"><span class="chapter-badge">SECURITY</span><span class="chapter-heading__number" aria-hidden="true">!</span></div><p class="eyebrow">ROTATE BEFORE LAUNCH</p><h2 id="slide-12-title">貼給 AI 的 key，視為已曝光</h2><p class="security-callout">所有貼給 AI 的 token 與 API key，都要在正式上線前重新產生。</p>
+          <ol class="security-grid"><li><span class="step-number" aria-hidden="true">01</span><strong>可以公開的只有必要資訊</strong><p>Supabase anon key 必須搭配 RLS。</p></li><li><span class="step-number" aria-hidden="true">02</span><strong>私密 key 不進前端</strong><p>private key、service-role key、Vercel token 絕不可放進 frontend。</p></li></ol>
         </div>
       </section>
 
-      <section
-        class="slide slide--closing"
-        id="slide-16"
-        data-label="以後做網站，先走這 5 步"
-        aria-labelledby="slide-16-title"
-      >
-        <div class="slide__content">
-          <p class="eyebrow">KEEP BUILDING</p>
-          <h2 id="slide-16-title">以後做網站，先走這 5 步</h2>
-          <ol class="closing-steps">
-            <li><span aria-hidden="true">01</span><strong>說清楚</strong></li>
-            <li><span aria-hidden="true">02</span><strong>做出來</strong></li>
-            <li><span aria-hidden="true">03</span><strong>接資料</strong></li>
-            <li><span aria-hidden="true">04</span><strong>存版本</strong></li>
-            <li><span aria-hidden="true">05</span><strong>安全上線</strong></li>
-          </ol>
-          <p class="closing-line">小步完成，持續迭代。</p>
+      <section class="slide slide--security" id="slide-13" data-label="新 key：手動更新 Vercel" aria-labelledby="slide-13-title">
+        <div class="slide__content"><div class="chapter-heading"><span class="chapter-badge">SECURITY</span><span class="chapter-heading__number" aria-hidden="true">01</span></div><h2 id="slide-13-title">新 key：手動更新 Vercel</h2><p class="security-callout">到 Project Settings → Environment Variables，逐一替換新 key。</p>
+          <ol class="security-grid"><li><span class="step-number" aria-hidden="true">01</span><strong>刪除舊值，貼上新值</strong><p>確認 Preview 與 Production 使用正確環境。</p></li><li><span class="step-number" aria-hidden="true">02</span><strong>重新部署</strong><p>部署完成後，以網站功能實測確認。</p></li></ol>
         </div>
+      </section>
+
+      <section class="slide slide--security" id="slide-14" data-label="有自動化才更新 GitHub Secrets" aria-labelledby="slide-14-title">
+        <div class="slide__content"><div class="chapter-heading"><span class="chapter-badge">SECURITY</span><span class="chapter-heading__number" aria-hidden="true">02</span></div><h2 id="slide-14-title">有自動化才更新 GitHub Secrets</h2><p class="security-callout">只有 GitHub Actions 自動化流程有使用時，才需要更新 GitHub Actions Secrets。</p>
+          <ol class="security-grid"><li><span class="step-number" aria-hidden="true">01</span><strong>Repository Settings</strong><p>進入 Secrets and variables → Actions。</p></li><li><span class="step-number" aria-hidden="true">02</span><strong>名稱不變，值換新</strong><p>更新後重新執行 workflow 並確認成功。</p></li></ol>
+        </div>
+      </section>
+
+      <section class="slide slide--security" id="slide-15" data-label="同步本地 .env.local，測試後再推送" aria-labelledby="slide-15-title">
+        <div class="slide__content"><div class="chapter-heading"><span class="chapter-badge">SECURITY</span><span class="chapter-heading__number" aria-hidden="true">03</span></div><h2 id="slide-15-title">同步本地 .env.local，測試後再推送</h2><p class="security-callout">本機 `.env.local` 也換成新 key；不要 commit 私密值到 GitHub。</p>
+          <ol class="security-grid"><li><span class="step-number" aria-hidden="true">01</span><strong>本機啟動測試</strong><p>確認讀取到的是新設定，而不是舊快取。</p></li><li><span class="step-number" aria-hidden="true">02</span><strong>檢查 .gitignore</strong><p>`.env.local` 必須被排除，推送前再檢查一次。</p></li></ol>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-16" data-label="讓 Claude Code 協助維護" aria-labelledby="slide-16-title">
+        <div class="slide__content slide__content--chapter-detail"><div class="chapter-index"><span class="chapter-badge">MAINTAIN</span><span class="chapter-large-number" aria-hidden="true">06</span></div>
+          <div class="slide__copy"><p class="eyebrow">CLAUDE CODE</p><h2 id="slide-16-title">讓 Claude Code 協助維護</h2><p class="lede">請它先讀專案規則；每次只完成一個可驗證的改動。</p><ol class="mini-steps"><li><span aria-hidden="true">01</span>描述需求與驗收方式</li><li><span aria-hidden="true">02</span>修改後先測試、檢查</li><li><span aria-hidden="true">03</span>確認後 commit，再 push</li></ol></div>
+          <figure class="visual-card visual-card--tool"><img src="assets/logos/claude.svg" alt="Claude 圖示" width="360" height="360"></figure>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-17" data-label="推送即部署" aria-labelledby="slide-17-title">
+        <div class="slide__content"><div class="chapter-heading"><span class="chapter-badge">AUTOMATION</span><span class="chapter-heading__number" aria-hidden="true">→</span></div><h2 id="slide-17-title">推送即部署</h2><p class="lede">讓 GitHub 連動 Vercel；Claude Code 不需要拿到 Vercel token。</p>
+          <figure class="data-flow"><figcaption class="sr-only">從 GitHub 推送到 Vercel 部署的流程</figcaption><div class="data-flow__node"><strong>任何 branch</strong><span>push 後產生 Preview</span></div><div class="data-flow__arrows"><span>GitHub →</span><span>← 測試回饋</span></div><div class="data-flow__node data-flow__node--accent"><strong>main</strong><span>push 後部署 Production</span></div></figure>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-18" data-label="網站完成後的三件事" aria-labelledby="slide-18-title">
+        <div class="slide__content"><p class="eyebrow">STEP 05</p><h2 id="slide-18-title">網站完成後的三件事</h2><ol class="outcome-flow"><li class="outcome-flow__item"><span class="step-number" aria-hidden="true">01</span><strong>接上 Domain</strong><span>使用自己的網址</span></li><li class="outcome-flow__item"><span class="step-number" aria-hidden="true">02</span><strong>加入 GA</strong><span>了解使用者行為</span></li><li class="outcome-flow__item"><span class="step-number" aria-hidden="true">03</span><strong>設定 Search Console</strong><span>讓 Google 能收錄</span></li></ol></div>
+      </section>
+
+      <section class="slide slide--closing" id="slide-19" data-label="完成一個可持續維護的網站" aria-labelledby="slide-19-title">
+        <div class="slide__content"><p class="eyebrow">KEEP BUILDING</p><h2 id="slide-19-title">完成一個可持續維護的網站</h2><ol class="closing-steps"><li><span aria-hidden="true">01</span><strong>生成前端</strong></li><li><span aria-hidden="true">02</span><strong>存進 GitHub</strong></li><li><span aria-hidden="true">03</span><strong>本地開發</strong></li><li><span aria-hidden="true">04</span><strong>部署完成</strong></li><li><span aria-hidden="true">05</span><strong>持續優化</strong></li></ol><p class="closing-line">小步完成，安全上線，持續迭代。</p></div>
       </section>
     </main>
 
     <nav class="dot-nav" data-dot-nav aria-label="投影片快速導覽"></nav>
-
-    <div class="slide-status" role="status" aria-live="polite" aria-atomic="true">
-      <span data-current-slide>01</span>
-      <span aria-hidden="true"> / </span>
-      <span class="sr-only">共</span>
-      <span data-total-slides>16</span>
-    </div>
-
+    <div class="slide-status" role="status" aria-live="polite" aria-atomic="true"><span data-current-slide>01</span><span aria-hidden="true"> / </span><span class="sr-only">共</span><span data-total-slides>19</span></div>
     <script type="module" src="deck.js"></script>
   </body>
 </html>

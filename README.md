@@ -63,7 +63,8 @@ npm test
 
 - 瀏覽器最多直接使用快取一小時。
 - 快取到期後必須向 Vercel 重新驗證；檔案未變時可沿用，檔案更新時會取得新版。
-- 若要讓重要素材更新立即生效，可更換檔名或在 Vercel 清除快取後重新部署。
+- 更換資產檔名並同步更新 HTML 引用時，瀏覽器會立即請求新的 URL。
+- Vercel CDN purge（清除）不會讓仍在 fresh 狀態的瀏覽器快取失效；若檔名不變，使用者仍可能看到舊檔，最久到 `max-age` 一小時屆滿。
 
 ## 安全注意事項
 
@@ -73,7 +74,7 @@ npm test
 
 ## 素材來源
 
-- `assets/hero.jpg`：由原始投影片素材提供的 hero artwork；SHA-256 為 `fb4f36a58af2dcb6412cdfe2ba20a3cb05644ffbd2a23831bc8cfc327ff07b18`。
+- `assets/hero.jpg`：由使用者提供的原始投影片素材，SHA-256 為 `fb4f36a58af2dcb6412cdfe2ba20a3cb05644ffbd2a23831bc8cfc327ff07b18`。本 repository 不獨立主張該圖片的授權或使用權；素材提供者需自行確認其使用依據。
 - `assets/logos/claude.svg`：Simple Icons 的 Anthropic 圖示；SHA-256 為 `1c10881e4729127e1a86e569613d786240acae13eacfa01860be065b66260e36`。
 - `assets/logos/gemini.svg` 與 `assets/logos/google-ai-studio.svg`：Simple Icons 的 Google Gemini 圖示；SHA-256 均為 `404eba6940a54e63d40edcce2d2e7cb2b3dbfec765e7a1d523662b6f4e0d6747`。
 - `assets/logos/github.svg`：Simple Icons 的 GitHub 圖示；SHA-256 為 `476ba7aa67b86da7d6e7567b08a4bf0eb1a2fd28da5fc243f8ee39a2f1ea6773`。

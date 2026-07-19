@@ -99,6 +99,9 @@ test("documents local use, navigation, sharing, printing, and deployment", async
   assert.match(readme, /未使用.*內容雜湊|檔名.*未.*hash/i);
   assert.match(readme, /max-age=3600/);
   assert.match(readme, /must-revalidate/);
+  assert.match(readme, /更換.*檔名.*立即.*新/i);
+  assert.match(readme, /CDN.*(?:清除|purge).*不會.*瀏覽器.*快取/i);
+  assert.match(readme, /檔名.*不變.*(?:一小時|max-age)/i);
 });
 
 test("documents bundled asset provenance and trademark ownership", async () => {
@@ -109,6 +112,8 @@ test("documents bundled asset provenance and trademark ownership", async () => {
   assert.match(readme, /Simple Icons/);
   assert.match(readme, /官方.*標誌/);
   assert.match(readme, /SHA-256/);
+  assert.match(readme, /(?:使用者|委託者).*提供/);
+  assert.match(readme, /不.*(?:獨立)?主張.*(?:授權|license|使用權)/i);
   assert.match(readme, /商標.*各自.*所有權人/);
 });
 

@@ -7,6 +7,8 @@ const fragments = {
   githubClassic: ["gh", "p_"].join(""),
   githubFineGrained: ["github", "_pat_"].join(""),
   openAi: ["s", "k-"].join(""),
+  anthropic: ["s", "k-ant-"].join(""),
+  googleApi: ["AI", "za"].join(""),
   supabaseSecret: ["sb", "_secret_"].join(""),
   serviceRole: ["service", "_role"].join(""),
   awsSecretName: ["AWS_SECRET_ACCESS", "_KEY"].join(""),
@@ -43,7 +45,21 @@ const detectors = [
   {
     label: "OpenAI API key",
     pattern: new RegExp(
-      `\\b${escapeRegExp(fragments.openAi)}(?:proj-)?[A-Za-z0-9_-]{20,}\\b`,
+      `(?<![A-Za-z0-9_-])${escapeRegExp(fragments.openAi)}(?:(?:proj-)[A-Za-z0-9_-]{20,}|(?!ant-)[A-Za-z0-9]{20,})(?![A-Za-z0-9_-])`,
+      "g",
+    ),
+  },
+  {
+    label: "Anthropic API key",
+    pattern: new RegExp(
+      `(?<![A-Za-z0-9_-])${escapeRegExp(fragments.anthropic)}(?:api\\d{2}-)?[A-Za-z0-9_-]{20,}(?![A-Za-z0-9_-])`,
+      "g",
+    ),
+  },
+  {
+    label: "Google API key",
+    pattern: new RegExp(
+      `(?<![A-Za-z0-9_-])${escapeRegExp(fragments.googleApi)}[A-Za-z0-9_-]{35}(?![A-Za-z0-9_-])`,
       "g",
     ),
   },
@@ -139,12 +155,52 @@ export function scanTrackedTextFiles(repositoryPath) {
 
 export function scanGitHistory(repositoryPath) {
   const findings = [];
+  const commitMessages = runGit(
+    repositoryPath,
+    ["log", "--all", "--format=%H%x00%B%x00"],
+    { encoding: "utf8" },
+  );
+  findings.push(
+    ...findCredentialFindings(
+      commitMessages,
+      "git-history:commit-messages",
+    ),
+  );
+
   const patchHistory = runGit(
     repositoryPath,
     ["log", "--all", "-p", "--no-ext-diff", "--text", "--format=commit %H"],
     { encoding: "utf8" },
   );
   findings.push(...findCredentialFindings(patchHistory, "git-history:patches"));
+
+  const tagLines = runGit(
+    repositoryPath,
+    ["for-each-ref", "refs/tags", "--format=%(objectname) %(refname)"],
+    { encoding: "utf8" },
+  )
+    .split("\n")
+    .filter(Boolean);
+
+  for (const line of tagLines) {
+    const separatorIndex = line.indexOf(" ");
+    const objectId = line.slice(0, separatorIndex);
+    const refName = line.slice(separatorIndex + 1);
+    const objectType = runGit(repositoryPath, ["cat-file", "-t", objectId], {
+      encoding: "utf8",
+    }).trim();
+
+    if (objectType !== "tag") {
+      continue;
+    }
+
+    findings.push(
+      ...scanBuffer(
+        runGit(repositoryPath, ["cat-file", "-p", objectId]),
+        `git-history:annotated-tag:${refName}`,
+      ),
+    );
+  }
 
   const objectLines = runGit(repositoryPath, [
     "rev-list",

@@ -160,6 +160,7 @@ test("lists required Vercel and Supabase credentials before class", async () => 
   assert.match(visibleText, /取得 Vercel token/);
   assert.match(visibleText, /開好 Supabase 帳號/);
   assert.match(visibleText, /取得 Supabase (?:token|API key)/);
+  assert.doesNotMatch(visibleText, /準備可收驗證信的信箱/);
 });
 
 test("requires every AI-shared token and API key to be regenerated after launch", async () => {

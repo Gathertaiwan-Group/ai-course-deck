@@ -19,6 +19,7 @@ const requiredSlideTitles = [
   "有自動化才更新 GitHub Secrets",
   "同步本地 .env.local，測試後再推送",
   "讓 Claude Code 協助維護",
+  "Chrome 上的 AI 助手",
   "推送即部署",
   "網站完成後的三件事",
   "完成一個可持續維護的網站",
@@ -134,10 +135,10 @@ function getSlideText(html, slideIndex) {
   return getVisibleText(slide);
 }
 
-test("contains exactly 19 sections with the slide class", async () => {
+test("contains exactly 20 sections with the slide class", async () => {
   const html = await loadIndexHtml();
 
-  assert.equal(getSlideSections(html).length, 19);
+  assert.equal(getSlideSections(html).length, 20);
 });
 
 test("places every approved title in its corresponding slide section", async () => {
@@ -206,14 +207,20 @@ test("teaches the ordered rotation of Vercel, GitHub, and local secrets", async 
   assert.match(localText, /(?:不要|不可|絕不).*commit/);
 });
 
-test("teaches Claude Code maintenance and Git-driven Vercel deployment", async () => {
+test("introduces Chrome AI assistants and Git-driven Vercel deployment", async () => {
   const claudeText = getSlideText(await loadIndexHtml(), 15);
-  const deployText = getSlideText(await loadIndexHtml(), 16);
+  const chromeText = getSlideText(await loadIndexHtml(), 16);
+  const deployText = getSlideText(await loadIndexHtml(), 17);
 
   assert.match(claudeText, /Claude Code/);
   assert.match(claudeText, /(?:測試|檢查)/);
   assert.match(claudeText, /commit/);
   assert.match(claudeText, /push/);
+  assert.match(chromeText, /Claude on Chrome/);
+  assert.match(chromeText, /Codex on Chrome/);
+  assert.match(chromeText, /(?:操控|控制).*瀏覽器/);
+  assert.match(chromeText, /(?:設定卡住|卡住)/);
+  assert.match(chromeText, /(?:不要|不可|絕不).*敏感/);
   assert.match(deployText, /Preview/);
   assert.match(deployText, /main/);
   assert.match(deployText, /Production/);

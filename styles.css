@@ -764,6 +764,55 @@ strong {
   line-height: 1.5;
 }
 
+.browser-grid {
+  display: grid;
+  max-width: 960px;
+  margin-top: clamp(30px, 4.5vh, 50px);
+  list-style: none;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(18px, 2.5vw, 28px);
+}
+
+.browser-grid li {
+  min-height: clamp(190px, 24vh, 250px);
+  padding: clamp(24px, 3.2vw, 38px);
+  border-radius: var(--radius-medium);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+
+.browser-grid li:nth-child(2) {
+  background: var(--surface-blue);
+}
+
+.browser-grid img {
+  width: clamp(48px, 5vw, 70px);
+  height: clamp(48px, 5vw, 70px);
+}
+
+.browser-grid strong {
+  display: block;
+  margin-top: 20px;
+  font-size: clamp(1.25rem, 2vw, 1.7rem);
+  letter-spacing: -0.025em;
+}
+
+.browser-grid p,
+.browser-note {
+  max-width: 34ch;
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: clamp(0.98rem, 1.35vw, 1.12rem);
+  line-height: 1.5;
+}
+
+.browser-note {
+  max-width: 62ch;
+  margin-top: 18px;
+  color: var(--orange-dark);
+  font-weight: 650;
+}
+
 .slide--closing {
   background:
     radial-gradient(circle at 80% 20%, rgba(22, 104, 194, 0.14), transparent 34%),
@@ -936,6 +985,7 @@ strong {
 .slide .iteration-loop > *,
 .slide .data-flow > *,
 .slide .security-grid > *,
+.slide .browser-grid > *,
 .slide .closing-steps > * {
   opacity: 1;
   transform: translateY(0);
@@ -952,6 +1002,7 @@ strong {
 .js .slide:not(.is-active) .iteration-loop > *,
 .js .slide:not(.is-active) .data-flow > *,
 .js .slide:not(.is-active) .security-grid > *,
+.js .slide:not(.is-active) .browser-grid > *,
 .js .slide:not(.is-active) .closing-steps > * {
   opacity: 0;
   transform: translateY(22px);
@@ -1369,6 +1420,38 @@ strong {
     gap: 8px;
   }
 
+  .browser-grid {
+    margin-top: 20px;
+    gap: 10px;
+  }
+
+  .browser-grid li {
+    min-height: 0;
+    padding: 18px;
+    border-radius: 18px;
+  }
+
+  .browser-grid img {
+    width: 42px;
+    height: 42px;
+  }
+
+  .browser-grid strong {
+    margin-top: 12px;
+    font-size: 1.1rem;
+  }
+
+  .browser-grid p,
+  .browser-note {
+    margin-top: 6px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+
+  .browser-note {
+    margin-top: 12px;
+  }
+
   .security-grid li {
     min-height: 0;
     padding: 16px 18px;
@@ -1742,6 +1825,38 @@ strong {
     gap: 10px;
   }
 
+  .browser-grid {
+    margin-top: 12px;
+    gap: 10px;
+  }
+
+  .browser-grid li {
+    min-height: 92px;
+    padding: 12px 16px;
+    border-radius: 16px;
+  }
+
+  .browser-grid img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .browser-grid strong {
+    margin-top: 5px;
+    font-size: 1rem;
+  }
+
+  .browser-grid p,
+  .browser-note {
+    margin-top: 3px;
+    font-size: 0.9rem;
+    line-height: 1.3;
+  }
+
+  .browser-note {
+    margin-top: 8px;
+  }
+
   .security-grid li {
     min-height: 86px;
     padding: 12px 16px;
@@ -1807,6 +1922,7 @@ strong {
   .js .slide:not(.is-active) .iteration-loop > *,
   .js .slide:not(.is-active) .data-flow > *,
   .js .slide:not(.is-active) .security-grid > *,
+  .js .slide:not(.is-active) .browser-grid > *,
   .js .slide:not(.is-active) .closing-steps > * {
     opacity: 1;
     transform: none;

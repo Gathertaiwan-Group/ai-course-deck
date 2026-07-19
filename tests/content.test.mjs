@@ -245,6 +245,16 @@ test("checks Meta information, Open Graph, and RWD before storing the frontend",
   assert.match(visibleText, /RWD/);
 });
 
+test("explains first-time GitHub authorization from AI Studio", async () => {
+  const slides = getSlideSections(await loadIndexHtml());
+  const slideMarkup = slides[6];
+  const visibleText = getVisibleText(slideMarkup);
+
+  assert.match(visibleText, /第一次/);
+  assert.match(visibleText, /授權/);
+  assert.match(slideMarkup, /assets\/screenshots\/ai-studio-github-authorize\.png/);
+});
+
 test("teaches AI maintenance and Git-driven Vercel deployment", async () => {
   const slides = getSlideSections(await loadIndexHtml());
   const localRepoMarkup = slides[8];

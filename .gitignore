@@ -1,0 +1,12 @@
+.env
+.env.*
+!.env.example
+
+.vercel/
+.DS_Store
+node_modules/
+
+test-results/
+playwright-report/
+tests/screenshots/
+tests/artifacts/

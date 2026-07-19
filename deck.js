@@ -57,10 +57,71 @@ export function shouldIgnoreKeyboardEvent(event) {
   );
 }
 
+export function findDeckScrollRoot(documentRoot) {
+  return documentRoot?.querySelector?.(".deck") ?? null;
+}
+
+export function getIntersectingSlideIndexes(slideBounds, rootBounds) {
+  if (!Array.isArray(slideBounds) || !rootBounds) {
+    return [];
+  }
+
+  const rootTop = rootBounds.top;
+  const rootBottom = rootTop + rootBounds.height;
+
+  return slideBounds.flatMap((bounds, index) => {
+    const slideBottom = bounds.top + bounds.height;
+    const intersects = bounds.top < rootBottom && slideBottom > rootTop;
+
+    return intersects ? [index] : [];
+  });
+}
+
+export function getVisibleSlideIndex(slideBounds, rootBounds) {
+  if (!Array.isArray(slideBounds) || slideBounds.length === 0 || !rootBounds) {
+    return 0;
+  }
+
+  const rootCenter = rootBounds.top + rootBounds.height / 2;
+  let closestIndex = 0;
+  let closestDistance = Number.POSITIVE_INFINITY;
+
+  slideBounds.forEach((bounds, index) => {
+    const slideCenter = bounds.top + bounds.height / 2;
+    const distance = Math.abs(slideCenter - rootCenter);
+
+    if (distance < closestDistance) {
+      closestDistance = distance;
+      closestIndex = index;
+    }
+  });
+
+  return closestIndex;
+}
+
+export function resolveScrollSynchronization({
+  visibleIndex,
+  navigationTargetIndex,
+  targetHasArrived,
+}) {
+  if (navigationTargetIndex !== null && !targetHasArrived) {
+    return {
+      activeIndex: navigationTargetIndex,
+      navigationTargetIndex,
+    };
+  }
+
+  return {
+    activeIndex: visibleIndex,
+    navigationTargetIndex: null,
+  };
+}
+
 function initializeDeck() {
   const slides = Array.from(document.querySelectorAll(".slide"));
+  const scrollRoot = findDeckScrollRoot(document);
 
-  if (slides.length === 0) {
+  if (slides.length === 0 || !scrollRoot) {
     return;
   }
 
@@ -78,23 +139,24 @@ function initializeDeck() {
   const dotButtons = [];
   let activeIndex = 0;
   let navigationTargetIndex = null;
-  let navigationReleaseTimer = 0;
+  let navigationFallbackTimer = 0;
   let scrollFrame = 0;
 
   const prefersReducedMotion = () => reducedMotionQuery?.matches ?? false;
 
   const releaseNavigationTarget = () => {
     navigationTargetIndex = null;
-    window.clearTimeout(navigationReleaseTimer);
-    navigationReleaseTimer = 0;
+    window.clearTimeout(navigationFallbackTimer);
+    navigationFallbackTimer = 0;
   };
 
-  const updateActiveSlide = (index) => {
+  const updateActiveSlide = (index, revealedIndexes = [index]) => {
     const nextIndex = clampSlideIndex(index, slides.length);
+    const revealedSlides = new Set([...revealedIndexes, nextIndex]);
     activeIndex = nextIndex;
 
     slides.forEach((slide, slideIndex) => {
-      slide.classList.toggle("is-active", slideIndex === nextIndex);
+      slide.classList.toggle("is-active", revealedSlides.has(slideIndex));
     });
 
     if (progressBar) {
@@ -133,40 +195,61 @@ function initializeDeck() {
     }
   };
 
-  const closestSlideIndex = () => {
-    const viewportCenter = window.innerHeight / 2;
-    let closestIndex = 0;
-    let closestDistance = Number.POSITIVE_INFINITY;
+  const getScrollGeometry = () => {
+    const rootBounds = scrollRoot.getBoundingClientRect();
+    const slideBounds = slides.map((slide) => slide.getBoundingClientRect());
 
-    slides.forEach((slide, index) => {
-      const bounds = slide.getBoundingClientRect();
-      const slideCenter = bounds.top + bounds.height / 2;
-      const distance = Math.abs(slideCenter - viewportCenter);
+    return { rootBounds, slideBounds };
+  };
 
-      if (distance < closestDistance) {
-        closestDistance = distance;
-        closestIndex = index;
-      }
-    });
+  const targetHasArrived = (targetIndex, geometry) => {
+    if (targetIndex === null) {
+      return false;
+    }
 
-    return closestIndex;
+    const targetBounds = geometry.slideBounds[targetIndex];
+
+    if (!targetBounds) {
+      return false;
+    }
+
+    const tolerance = Math.max(2, geometry.rootBounds.height * 0.015);
+    const isAtTargetOffset =
+      Math.abs(targetBounds.top - geometry.rootBounds.top) <= tolerance;
+    const visibleIndex = getVisibleSlideIndex(
+      geometry.slideBounds,
+      geometry.rootBounds,
+    );
+
+    return visibleIndex === targetIndex && isAtTargetOffset;
   };
 
   const synchronizeFromScroll = () => {
     scrollFrame = 0;
-    const closestIndex = closestSlideIndex();
+    const geometry = getScrollGeometry();
+    const visibleIndex = getVisibleSlideIndex(
+      geometry.slideBounds,
+      geometry.rootBounds,
+    );
+    const revealedIndexes = getIntersectingSlideIndexes(
+      geometry.slideBounds,
+      geometry.rootBounds,
+    );
+    const synchronization = resolveScrollSynchronization({
+      visibleIndex,
+      navigationTargetIndex,
+      targetHasArrived: targetHasArrived(navigationTargetIndex, geometry),
+    });
 
-    if (navigationTargetIndex !== null) {
-      if (closestIndex !== navigationTargetIndex) {
-        return;
-      }
-
+    if (
+      navigationTargetIndex !== null &&
+      synchronization.navigationTargetIndex === null
+    ) {
       releaseNavigationTarget();
     }
 
-    if (closestIndex !== activeIndex) {
-      updateActiveSlide(closestIndex);
-    }
+    navigationTargetIndex = synchronization.navigationTargetIndex;
+    updateActiveSlide(synchronization.activeIndex, revealedIndexes);
   };
 
   const scheduleScrollSynchronization = () => {
@@ -175,6 +258,22 @@ function initializeDeck() {
     }
 
     scrollFrame = window.requestAnimationFrame(synchronizeFromScroll);
+  };
+
+  const enforceNavigationTarget = () => {
+    if (navigationTargetIndex === null) {
+      return;
+    }
+
+    const targetSlide = slides[navigationTargetIndex];
+
+    if (!targetSlide) {
+      releaseNavigationTarget();
+      return;
+    }
+
+    targetSlide.scrollIntoView({ behavior: "auto", block: "start" });
+    window.requestAnimationFrame(synchronizeFromScroll);
   };
 
   const navigateTo = (index, options = {}) => {
@@ -195,15 +294,14 @@ function initializeDeck() {
     targetSlide.scrollIntoView({ behavior, block: "start" });
 
     if (behavior === "auto") {
-      releaseNavigationTarget();
       window.requestAnimationFrame(synchronizeFromScroll);
       return;
     }
 
-    navigationReleaseTimer = window.setTimeout(() => {
-      releaseNavigationTarget();
-      scheduleScrollSynchronization();
-    }, 900);
+    navigationFallbackTimer = window.setTimeout(
+      enforceNavigationTarget,
+      1800,
+    );
   };
 
   const navigateFromHash = (options = {}) => {
@@ -269,8 +367,15 @@ function initializeDeck() {
     }
   });
 
-  window.addEventListener("scroll", scheduleScrollSynchronization, {
+  scrollRoot.addEventListener("scroll", scheduleScrollSynchronization, {
     passive: true,
+  });
+  scrollRoot.addEventListener("scrollend", () => {
+    synchronizeFromScroll();
+
+    if (navigationTargetIndex !== null) {
+      enforceNavigationTarget();
+    }
   });
   window.addEventListener("resize", scheduleScrollSynchronization, {
     passive: true,
@@ -279,8 +384,30 @@ function initializeDeck() {
     navigateFromHash({ instant: prefersReducedMotion() });
   });
 
+  if ("IntersectionObserver" in window) {
+    const observer = new window.IntersectionObserver(
+      scheduleScrollSynchronization,
+      {
+        root: scrollRoot,
+        threshold: [0, 0.25, 0.5, 0.75, 1],
+      },
+    );
+    slides.forEach((slide) => observer.observe(slide));
+  }
+
   if (!navigateFromHash({ instant: true })) {
-    updateActiveSlide(closestSlideIndex());
+    const geometry = getScrollGeometry();
+    const visibleIndex = getVisibleSlideIndex(
+      geometry.slideBounds,
+      geometry.rootBounds,
+    );
+    updateActiveSlide(
+      visibleIndex,
+      getIntersectingSlideIndexes(
+        geometry.slideBounds,
+        geometry.rootBounds,
+      ),
+    );
   }
 }
 

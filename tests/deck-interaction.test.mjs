@@ -2,7 +2,11 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import {
+  findDeckScrollRoot,
+  getIntersectingSlideIndexes,
   getKeyboardAction,
+  getVisibleSlideIndex,
+  resolveScrollSynchronization,
   shouldIgnoreKeyboardEvent,
 } from "../deck.js";
 
@@ -70,4 +74,95 @@ test("allows unmodified navigation events outside editable targets", () => {
     false,
   );
   assert.equal(shouldIgnoreKeyboardEvent({ shiftKey: true }), false);
+});
+
+test("uses the deck element as the presentation scroll root", () => {
+  const deck = { id: "deck" };
+  const documentRoot = {
+    querySelector(selector) {
+      return selector === ".deck" ? deck : null;
+    },
+  };
+
+  assert.equal(findDeckScrollRoot(documentRoot), deck);
+  assert.equal(findDeckScrollRoot({ querySelector: () => null }), null);
+});
+
+test("finds the visible slide relative to the deck viewport", () => {
+  const rootBounds = { top: 120, height: 600 };
+  const slideBounds = [
+    { top: -480, height: 600 },
+    { top: 120, height: 600 },
+    { top: 720, height: 600 },
+  ];
+
+  assert.equal(getVisibleSlideIndex(slideBounds, rootBounds), 1);
+});
+
+test("reveals every slide intersecting the deck viewport during scrolling", () => {
+  const rootBounds = { top: 100, height: 600 };
+  const slideBounds = [
+    { top: -400, height: 600 },
+    { top: 200, height: 600 },
+    { top: 800, height: 600 },
+  ];
+
+  assert.deepEqual(
+    getIntersectingSlideIndexes(slideBounds, rootBounds),
+    [0, 1],
+  );
+});
+
+test("keeps a navigation target locked through intermediate slides", () => {
+  assert.deepEqual(
+    resolveScrollSynchronization({
+      visibleIndex: 7,
+      navigationTargetIndex: 15,
+      targetHasArrived: false,
+    }),
+    {
+      activeIndex: 15,
+      navigationTargetIndex: 15,
+    },
+  );
+});
+
+test("releases a navigation target only after that exact slide arrives", () => {
+  assert.deepEqual(
+    resolveScrollSynchronization({
+      visibleIndex: 14,
+      navigationTargetIndex: 15,
+      targetHasArrived: false,
+    }),
+    {
+      activeIndex: 15,
+      navigationTargetIndex: 15,
+    },
+  );
+
+  assert.deepEqual(
+    resolveScrollSynchronization({
+      visibleIndex: 15,
+      navigationTargetIndex: 15,
+      targetHasArrived: true,
+    }),
+    {
+      activeIndex: 15,
+      navigationTargetIndex: null,
+    },
+  );
+});
+
+test("manual scrolling activates the newly visible slide without a lock", () => {
+  assert.deepEqual(
+    resolveScrollSynchronization({
+      visibleIndex: 2,
+      navigationTargetIndex: null,
+      targetHasArrived: false,
+    }),
+    {
+      activeIndex: 2,
+      navigationTargetIndex: null,
+    },
+  );
 });

@@ -34,7 +34,7 @@ const requiredSlideSummaries = [
   "用 Vercel 把網站公開。",
   "串上資料，持續修改。",
   "一次改一件事，先測試。",
-  "推送程式，網站自動更新。",
+  "改好送出去，線上網站就會自己變新。",
   "接網域、GA 和 Search Console。",
   "上線後，請 AI 用瀏覽器把安全設定做完。",
   "網站完成後，持續優化。",
@@ -253,9 +253,10 @@ test("teaches AI maintenance and Git-driven Vercel deployment", async () => {
   assert.match(claudeText, /(?:測試|檢查)/);
   assert.match(claudeText, /commit/);
   assert.match(claudeText, /push/);
-  assert.match(deployText, /Preview/);
-  assert.match(deployText, /main/);
-  assert.match(deployText, /Production/);
+  assert.match(deployText, /本地改完/);
+  assert.match(deployText, /commit \/ push/);
+  assert.match(deployText, /Vercel.*自動更新|Vercel.*自動部署/);
+  assert.match(deployText, /線上網址檢查/);
   assert.match(deployText, /repository.*Private|repo.*Private/i);
   assert.match(deployText, /自動部署.*成功|部署.*成功.*repository/i);
 });

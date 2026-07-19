@@ -82,7 +82,7 @@
       <section class="slide" id="slide-6" data-label="前端完成前，先檢查 3 件事" aria-labelledby="slide-6-title">
         <div class="slide__content slide__content--chapter-wide"><div class="chapter-index"><span class="chapter-badge">STEP 01</span><span class="chapter-large-number" aria-hidden="true">1-2</span></div><div class="chapter-wide-body">
           <h2 id="slide-6-title">前端完成前，先檢查 3 件事</h2><p class="lede">畫面好看之外，也要讓分享與搜尋正常運作。</p>
-          <ol class="iteration-loop"><li>Meta 資訊<br><small>title、description</small></li><li>Open Graph<br><small>分享預覽圖與文字</small></li><li>RWD<br><small>手機、平板、桌機</small></li><li>逐頁預覽<br><small>一次只改一件事</small></li></ol></div>
+          <ol class="iteration-loop"><li>Meta 資訊<br><small>title、description</small></li><li>Open Graph<br><small>分享預覽圖與文字</small></li><li>RWD<br><small>手機、平板、桌機</small></li></ol></div>
           <p class="slide-summary">確認手機、分享和搜尋都正常。</p>
         </div>
       </section>
@@ -141,10 +141,10 @@
       </section>
 
       <section class="slide" id="slide-13" data-label="設定自動更新（推送即部署）" aria-labelledby="slide-13-title">
-        <div class="slide__content slide__content--chapter-wide"><div class="chapter-index"><span class="chapter-badge">STEP 04</span><span class="chapter-large-number" aria-hidden="true">4-4</span></div><div class="chapter-wide-body"><h2 id="slide-13-title">設定自動更新（推送即部署）</h2><p class="lede">讓 GitHub 連動 Vercel；Claude Code 不需要拿到 Vercel token。</p>
-          <figure class="data-flow"><figcaption class="sr-only">從 GitHub 推送到 Vercel 部署的流程</figcaption><div class="data-flow__node"><strong>任何 branch</strong><span>push 後產生 Preview</span></div><div class="data-flow__arrows"><span>GitHub →</span><span>← 測試回饋</span></div><div class="data-flow__node data-flow__node--accent"><strong>main</strong><span>push 後部署 Production</span></div></figure>
+        <div class="slide__content slide__content--chapter-wide"><div class="chapter-index"><span class="chapter-badge">STEP 04</span><span class="chapter-large-number" aria-hidden="true">4-4</span></div><div class="chapter-wide-body"><h2 id="slide-13-title">設定自動更新（推送即部署）</h2><p class="lede">本地改完後，只要 push，Vercel 會自動更新線上網站。</p>
+          <figure class="data-flow data-flow--deploy"><figcaption class="sr-only">本地修改後推送，Vercel 自動更新線上網站，再打開線上網址檢查</figcaption><div class="data-flow__node"><strong>本地修改</strong></div><div class="data-flow__node"><strong>commit / push</strong></div><div class="data-flow__node data-flow__node--accent"><strong>Vercel 自動部署</strong></div><div class="data-flow__node"><strong>打開線上網址檢查</strong></div></figure>
           <p class="browser-note">自動部署設定成功後，記得把 GitHub repository 設為 Private。</p></div>
-          <p class="slide-summary">推送程式，網站自動更新。</p>
+          <p class="slide-summary">改好送出去，線上網站就會自己變新。</p>
         </div>
       </section>
 

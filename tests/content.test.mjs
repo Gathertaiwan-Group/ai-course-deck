@@ -5,6 +5,7 @@ import test from "node:test";
 const requiredSlideTitles = [
   "用 AI 打造全端網站",
   "今天做出可被找到的網站",
+  "今天會用五步驟完成網站",
   "前置準備",
   "5 步完成網站",
   "AI Studio：快速做出前端",
@@ -135,10 +136,10 @@ function getSlideText(html, slideIndex) {
   return getVisibleText(slide);
 }
 
-test("contains exactly 20 sections with the slide class", async () => {
+test("contains exactly 21 sections with the slide class", async () => {
   const html = await loadIndexHtml();
 
-  assert.equal(getSlideSections(html).length, 20);
+  assert.equal(getSlideSections(html).length, 21);
 });
 
 test("places every approved title in its corresponding slide section", async () => {
@@ -155,7 +156,7 @@ test("places every approved title in its corresponding slide section", async () 
 });
 
 test("lists required Vercel and Supabase credentials before class", async () => {
-  const visibleText = getSlideText(await loadIndexHtml(), 2);
+  const visibleText = getSlideText(await loadIndexHtml(), 3);
 
   assert.match(visibleText, /開好 Vercel 帳號/);
   assert.match(visibleText, /取得 Vercel token/);
@@ -164,8 +165,19 @@ test("lists required Vercel and Supabase credentials before class", async () => 
   assert.doesNotMatch(visibleText, /準備可收驗證信的信箱/);
 });
 
+test("introduces the five-step website production flow after the outcome", async () => {
+  const visibleText = getSlideText(await loadIndexHtml(), 2);
+
+  assert.match(visibleText, /五步驟/);
+  assert.match(visibleText, /生成前端/);
+  assert.match(visibleText, /存進 GitHub/);
+  assert.match(visibleText, /本地開發/);
+  assert.match(visibleText, /部署完成/);
+  assert.match(visibleText, /持續優化/);
+});
+
 test("requires every AI-shared token and API key to be regenerated after launch", async () => {
-  const visibleText = getSlideText(await loadIndexHtml(), 11);
+  const visibleText = getSlideText(await loadIndexHtml(), 12);
 
   assert.match(visibleText, /(?:所有|每一把|全部)/);
   assert.match(visibleText, /(?:貼給|提供給|分享給|交給)/);
@@ -177,7 +189,7 @@ test("requires every AI-shared token and API key to be regenerated after launch"
 });
 
 test("forbids private and service-role keys in frontend code", async () => {
-  const visibleText = getSlideText(await loadIndexHtml(), 11);
+  const visibleText = getSlideText(await loadIndexHtml(), 12);
 
   assert.match(visibleText, /\bprivate key\b/i);
   assert.match(visibleText, /\bservice-role key\b/i);
@@ -186,7 +198,7 @@ test("forbids private and service-role keys in frontend code", async () => {
 });
 
 test("checks Meta information, Open Graph, and RWD before storing the frontend", async () => {
-  const visibleText = getSlideText(await loadIndexHtml(), 5);
+  const visibleText = getSlideText(await loadIndexHtml(), 6);
 
   assert.match(visibleText, /Meta/);
   assert.match(visibleText, /Open Graph/);
@@ -194,9 +206,9 @@ test("checks Meta information, Open Graph, and RWD before storing the frontend",
 });
 
 test("teaches the ordered rotation of Vercel, GitHub, and local secrets", async () => {
-  const vercelText = getSlideText(await loadIndexHtml(), 12);
-  const githubText = getSlideText(await loadIndexHtml(), 13);
-  const localText = getSlideText(await loadIndexHtml(), 14);
+  const vercelText = getSlideText(await loadIndexHtml(), 13);
+  const githubText = getSlideText(await loadIndexHtml(), 14);
+  const localText = getSlideText(await loadIndexHtml(), 15);
 
   assert.match(vercelText, /Vercel/);
   assert.match(vercelText, /Environment Variables/);
@@ -208,9 +220,9 @@ test("teaches the ordered rotation of Vercel, GitHub, and local secrets", async 
 });
 
 test("introduces Chrome AI assistants and Git-driven Vercel deployment", async () => {
-  const claudeText = getSlideText(await loadIndexHtml(), 15);
-  const chromeText = getSlideText(await loadIndexHtml(), 16);
-  const deployText = getSlideText(await loadIndexHtml(), 17);
+  const claudeText = getSlideText(await loadIndexHtml(), 16);
+  const chromeText = getSlideText(await loadIndexHtml(), 17);
+  const deployText = getSlideText(await loadIndexHtml(), 18);
 
   assert.match(claudeText, /Claude Code/);
   assert.match(claudeText, /(?:測試|檢查)/);

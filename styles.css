@@ -851,8 +851,8 @@ strong {
 .dot-nav a {
   position: relative;
   display: grid;
-  width: 30px;
-  height: 24px;
+  width: 44px;
+  height: 44px;
   padding: 0;
   border: 0;
   background: transparent;
@@ -1187,7 +1187,7 @@ strong {
 
   .tool-line {
     margin-top: 22px;
-    font-size: 0.95rem;
+    font-size: 1rem;
   }
 
   .slide__content--split .visual-card--hero {
@@ -1217,7 +1217,7 @@ strong {
 
   .outcome-flow__item > span:last-child {
     margin: 0;
-    font-size: 0.96rem;
+    font-size: 1rem;
   }
 
   .check-list {
@@ -1249,7 +1249,7 @@ strong {
   }
 
   .tool-mark span {
-    font-size: 0.86rem;
+    font-size: 1rem;
   }
 
   .slide__content--chapter {
@@ -1343,7 +1343,7 @@ strong {
   .concept-row span {
     min-height: 44px;
     padding: 10px 14px;
-    font-size: 0.95rem;
+    font-size: 1rem;
   }
 
   .data-flow {
@@ -1371,7 +1371,7 @@ strong {
     padding: 4px 10px;
     grid-template-columns: 1fr 1fr;
     gap: 8px;
-    font-size: 0.82rem;
+    font-size: 1rem;
   }
 
   .version-flow {

@@ -15,7 +15,7 @@ const requiredSlideTitles = [
   "Vercel 部署前端",
   "Supabase 串資料，持續修改到完成",
   "讓 Claude Code 或 Codex 協助維護",
-  "推送即部署",
+  "設定自動更新（推送即部署）",
   "網站完成後的三件事",
   "網站上線後，用 AI 處理安全設定",
   "完成一個可持續維護的網站",

@@ -5,13 +5,8 @@ import {
   parseSlideHash,
 } from "./deck-state.js";
 
-const INTERACTIVE_TAGS = new Set([
-  "A",
-  "BUTTON",
-  "INPUT",
-  "SELECT",
-  "TEXTAREA",
-]);
+const EDITABLE_TAGS = new Set(["INPUT", "SELECT", "TEXTAREA"]);
+const NATIVE_BUTTON_KEYS = new Set([" ", "Enter", "Spacebar"]);
 
 export function getKeyboardAction(event) {
   switch (event?.key) {
@@ -36,7 +31,7 @@ export function getKeyboardAction(event) {
 }
 
 export function shouldIgnoreKeyboardEvent(event) {
-  if (event?.altKey || event?.ctrlKey || event?.metaKey) {
+  if (event?.altKey || event?.ctrlKey || event?.metaKey || event?.repeat) {
     return true;
   }
 
@@ -46,15 +41,81 @@ export function shouldIgnoreKeyboardEvent(event) {
     return false;
   }
 
-  if (INTERACTIVE_TAGS.has(target.tagName) || target.isContentEditable) {
+  if (EDITABLE_TAGS.has(target.tagName) || target.isContentEditable) {
     return true;
   }
 
-  return Boolean(
+  const isInsideEditableTarget = Boolean(
     target.closest?.(
-      'a, button, [contenteditable]:not([contenteditable="false"]), input, textarea, select',
+      '[contenteditable]:not([contenteditable="false"]), input, textarea, select',
     ),
   );
+
+  if (isInsideEditableTarget) {
+    return true;
+  }
+
+  const isButton =
+    target.tagName === "BUTTON" ||
+    Boolean(target.closest?.("button"));
+
+  return isButton && NATIVE_BUTTON_KEYS.has(event?.key);
+}
+
+export function createDeckKeyboardHandler({
+  getActiveIndex,
+  getSlideCount,
+  navigateTo,
+}) {
+  return (event) => {
+    if (shouldIgnoreKeyboardEvent(event)) {
+      return false;
+    }
+
+    const action = getKeyboardAction(event);
+
+    if (!action) {
+      return false;
+    }
+
+    const activeIndex = getActiveIndex();
+    const slideCount = getSlideCount();
+    let targetIndex = activeIndex;
+
+    if (action === "first") {
+      targetIndex = 0;
+    } else if (action === "last") {
+      targetIndex = slideCount - 1;
+    } else if (action === "previous") {
+      targetIndex = activeIndex - 1;
+    } else {
+      targetIndex = activeIndex + 1;
+    }
+
+    event.preventDefault?.();
+    navigateTo(clampSlideIndex(targetIndex, slideCount));
+    return true;
+  };
+}
+
+export function hasActiveSlideChanged(currentIndex, nextIndex) {
+  return currentIndex !== nextIndex;
+}
+
+export function updateAriaLiveSlideStatus(
+  statusElement,
+  currentIndex,
+  nextIndex,
+) {
+  if (
+    !statusElement ||
+    !hasActiveSlideChanged(currentIndex, nextIndex)
+  ) {
+    return false;
+  }
+
+  statusElement.textContent = String(nextIndex + 1).padStart(2, "0");
+  return true;
 }
 
 export function findDeckScrollRoot(documentRoot) {
@@ -137,7 +198,7 @@ function initializeDeck() {
     "(prefers-reduced-motion: reduce)",
   );
   const dotButtons = [];
-  let activeIndex = 0;
+  let activeIndex = null;
   let navigationTargetIndex = null;
   let navigationFallbackTimer = 0;
   let scrollFrame = 0;
@@ -153,20 +214,31 @@ function initializeDeck() {
   const updateActiveSlide = (index, revealedIndexes = [index]) => {
     const nextIndex = clampSlideIndex(index, slides.length);
     const revealedSlides = new Set([...revealedIndexes, nextIndex]);
+    const previousActiveIndex = activeIndex;
+    const activeSlideChanged = hasActiveSlideChanged(
+      previousActiveIndex,
+      nextIndex,
+    );
     activeIndex = nextIndex;
 
     slides.forEach((slide, slideIndex) => {
       slide.classList.toggle("is-active", revealedSlides.has(slideIndex));
     });
 
+    if (!activeSlideChanged) {
+      return;
+    }
+
     if (progressBar) {
       const progress = calculateProgress(nextIndex, slides.length) / 100;
       progressBar.style.transform = `scaleX(${progress})`;
     }
 
-    if (currentSlideStatus) {
-      currentSlideStatus.textContent = String(nextIndex + 1).padStart(2, "0");
-    }
+    updateAriaLiveSlideStatus(
+      currentSlideStatus,
+      previousActiveIndex,
+      nextIndex,
+    );
 
     if (totalSlidesStatus) {
       totalSlidesStatus.textContent = String(slides.length);
@@ -343,29 +415,12 @@ function initializeDeck() {
     navigateTo(activeIndex + 1);
   });
 
-  document.addEventListener("keydown", (event) => {
-    if (shouldIgnoreKeyboardEvent(event)) {
-      return;
-    }
-
-    const action = getKeyboardAction(event);
-
-    if (!action) {
-      return;
-    }
-
-    event.preventDefault();
-
-    if (action === "first") {
-      navigateTo(0);
-    } else if (action === "last") {
-      navigateTo(slides.length - 1);
-    } else if (action === "previous") {
-      navigateTo(activeIndex - 1);
-    } else {
-      navigateTo(activeIndex + 1);
-    }
+  const handleKeydown = createDeckKeyboardHandler({
+    getActiveIndex: () => activeIndex,
+    getSlideCount: () => slides.length,
+    navigateTo,
   });
+  document.addEventListener("keydown", handleKeydown);
 
   scrollRoot.addEventListener("scroll", scheduleScrollSynchronization, {
     passive: true,

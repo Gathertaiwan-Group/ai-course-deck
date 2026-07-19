@@ -2,12 +2,15 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import {
+  createDeckKeyboardHandler,
   findDeckScrollRoot,
   getIntersectingSlideIndexes,
   getKeyboardAction,
   getVisibleSlideIndex,
+  hasActiveSlideChanged,
   resolveScrollSynchronization,
   shouldIgnoreKeyboardEvent,
+  updateAriaLiveSlideStatus,
 } from "../deck.js";
 
 test("maps forward navigation keys to the next slide", () => {
@@ -51,13 +54,42 @@ test("ignores keyboard events from editable targets", () => {
   );
 });
 
-test("ignores keyboard events handled by interactive controls", () => {
-  for (const tagName of ["BUTTON", "A"]) {
-    assert.equal(
-      shouldIgnoreKeyboardEvent({ target: { tagName } }),
-      true,
-    );
-  }
+test("allows presentation keys when a deck button retains focus", () => {
+  assert.equal(
+    shouldIgnoreKeyboardEvent({
+      key: "ArrowRight",
+      target: { tagName: "BUTTON" },
+    }),
+    false,
+  );
+  assert.equal(
+    shouldIgnoreKeyboardEvent({
+      key: "End",
+      target: { tagName: "BUTTON" },
+    }),
+    false,
+  );
+});
+
+test("preserves native Space activation for a focused button", () => {
+  assert.equal(
+    shouldIgnoreKeyboardEvent({
+      key: " ",
+      target: { tagName: "BUTTON" },
+    }),
+    true,
+  );
+});
+
+test("ignores repeated keyboard events", () => {
+  assert.equal(
+    shouldIgnoreKeyboardEvent({
+      key: "ArrowRight",
+      repeat: true,
+      target: { tagName: "BODY" },
+    }),
+    true,
+  );
 });
 
 test("ignores keyboard shortcuts with command modifiers", () => {
@@ -74,6 +106,94 @@ test("allows unmodified navigation events outside editable targets", () => {
     false,
   );
   assert.equal(shouldIgnoreKeyboardEvent({ shiftKey: true }), false);
+});
+
+test("button-focused ArrowRight advances exactly once through the controller", () => {
+  const navigatedIndices = [];
+  let preventedCount = 0;
+  const handleKeydown = createDeckKeyboardHandler({
+    getActiveIndex: () => 1,
+    getSlideCount: () => 16,
+    navigateTo: (index) => navigatedIndices.push(index),
+  });
+
+  const handled = handleKeydown({
+    key: "ArrowRight",
+    repeat: false,
+    target: { tagName: "BUTTON" },
+    preventDefault: () => {
+      preventedCount += 1;
+    },
+  });
+
+  assert.equal(handled, true);
+  assert.deepEqual(navigatedIndices, [2]);
+  assert.equal(preventedCount, 1);
+});
+
+test("controller preserves button Space and suppresses held keys", () => {
+  const navigatedIndices = [];
+  let preventedCount = 0;
+  const handleKeydown = createDeckKeyboardHandler({
+    getActiveIndex: () => 1,
+    getSlideCount: () => 16,
+    navigateTo: (index) => navigatedIndices.push(index),
+  });
+  const button = { tagName: "BUTTON" };
+
+  assert.equal(
+    handleKeydown({
+      key: " ",
+      repeat: false,
+      target: button,
+      preventDefault: () => {
+        preventedCount += 1;
+      },
+    }),
+    false,
+  );
+  assert.equal(
+    handleKeydown({
+      key: "ArrowRight",
+      repeat: true,
+      target: button,
+      preventDefault: () => {
+        preventedCount += 1;
+      },
+    }),
+    false,
+  );
+
+  assert.deepEqual(navigatedIndices, []);
+  assert.equal(preventedCount, 0);
+});
+
+test("active-slide status updates only when the index changes", () => {
+  assert.equal(hasActiveSlideChanged(2, 2), false);
+  assert.equal(hasActiveSlideChanged(2, 3), true);
+  assert.equal(hasActiveSlideChanged(null, 0), true);
+});
+
+test("aria-live status writes exactly once for a newly active slide", () => {
+  let statusText = "03";
+  let writeCount = 0;
+  const statusElement = {
+    get textContent() {
+      return statusText;
+    },
+    set textContent(value) {
+      statusText = value;
+      writeCount += 1;
+    },
+  };
+
+  assert.equal(updateAriaLiveSlideStatus(statusElement, 2, 2), false);
+  assert.equal(writeCount, 0);
+  assert.equal(statusText, "03");
+
+  assert.equal(updateAriaLiveSlideStatus(statusElement, 2, 3), true);
+  assert.equal(writeCount, 1);
+  assert.equal(statusText, "04");
 });
 
 test("uses the deck element as the presentation scroll root", () => {

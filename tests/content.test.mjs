@@ -11,8 +11,7 @@ const requiredSlideTitles = [
   "今天的完整路線",
   "上午場：用 AI 做出第一版官網",
   "AI Studio：從一句話開始",
-  "先講清楚需求，再讓 AI 動手",
-  "生成第一版網站",
+  "講清楚需求，一次做出第一版",
   "產出後先檢查三件事",
   "改版與微調",
   "上午場：把成果存起來",
@@ -62,8 +61,7 @@ const requiredSlideSummaries = [
   "一條線走完，網站就上線。",
   "先把畫面做出來。",
   "用說的，就能做出網站。",
-  "需求講得越清楚，做得越準。",
-  "一次把手機版和分享預覽都要求好。",
+  "風格和需求一次給齊，AI 才做得準。",
   "讓 AI 自己檢查，再自己修。",
   "一次只改一個地方。",
   "存起來，才不會弄丟。",
@@ -214,11 +212,11 @@ function getSlideText(html, slideIndex) {
   return getVisibleText(slide);
 }
 
-test("contains exactly 48 sections with the slide class", async () => {
+test("contains exactly 47 sections with the slide class", async () => {
   const html = await loadIndexHtml();
 
-  assert.equal(getSlideSections(html).length, 48);
-  assert.match(html, /data-total-slides>48</);
+  assert.equal(getSlideSections(html).length, 47);
+  assert.match(html, /data-total-slides>47</);
 });
 
 test("numbers every slide id and heading id sequentially", async () => {
@@ -229,7 +227,7 @@ test("numbers every slide id and heading id sequentially", async () => {
 
   assert.deepEqual(
     ids,
-    Array.from({ length: 48 }, (_, index) => index + 1),
+    Array.from({ length: 47 }, (_, index) => index + 1),
   );
 
   for (const id of ids) {
@@ -302,34 +300,33 @@ test("uses consistent Step and chapter numbers across every workflow page", asyn
     [8, "01", "1-2"],
     [9, "01", "1-3"],
     [10, "01", "1-4"],
-    [11, "01", "1-5"],
-    [13, "02", "2-1"],
-    [14, "02", "2-2"],
-    [16, "03", "3-1"],
-    [17, "03", "3-2"],
-    [18, "03", "3-3"],
-    [19, "03", "3-4"],
-    [20, "04", "4-1"],
-    [21, "04", "4-2"],
-    [22, "04", "4-3"],
-    [23, "05", "5-1"],
-    [26, "06", "6-1"],
-    [27, "06", "6-2"],
-    [28, "06", "6-3"],
-    [30, "07", "7-1"],
-    [31, "07", "7-2"],
-    [32, "07", "7-3"],
-    [33, "07", "7-4"],
-    [34, "07", "7-5"],
-    [35, "07", "7-6"],
-    [36, "07", "7-7"],
-    [37, "07", "7-8"],
-    [39, "08", "8-1"],
-    [40, "08", "8-2"],
-    [41, "08", "8-3"],
-    [42, "08", "8-4"],
-    [43, "08", "8-5"],
-    [44, "08", "8-6"],
+    [12, "02", "2-1"],
+    [13, "02", "2-2"],
+    [15, "03", "3-1"],
+    [16, "03", "3-2"],
+    [17, "03", "3-3"],
+    [18, "03", "3-4"],
+    [19, "04", "4-1"],
+    [20, "04", "4-2"],
+    [21, "04", "4-3"],
+    [22, "05", "5-1"],
+    [25, "06", "6-1"],
+    [26, "06", "6-2"],
+    [27, "06", "6-3"],
+    [29, "07", "7-1"],
+    [30, "07", "7-2"],
+    [31, "07", "7-3"],
+    [32, "07", "7-4"],
+    [33, "07", "7-5"],
+    [34, "07", "7-6"],
+    [35, "07", "7-7"],
+    [36, "07", "7-8"],
+    [38, "08", "8-1"],
+    [39, "08", "8-2"],
+    [40, "08", "8-3"],
+    [41, "08", "8-4"],
+    [42, "08", "8-5"],
+    [43, "08", "8-6"],
   ];
   const slides = getSlideSections(await loadIndexHtml());
 
@@ -348,7 +345,7 @@ test("uses consistent Step and chapter numbers across every workflow page", asyn
 });
 
 test("checks page information, share preview, and mobile layout before storing the frontend", async () => {
-  const visibleText = getSlideText(await loadIndexHtml(), 10);
+  const visibleText = getSlideText(await loadIndexHtml(), 9);
 
   assert.match(visibleText, /頁面資訊/);
   assert.match(visibleText, /分享預覽/);
@@ -357,7 +354,7 @@ test("checks page information, share preview, and mobile layout before storing t
 
 test("explains first-time GitHub authorization from AI Studio", async () => {
   const slides = getSlideSections(await loadIndexHtml());
-  const slideMarkup = slides[13];
+  const slideMarkup = slides[12];
   const visibleText = getVisibleText(slideMarkup);
 
   assert.match(visibleText, /第一次/);
@@ -366,7 +363,7 @@ test("explains first-time GitHub authorization from AI Studio", async () => {
 });
 
 test("keeps the morning safety steps about rotating keys and private repositories", async () => {
-  const visibleText = getSlideText(await loadIndexHtml(), 23);
+  const visibleText = getSlideText(await loadIndexHtml(), 22);
 
   assert.match(visibleText, /金鑰/);
   assert.match(visibleText, /重新產生/);
@@ -375,7 +372,7 @@ test("keeps the morning safety steps about rotating keys and private repositorie
 });
 
 test("states what is free and what costs money before the automation section", async () => {
-  const visibleText = getSlideText(await loadIndexHtml(), 26);
+  const visibleText = getSlideText(await loadIndexHtml(), 25);
 
   assert.match(visibleText, /免費做得到/);
   assert.match(visibleText, /要錢/);
@@ -384,7 +381,7 @@ test("states what is free and what costs money before the automation section", a
 });
 
 test("warns about the three Meta publishing restrictions", async () => {
-  const visibleText = getSlideText(await loadIndexHtml(), 27);
+  const visibleText = getSlideText(await loadIndexHtml(), 26);
 
   assert.match(visibleText, /Instagram 個人帳號不能/);
   assert.match(visibleText, /Facebook 個人動態不能/);
@@ -393,7 +390,7 @@ test("warns about the three Meta publishing restrictions", async () => {
 
 test("points readers at the official Hermes Agent domain only", async () => {
   const html = await loadIndexHtml();
-  const visibleText = getSlideText(html, 30);
+  const visibleText = getSlideText(html, 29);
 
   assert.match(visibleText, /hermes-agent\.nousresearch\.com/);
   assert.doesNotMatch(html, /hermes-agent\.org/);
@@ -402,7 +399,7 @@ test("points readers at the official Hermes Agent domain only", async () => {
 });
 
 test("tells students not to install the agent during class", async () => {
-  const visibleText = getSlideText(await loadIndexHtml(), 37);
+  const visibleText = getSlideText(await loadIndexHtml(), 36);
 
   assert.match(visibleText, /回家/);
   assert.match(visibleText, /hermes-agent\.nousresearch\.com/);
@@ -410,20 +407,20 @@ test("tells students not to install the agent during class", async () => {
 });
 
 test("warns about the lifetime channel limit before connecting accounts", async () => {
-  const visibleText = getSlideText(await loadIndexHtml(), 39);
+  const visibleText = getSlideText(await loadIndexHtml(), 38);
 
   assert.match(visibleText, /八個/);
   assert.match(visibleText, /Threads 必須設為公開/);
 });
 
-test("provides ten copyable prompt cards wired to existing prompt bodies", async () => {
+test("provides nine copyable prompt cards wired to existing prompt bodies", async () => {
   const html = await loadIndexHtml();
   const targets = [...html.matchAll(/data-copy-target="([^"]+)"/g)].map(
     (match) => match[1],
   );
 
-  assert.equal(targets.length, 10);
-  assert.equal(new Set(targets).size, 10);
+  assert.equal(targets.length, 9);
+  assert.equal(new Set(targets).size, 9);
 
   for (const targetId of targets) {
     assert.match(

@@ -1,6 +1,11 @@
 const COPY_IDLE_LABEL = "複製";
 const COPY_DONE_LABEL = "已複製 ✓";
-const COPY_FAIL_LABEL = "請手動選取";
+const APPLE_PLATFORM = /Mac|iPhone|iPad|iPod/i;
+const COPY_FAIL_LABEL = APPLE_PLATFORM.test(
+  globalThis.navigator?.platform || globalThis.navigator?.userAgent || "",
+)
+  ? "已選取，按 ⌘C"
+  : "已選取，按 Ctrl+C";
 const COPY_RESET_DELAY = 2000;
 const SPEAKER_NOTE_STORAGE_KEY = "deck-speaker-notes";
 const SPEAKER_NOTE_CLASS = "show-speaker-notes";

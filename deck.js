@@ -189,13 +189,11 @@ function initializeDeck() {
   document.documentElement.classList.add("js");
 
   const progressBar = document.querySelector("[data-progress-bar]");
-  const dotNav = document.querySelector("[data-dot-nav]");
   const currentSlideStatus = document.querySelector("[data-current-slide]");
   const totalSlidesStatus = document.querySelector("[data-total-slides]");
   const reducedMotionQuery = window.matchMedia?.(
     "(prefers-reduced-motion: reduce)",
   );
-  const dotButtons = [];
   let activeIndex = null;
   let navigationTargetIndex = null;
   let navigationFallbackTimer = 0;
@@ -241,14 +239,6 @@ function initializeDeck() {
     if (totalSlidesStatus) {
       totalSlidesStatus.textContent = String(slides.length);
     }
-
-    dotButtons.forEach((button, buttonIndex) => {
-      if (buttonIndex === nextIndex) {
-        button.setAttribute("aria-current", "true");
-      } else {
-        button.removeAttribute("aria-current");
-      }
-    });
 
     const nextHash = formatSlideHash(nextIndex);
 
@@ -376,26 +366,6 @@ function initializeDeck() {
     navigateTo(parsedIndex, options);
     return true;
   };
-
-  if (dotNav) {
-    const fragment = document.createDocumentFragment();
-
-    slides.forEach((slide, index) => {
-      const button = document.createElement("button");
-      const label = slide.dataset.label?.trim() || `投影片 ${index + 1}`;
-
-      button.type = "button";
-      button.setAttribute(
-        "aria-label",
-        `前往第 ${index + 1} 張投影片：${label}`,
-      );
-      button.addEventListener("click", () => navigateTo(index));
-      dotButtons.push(button);
-      fragment.append(button);
-    });
-
-    dotNav.replaceChildren(fragment);
-  }
 
   const handleKeydown = createDeckKeyboardHandler({
     getActiveIndex: () => activeIndex,

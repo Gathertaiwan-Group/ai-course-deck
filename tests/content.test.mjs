@@ -453,10 +453,11 @@ test("omits prohibited brand names from visible content", async () => {
   assert.doesNotMatch(visibleText, /給樂數位/);
 });
 
-test("uses keyboard, swipe, and dot navigation without fixed previous or next buttons", async () => {
+test("navigates by keyboard and swipe without any on-screen navigation chrome", async () => {
   const html = await loadIndexHtml();
 
-  assert.match(html, /data-dot-nav/);
+  assert.doesNotMatch(html, /data-dot-nav/);
+  assert.doesNotMatch(html, /class="[^"]*dot-nav/);
   assert.doesNotMatch(html, /data-deck-previous/);
   assert.doesNotMatch(html, /data-deck-next/);
   assert.doesNotMatch(html, /class="[^"]*click-zone/);

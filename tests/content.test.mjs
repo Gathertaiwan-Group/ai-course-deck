@@ -37,8 +37,8 @@ const requiredSlideTitles = [
   "示範一：讓 AI 記住你的品牌",
   "建立品牌人設",
   "示範二：用 Scheduled Tasks 自動找選題",
-  "示範三：接上 Zapier，讓它真的能動手發文",
-  "示範四：審核過了才真的發出去",
+  "示範三：接上 Buffer 的官方連接",
+  "示範四：讓 ChatGPT 幫你檢查排程",
   "用這套自動化之前，先知道五件事",
   "回家自己裝：進階自動化設定步驟",
   "下午場：換你動手，用 ChatGPT 產文排程發文",
@@ -80,18 +80,18 @@ const requiredSlideSummaries = [
   "部署 token 用完就收回，金錢相關的密碼永遠自己輸入。",
   "下午換內容上場。",
   "產內容是一件事，發出去是另一件事。",
-  "核心流程全部免費，自動發布才要升級。",
+  "核心流程全部免費，接上外部工具才要升級。",
   "這三件事，換什麼工具都一樣。",
-  "它現在會記得、會排程、也能真的動手。",
+  "它現在會記得、會排程、也能讀懂你的排程狀況。",
   "這一段看我操作就好。",
   "基本功能免費，接外部工具才要 Plus。",
   "記得住品牌調性，才不用每次重講。",
   "一次設定，之後每篇都照這個寫。",
   "跟它說時間，它就會準時做，而且不用你的電腦開著。",
-  "接上 Zapier，ChatGPT 才能真的動手做事。",
-  "AI 產文、你把關、核准了才發。",
+  "接上 Buffer，讓 ChatGPT 讀懂你的排程狀況。",
+  "先讓它幫你看懂排程，發布的按鈕還是自己按。",
   "方便和風險是同一件事。",
-  "照著這五步，回家就能升級成自動發布。",
+  "照著這五步，回家就能讓 ChatGPT 讀懂你的排程。",
   "這一段大家一起做。",
   "三個免費名額，想清楚再接。",
   "一次規劃七天，不用天天想。",
@@ -100,7 +100,7 @@ const requiredSlideSummaries = [
   "排好之後，它會自己發。",
   "穩定比爆紅重要。",
   "這些坑，先知道就不會踩。",
-  "免費夠用，要自動發布再加錢，但不用再租主機。",
+  "免費夠用，要接上外部工具再加錢。",
   "網站會上線，內容會持續。",
 ];
 
@@ -404,7 +404,7 @@ test("tells students the advanced setup waits until they are home", async () => 
 
   assert.match(visibleText, /回家/);
   assert.match(visibleText, /ChatGPT Plus/);
-  assert.match(visibleText, /Zapier/);
+  assert.match(visibleText, /Buffer/);
 });
 
 test("warns about the lifetime channel limit before connecting accounts", async () => {

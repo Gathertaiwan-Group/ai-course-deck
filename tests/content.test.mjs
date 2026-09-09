@@ -25,7 +25,8 @@ const requiredSlideTitles = [
   "接上 Supabase 資料庫",
   "Supabase 做的事：你的倉庫",
   "推送即部署",
-  "上午收尾：三個安全動作",
+  "接上你自己的網域",
+  "上午收尾：三件事要處理",
   "午休：下午讓網站自己說話",
   "下午的路線：兩件事分開看",
   "先說清楚：什麼免費，什麼要錢",
@@ -70,12 +71,13 @@ const requiredSlideSummaries = [
   "接下來換 Claude 或 Codex 上場。",
   "它們能直接動你的專案檔案。",
   "先接上 repo，再讓 AI 看懂專案。",
-  "一步一步來，每步都確認。",
+  "給一個 token，剩下的交給 AI 全自動做完。",
   "伺服器就是讓網站一直開著的地方。",
-  "有了資料庫，網站才記得住東西。",
+  "給一個 token，資料庫也自動接好。",
   "表單、名單、訂單，都放在這裡。",
   "改好送出去，線上網站就自己更新。",
-  "密碼和金鑰，永遠自己輸入。",
+  "網域接好，網址就不再是 xxx.vercel.app。",
+  "部署 token 用完就收回，金錢相關的密碼永遠自己輸入。",
   "下午換內容上場。",
   "產內容是一件事，發出去是另一件事。",
   "免費做得到很多，但不是全部。",
@@ -212,11 +214,11 @@ function getSlideText(html, slideIndex) {
   return getVisibleText(slide);
 }
 
-test("contains exactly 47 sections with the slide class", async () => {
+test("contains exactly 48 sections with the slide class", async () => {
   const html = await loadIndexHtml();
 
-  assert.equal(getSlideSections(html).length, 47);
-  assert.match(html, /data-total-slides>47</);
+  assert.equal(getSlideSections(html).length, 48);
+  assert.match(html, /data-total-slides>48</);
 });
 
 test("numbers every slide id and heading id sequentially", async () => {
@@ -227,7 +229,7 @@ test("numbers every slide id and heading id sequentially", async () => {
 
   assert.deepEqual(
     ids,
-    Array.from({ length: 47 }, (_, index) => index + 1),
+    Array.from({ length: 48 }, (_, index) => index + 1),
   );
 
   for (const id of ids) {
@@ -309,24 +311,25 @@ test("uses consistent Step and chapter numbers across every workflow page", asyn
     [19, "04", "4-1"],
     [20, "04", "4-2"],
     [21, "04", "4-3"],
-    [22, "05", "5-1"],
-    [25, "06", "6-1"],
-    [26, "06", "6-2"],
-    [27, "06", "6-3"],
-    [29, "07", "7-1"],
-    [30, "07", "7-2"],
-    [31, "07", "7-3"],
-    [32, "07", "7-4"],
-    [33, "07", "7-5"],
-    [34, "07", "7-6"],
-    [35, "07", "7-7"],
-    [36, "07", "7-8"],
-    [38, "08", "8-1"],
-    [39, "08", "8-2"],
-    [40, "08", "8-3"],
-    [41, "08", "8-4"],
-    [42, "08", "8-5"],
-    [43, "08", "8-6"],
+    [22, "04", "4-4"],
+    [23, "05", "5-1"],
+    [26, "06", "6-1"],
+    [27, "06", "6-2"],
+    [28, "06", "6-3"],
+    [30, "07", "7-1"],
+    [31, "07", "7-2"],
+    [32, "07", "7-3"],
+    [33, "07", "7-4"],
+    [34, "07", "7-5"],
+    [35, "07", "7-6"],
+    [36, "07", "7-7"],
+    [37, "07", "7-8"],
+    [39, "08", "8-1"],
+    [40, "08", "8-2"],
+    [41, "08", "8-3"],
+    [42, "08", "8-4"],
+    [43, "08", "8-5"],
+    [44, "08", "8-6"],
   ];
   const slides = getSlideSections(await loadIndexHtml());
 
@@ -362,17 +365,17 @@ test("explains first-time GitHub authorization from AI Studio", async () => {
   assert.match(slideMarkup, /assets\/screenshots\/ai-studio-github-authorize\.png/);
 });
 
-test("keeps the morning safety steps about rotating keys and private repositories", async () => {
-  const visibleText = getSlideText(await loadIndexHtml(), 22);
+test("keeps the morning safety steps about revoking tokens and private repositories", async () => {
+  const visibleText = getSlideText(await loadIndexHtml(), 23);
 
-  assert.match(visibleText, /金鑰/);
+  assert.match(visibleText, /token/i);
   assert.match(visibleText, /重新產生/);
   assert.match(visibleText, /Private/);
   assert.match(visibleText, /(?:不要|不可|絕不).*(?:密碼|金鑰)/);
 });
 
 test("states what is free and what costs money before the automation section", async () => {
-  const visibleText = getSlideText(await loadIndexHtml(), 25);
+  const visibleText = getSlideText(await loadIndexHtml(), 26);
 
   assert.match(visibleText, /免費做得到/);
   assert.match(visibleText, /要錢/);
@@ -381,7 +384,7 @@ test("states what is free and what costs money before the automation section", a
 });
 
 test("warns about the three Meta publishing restrictions", async () => {
-  const visibleText = getSlideText(await loadIndexHtml(), 26);
+  const visibleText = getSlideText(await loadIndexHtml(), 27);
 
   assert.match(visibleText, /Instagram 個人帳號不能/);
   assert.match(visibleText, /Facebook 個人動態不能/);
@@ -390,7 +393,7 @@ test("warns about the three Meta publishing restrictions", async () => {
 
 test("points readers at the official Hermes Agent domain only", async () => {
   const html = await loadIndexHtml();
-  const visibleText = getSlideText(html, 29);
+  const visibleText = getSlideText(html, 30);
 
   assert.match(visibleText, /hermes-agent\.nousresearch\.com/);
   assert.doesNotMatch(html, /hermes-agent\.org/);
@@ -399,7 +402,7 @@ test("points readers at the official Hermes Agent domain only", async () => {
 });
 
 test("tells students not to install the agent during class", async () => {
-  const visibleText = getSlideText(await loadIndexHtml(), 36);
+  const visibleText = getSlideText(await loadIndexHtml(), 37);
 
   assert.match(visibleText, /回家/);
   assert.match(visibleText, /hermes-agent\.nousresearch\.com/);
@@ -407,20 +410,20 @@ test("tells students not to install the agent during class", async () => {
 });
 
 test("warns about the lifetime channel limit before connecting accounts", async () => {
-  const visibleText = getSlideText(await loadIndexHtml(), 38);
+  const visibleText = getSlideText(await loadIndexHtml(), 39);
 
   assert.match(visibleText, /八個/);
   assert.match(visibleText, /Threads 必須設為公開/);
 });
 
-test("provides ten copyable prompt cards wired to existing prompt bodies", async () => {
+test("provides eleven copyable prompt cards wired to existing prompt bodies", async () => {
   const html = await loadIndexHtml();
   const targets = [...html.matchAll(/data-copy-target="([^"]+)"/g)].map(
     (match) => match[1],
   );
 
-  assert.equal(targets.length, 10);
-  assert.equal(new Set(targets).size, 10);
+  assert.equal(targets.length, 11);
+  assert.equal(new Set(targets).size, 11);
 
   for (const targetId of targets) {
     assert.match(

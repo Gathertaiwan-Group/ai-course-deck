@@ -344,24 +344,29 @@
           <div class="chapter-index"><span class="chapter-badge">STEP 03</span><span class="chapter-large-number" aria-hidden="true">3-3</span></div>
           <div class="chapter-wide-body">
             <h2 id="slide-18-title">部署到 Vercel</h2>
-            <p class="lede">讓 AI 一步一步帶你做，每一步都先確認再繼續。</p>
+            <p class="lede">給 AI 一個部署用的 token，剩下的交給它全自動做完，順便設好自動檢查。</p>
             <div class="prompt-card prompt-card--tight">
               <div class="prompt-card__head">
                 <span class="prompt-card__label">Prompt 05 · 貼給 Claude 或 Codex</span>
                 <button type="button" class="prompt-card__copy" data-copy-target="p-05">複製</button>
               </div>
-              <pre class="prompt-card__body" id="p-05">請幫我把這個專案部署到 Vercel。請照以下順序做，每做完一步先讓我確認再繼續：
+              <pre class="prompt-card__body" id="p-05">我要把這個專案部署到 Vercel，並設定基本的自動檢查，全部用工具自動做。
 
-1. 檢查專案有沒有缺少部署需要的設定檔，缺什麼就補什麼
-2. 告訴我需要在 Vercel 設定哪些環境變數，以及每一個是做什麼用的
-3. commit 並 push 到 GitHub
-4. 告訴我在 Vercel 網頁上要點哪些按鈕，從匯入專案之後的每一步
-5. 部署完成後，給我一份檢查清單，讓我逐項確認線上網站是好的
+我已經在 Vercel 建立一個 Access Token，這是：（貼上你的 Vercel token）
 
-注意：不要把任何金鑰或密碼寫進程式碼裡，那些我會自己在 Vercel 後台輸入。</pre>
+請照以下順序做：
+1. 用這個 token 透過 Vercel CLI，把這個專案連接到 Vercel（這是一次性的初始設定）
+2. 告訴我這個專案需要哪些環境變數，並用 token 幫我設定好
+3. 確認這個專案已經接上 GitHub 整合——之後只要 push 到 GitHub，Vercel 就會自動部署，不需要每次都用 CLI
+4. 幫我在 GitHub Actions 加一個自動檢查：每次 push，先確認網站建置（build）有沒有成功，讓我在 GitHub 上就能看到綠勾或紅叉
+5. commit 並 push 一次，確認自動部署真的會動
+6. 部署完成後，給我一份檢查清單，讓我逐項確認線上網站是好的
+7. 最後告訴我：這個 token 有什麼權限、等一下要去哪裡撤銷或重新產生
+
+完成後提醒我，這個 token 只在今天用，等一下要記得處理掉。</pre>
             </div>
           </div>
-          <p class="slide-summary">一步一步來，每步都確認。</p>
+          <p class="slide-summary">給一個 token，剩下的交給 AI 全自動做完。</p>
         </div>
       </section>
 
@@ -388,27 +393,28 @@
           <div class="chapter-index"><span class="chapter-badge">STEP 04</span><span class="chapter-large-number" aria-hidden="true">4-1</span></div>
           <div class="chapter-wide-body">
             <h2 id="slide-20-title">接上 Supabase 資料庫</h2>
-            <p class="lede">網站要記得住東西，就需要資料庫。</p>
+            <p class="lede">網站要記得住東西，就需要資料庫——這次也交給 AI 全自動設定。</p>
             <div class="prompt-card prompt-card--tight">
               <div class="prompt-card__head">
                 <span class="prompt-card__label">Prompt 06 · 貼給 Claude 或 Codex</span>
                 <button type="button" class="prompt-card__copy" data-copy-target="p-06">複製</button>
               </div>
-              <pre class="prompt-card__body" id="p-06">請幫我把這個網站接上 Supabase 資料庫。
+              <pre class="prompt-card__body" id="p-06">請幫我把這個網站接上 Supabase 資料庫，全部用工具自動做，不用我手動貼 SQL。
 
+我已經在 Supabase 建立一個 Access Token，這是：（貼上你的 Supabase token）
 我要儲存的資料是：（例：報名表單的姓名、Email、電話、想上的課程、報名時間）
 
 請照以下順序做：
 1. 先設計資料表結構，把欄位、型別、哪些必填列給我看，我確認後再繼續
-2. 給我建立資料表的 SQL，我會自己貼到 Supabase 後台執行
-3. 修改網站，讓表單送出後資料會存進 Supabase
-4. 加上錯誤處理：送出失敗時要讓使用者看得懂發生什麼事
-5. 告訴我怎麼在 Supabase 後台看到收到的資料
+2. 用這個 token 直接建立資料表，不用我自己貼 SQL 到後台
+3. 把連線需要的金鑰自動設定到 Vercel 的環境變數
+4. 修改網站，讓表單送出後資料會存進 Supabase
+5. 幫我測試一次，確認資料真的存進去，並告訴我怎麼在 Supabase 後台看到收到的資料
 
-注意：金鑰請用環境變數，不要寫死在程式碼裡。做完後告訴我怎麼測試。</pre>
+完成後提醒我，這個 token 可以動到我帳號下所有 Supabase 專案，等一下要記得去後台撤銷或重新產生。</pre>
             </div>
           </div>
-          <p class="slide-summary">有了資料庫，網站才記得住東西。</p>
+          <p class="slide-summary">給一個 token，資料庫也自動接好。</p>
         </div>
       </section>
 
@@ -433,35 +439,62 @@
 
       <section class="slide" id="slide-22" data-label="推送即部署" aria-labelledby="slide-22-title">
         <div class="slide__content slide__content--chapter-wide"><div class="chapter-index"><span class="chapter-badge">STEP 04</span><span class="chapter-large-number" aria-hidden="true">4-3</span></div><div class="chapter-wide-body"><h2 id="slide-22-title">推送即部署</h2><p class="lede">設定好之後，只要送出修改，線上網站會自己更新。</p>
-          <figure class="data-flow data-flow--deploy"><figcaption class="sr-only">修改後送出，Vercel 自動更新線上網站，再打開線上網址檢查</figcaption><div class="data-flow__node"><strong>修改內容</strong></div><div class="data-flow__node"><strong>送出到 GitHub</strong></div><div class="data-flow__node data-flow__node--accent"><strong>Vercel 自動部署</strong></div><div class="data-flow__node"><strong>打開網址檢查</strong></div></figure>
+          <figure class="data-flow data-flow--deploy"><figcaption class="sr-only">修改後送出，先跑 CI 檢查建置有沒有成功，過了 Vercel 才會自動更新線上網站，再打開線上網址檢查</figcaption><div class="data-flow__node"><strong>修改內容</strong></div><div class="data-flow__node"><strong>送出到 GitHub</strong></div><div class="data-flow__node"><strong>CI 檢查通過</strong></div><div class="data-flow__node data-flow__node--accent"><strong>Vercel 自動部署</strong></div><div class="data-flow__node"><strong>打開網址檢查</strong></div></figure>
           <p class="browser-note">自動部署設定成功後，記得把 GitHub repository 設為 Private。</p></div>
           <p class="slide-summary">改好送出去，線上網站就自己更新。</p>
         </div>
       </section>
 
-      <section class="slide slide--security" id="slide-23" data-label="上午收尾：三個安全動作" aria-labelledby="slide-23-title">
-        <div class="slide__content slide__content--chapter-wide"><div class="chapter-index"><span class="chapter-badge">STEP 05</span><span class="chapter-large-number" aria-hidden="true">5-1</span></div><div class="chapter-wide-body"><p class="eyebrow">BEFORE LUNCH</p><h2 id="slide-23-title">上午收尾：三個安全動作</h2><p class="security-callout">網站上線了，先把安全的事做完再去吃飯。</p>
-          <ol class="security-grid"><li><span class="step-number" aria-hidden="true">01</span><strong>換掉貼過的金鑰</strong><p>只要曾經貼給 AI 看過，就重新產生一組，並更新 Vercel 上的設定。</p></li><li><span class="step-number" aria-hidden="true">02</span><strong>把 repository 設為 Private</strong><p>確認之後重新部署一次，打開網址測試網站仍然正常。</p></li></ol>
-          <p class="browser-note">密碼、金鑰、private key 不要交給 AI，需要輸入時自己手動貼到後台。</p></div><p class="slide-summary">密碼和金鑰，永遠自己輸入。</p>
+      <section class="slide slide--prompt" id="slide-23" data-label="接上你自己的網域" aria-labelledby="slide-23-title">
+        <div class="slide__content slide__content--chapter-wide">
+          <div class="chapter-index"><span class="chapter-badge">STEP 04</span><span class="chapter-large-number" aria-hidden="true">4-4</span></div>
+          <div class="chapter-wide-body">
+            <h2 id="slide-23-title">接上你自己的網域</h2>
+            <p class="lede">Vercel 給的網址是 xxx.vercel.app，想換成自己的網域，交給 AI 帶你設定。</p>
+            <div class="prompt-card prompt-card--tight">
+              <div class="prompt-card__head">
+                <span class="prompt-card__label">網域設定 · 貼給 Claude 或 Codex</span>
+                <button type="button" class="prompt-card__copy" data-copy-target="p-domain">複製</button>
+              </div>
+              <pre class="prompt-card__body" id="p-domain">我想幫這個網站接上自己的網域：（你的網域，例如 mybrand.com）
+我的網域是在（你的網域註冊商，例如 GoDaddy、Namecheap、Cloudflare）買的。
+
+請照以下順序做：
+1. 用剛才的 Vercel token，幫我把這個網域加進專案設定
+2. 加完之後，Vercel 會給幾筆 DNS 設定值，請列出來並告訴我每一筆是做什麼用的
+3. 告訴我要去我的網域註冊商後台的哪裡，把這些值貼上去
+4. 告訴我大概要等多久才會生效，以及怎麼確認真的生效了、網址前面的鎖頭（https）有沒有跑出來
+
+我還沒有網域的話，也請先幫我列出一般網域註冊商大概的價格範圍。</pre>
+            </div>
+          </div>
+          <p class="slide-summary">網域接好，網址就不再是 xxx.vercel.app。</p>
         </div>
       </section>
 
-      <section class="slide slide--chapter" id="slide-24" data-label="午休：下午讓網站自己說話" aria-labelledby="slide-24-title">
+      <section class="slide slide--security" id="slide-24" data-label="上午收尾：三件事要處理" aria-labelledby="slide-24-title">
+        <div class="slide__content slide__content--chapter-wide"><div class="chapter-index"><span class="chapter-badge">STEP 05</span><span class="chapter-large-number" aria-hidden="true">5-1</span></div><div class="chapter-wide-body"><p class="eyebrow">BEFORE LUNCH</p><h2 id="slide-24-title">上午收尾：三件事要處理</h2><p class="security-callout">網站上線了，先把安全的事處理完再去吃飯。</p>
+          <ol class="security-grid"><li><span class="step-number" aria-hidden="true">01</span><strong>回去撤銷今天用的 token</strong><p>今天貼給 AI 看過的 Vercel、Supabase token，到後台重新產生一組新的，讓今天這組失效。</p></li><li><span class="step-number" aria-hidden="true">02</span><strong>把 repository 設為 Private</strong><p>確認之後重新部署一次，打開網址測試網站仍然正常。</p></li></ol>
+          <p class="browser-note">部署用的 token 今天可以給 AI，但用完要撤銷；客戶的信用卡號、銀行密碼、任何跟金錢直接掛鉤的密碼，永遠不要交給 AI。</p></div><p class="slide-summary">部署 token 用完就收回，金錢相關的密碼永遠自己輸入。</p>
+        </div>
+      </section>
+
+      <section class="slide slide--chapter" id="slide-25" data-label="午休：下午讓網站自己說話" aria-labelledby="slide-25-title">
         <div class="slide__content slide__content--chapter">
           <p class="chapter-kicker eyebrow">午休 · 12:00 – 13:00</p>
           <p class="chapter-number" aria-hidden="true">PM</p>
           <div class="chapter-copy">
-            <h2 id="slide-24-title">午休：下午讓網站自己說話</h2>
+            <h2 id="slide-25-title">午休：下午讓網站自己說話</h2>
             <p>上午做出網站。下午做的是：讓內容持續產出、持續發出去。</p>
           </div>
           <p class="slide-summary">下午換內容上場。</p>
         </div>
       </section>
 
-      <section class="slide" id="slide-25" data-label="下午的路線：兩件事分開看" aria-labelledby="slide-25-title">
+      <section class="slide" id="slide-26" data-label="下午的路線：兩件事分開看" aria-labelledby="slide-26-title">
         <div class="slide__content">
           <p class="eyebrow">TWO HALVES</p>
-          <h2 id="slide-25-title">下午的路線：兩件事分開看</h2>
+          <h2 id="slide-26-title">下午的路線：兩件事分開看</h2>
           <p class="lede">很多人把「自動化行銷」當成一件事，其實是兩件。</p>
           <ul class="fact-row">
             <li><strong>內容生產線</strong><p>想主題、寫文案、配圖、改成各平台版本。這一段 AI 很強。</p><small>今天用 Hermes Agent 示範</small></li>
@@ -472,11 +505,11 @@
         </div>
       </section>
 
-      <section class="slide" id="slide-26" data-label="先說清楚：什麼免費，什麼要錢" aria-labelledby="slide-26-title">
+      <section class="slide" id="slide-27" data-label="先說清楚：什麼免費，什麼要錢" aria-labelledby="slide-27-title">
         <div class="slide__content slide__content--chapter-wide">
           <div class="chapter-index"><span class="chapter-badge">STEP 06</span><span class="chapter-large-number" aria-hidden="true">6-1</span></div>
           <div class="chapter-wide-body">
-            <h2 id="slide-26-title">先說清楚：什麼免費，什麼要錢</h2>
+            <h2 id="slide-27-title">先說清楚：什麼免費，什麼要錢</h2>
             <p class="lede">今天教的全部可以免費做完。但有些事免費做不到，先講清楚。</p>
             <ul class="fact-row">
               <li><strong>免費做得到</strong><p>AI 產文案與配圖、排程貼文、三個社群帳號、內容規劃與品牌語氣設定。</p><small>今天全程不需要信用卡</small></li>
@@ -489,11 +522,11 @@
         </div>
       </section>
 
-      <section class="slide" id="slide-27" data-label="Meta 的三個硬限制" aria-labelledby="slide-27-title">
+      <section class="slide" id="slide-28" data-label="Meta 的三個硬限制" aria-labelledby="slide-28-title">
         <div class="slide__content slide__content--chapter-wide">
           <div class="chapter-index"><span class="chapter-badge">STEP 06</span><span class="chapter-large-number" aria-hidden="true">6-2</span></div>
           <div class="chapter-wide-body">
-            <h2 id="slide-27-title">Meta 的三個硬限制</h2>
+            <h2 id="slide-28-title">Meta 的三個硬限制</h2>
             <p class="lede">這三件事跟你用什麼工具無關，是 Meta 自己的規定。</p>
             <ul class="check-list check-list--warn">
               <li>Instagram 個人帳號不能用工具排程，一定要轉成專業帳號</li>
@@ -506,11 +539,11 @@
         </div>
       </section>
 
-      <section class="slide" id="slide-28" data-label="AI Agent 跟 ChatGPT 差在哪" aria-labelledby="slide-28-title">
+      <section class="slide" id="slide-29" data-label="AI Agent 跟 ChatGPT 差在哪" aria-labelledby="slide-29-title">
         <div class="slide__content slide__content--chapter-wide">
           <div class="chapter-index"><span class="chapter-badge">STEP 06</span><span class="chapter-large-number" aria-hidden="true">6-3</span></div>
           <div class="chapter-wide-body">
-            <h2 id="slide-28-title">AI Agent 跟 ChatGPT 差在哪</h2>
+            <h2 id="slide-29-title">AI Agent 跟 ChatGPT 差在哪</h2>
             <ul class="fact-row">
               <li><strong>聊天機器人</strong><p>你問一句，它答一句。關掉視窗就忘了，下次要重講一次。</p></li>
               <li><strong>AI Agent</strong><p>會記得你的品牌、會照時間自己做事、會用工具查資料和產圖。</p></li>
@@ -521,12 +554,12 @@
         </div>
       </section>
 
-      <section class="slide slide--chapter" id="slide-29" data-label="下午場：Hermes Agent 示範" aria-labelledby="slide-29-title">
+      <section class="slide slide--chapter" id="slide-30" data-label="下午場：Hermes Agent 示範" aria-labelledby="slide-30-title">
         <div class="slide__content slide__content--chapter">
           <p class="chapter-kicker eyebrow">下午場 · 講師示範</p>
           <p class="chapter-number" aria-hidden="true">07</p>
           <div class="chapter-copy">
-            <h2 id="slide-29-title">下午場：Hermes Agent 示範</h2>
+            <h2 id="slide-30-title">下午場：Hermes Agent 示範</h2>
             <p>這一段先看我操作。安裝步驟在後面，回家照著做就好。</p>
           </div>
           <p class="slide-summary">這一段看我操作就好。</p>
@@ -534,11 +567,11 @@
         </div>
       </section>
 
-      <section class="slide" id="slide-30" data-label="Hermes Agent 是什麼" aria-labelledby="slide-30-title">
+      <section class="slide" id="slide-31" data-label="Hermes Agent 是什麼" aria-labelledby="slide-31-title">
         <div class="slide__content slide__content--chapter-wide">
           <div class="chapter-index"><span class="chapter-badge">STEP 07</span><span class="chapter-large-number" aria-hidden="true">7-1</span></div>
           <div class="chapter-wide-body">
-            <h2 id="slide-30-title">Hermes Agent 是什麼</h2>
+            <h2 id="slide-31-title">Hermes Agent 是什麼</h2>
             <p class="lede">Nous Research 開源的 AI 助理，會記得事情、會自己排程做事。</p>
             <ul class="tool-list">
               <li><strong>開源免費</strong><span>MIT 授權，軟體本身不用錢</span></li>
@@ -551,11 +584,11 @@
         </div>
       </section>
 
-      <section class="slide" id="slide-31" data-label="示範一：讓 AI 記住你的品牌" aria-labelledby="slide-31-title">
+      <section class="slide" id="slide-32" data-label="示範一：讓 AI 記住你的品牌" aria-labelledby="slide-32-title">
         <div class="slide__content slide__content--chapter-wide">
           <div class="chapter-index"><span class="chapter-badge">STEP 07</span><span class="chapter-large-number" aria-hidden="true">7-2</span></div>
           <div class="chapter-wide-body">
-            <h2 id="slide-31-title">示範一：讓 AI 記住你的品牌</h2>
+            <h2 id="slide-32-title">示範一：讓 AI 記住你的品牌</h2>
             <p class="lede">每次都要重新解釋「我們品牌是什麼調性」，是最浪費時間的事。</p>
             <ol class="mini-steps">
               <li><span aria-hidden="true">01</span>把品牌語氣寫成一份設定，讓它一直記得</li>
@@ -567,11 +600,11 @@
         </div>
       </section>
 
-      <section class="slide slide--prompt" id="slide-32" data-label="建立品牌人設" aria-labelledby="slide-32-title">
+      <section class="slide slide--prompt" id="slide-33" data-label="建立品牌人設" aria-labelledby="slide-33-title">
         <div class="slide__content slide__content--chapter-wide">
           <div class="chapter-index"><span class="chapter-badge">STEP 07</span><span class="chapter-large-number" aria-hidden="true">7-3</span></div>
           <div class="chapter-wide-body">
-            <h2 id="slide-32-title">建立品牌人設</h2>
+            <h2 id="slide-33-title">建立品牌人設</h2>
             <p class="lede">這則 prompt 貼到任何 AI 都能用，不是只有 Hermes。</p>
             <div class="prompt-card prompt-card--tight">
               <div class="prompt-card__head">
@@ -600,11 +633,11 @@
         </div>
       </section>
 
-      <section class="slide" id="slide-33" data-label="示範二：把你的寫法變成技能" aria-labelledby="slide-33-title">
+      <section class="slide" id="slide-34" data-label="示範二：把你的寫法變成技能" aria-labelledby="slide-34-title">
         <div class="slide__content slide__content--chapter-wide">
           <div class="chapter-index"><span class="chapter-badge">STEP 07</span><span class="chapter-large-number" aria-hidden="true">7-4</span></div>
           <div class="chapter-wide-body">
-            <h2 id="slide-33-title">示範二：把你的寫法變成技能</h2>
+            <h2 id="slide-34-title">示範二：把你的寫法變成技能</h2>
             <p class="lede">你平常怎麼寫貼文，用說的講一次，它就記起來變成可重複的流程。</p>
             <ol class="mini-steps">
               <li><span aria-hidden="true">01</span>用自然語言描述你的步驟，不用寫程式</li>
@@ -617,11 +650,11 @@
         </div>
       </section>
 
-      <section class="slide" id="slide-34" data-label="示範三：用一句話設定排程" aria-labelledby="slide-34-title">
+      <section class="slide" id="slide-35" data-label="示範三：用一句話設定排程" aria-labelledby="slide-35-title">
         <div class="slide__content slide__content--chapter-wide">
           <div class="chapter-index"><span class="chapter-badge">STEP 07</span><span class="chapter-large-number" aria-hidden="true">7-5</span></div>
           <div class="chapter-wide-body">
-            <h2 id="slide-34-title">示範三：用一句話設定排程</h2>
+            <h2 id="slide-35-title">示範三：用一句話設定排程</h2>
             <p class="lede">不用學排程語法，直接跟它說時間就好。</p>
             <ul class="tool-list">
               <li><strong>每天早上九點</strong><span>幫我找今天適合發文的三個主題</span></li>
@@ -634,11 +667,11 @@
         </div>
       </section>
 
-      <section class="slide" id="slide-35" data-label="示範四：用手機遠端指揮" aria-labelledby="slide-35-title">
+      <section class="slide" id="slide-36" data-label="示範四：用手機遠端指揮" aria-labelledby="slide-36-title">
         <div class="slide__content slide__content--chapter-wide">
           <div class="chapter-index"><span class="chapter-badge">STEP 07</span><span class="chapter-large-number" aria-hidden="true">7-6</span></div>
           <div class="chapter-wide-body">
-            <h2 id="slide-35-title">示範四：用手機遠端指揮</h2>
+            <h2 id="slide-36-title">示範四：用手機遠端指揮</h2>
             <p class="lede">接上 Telegram 或 Discord，人在外面也能叫它做事。</p>
             <ol class="mini-steps">
               <li><span aria-hidden="true">01</span>在手機上傳一句「幫我寫今天的貼文」</li>
@@ -651,12 +684,12 @@
         </div>
       </section>
 
-      <section class="slide slide--security" id="slide-36" data-label="用 Agent 之前，先知道五件事" aria-labelledby="slide-36-title">
+      <section class="slide slide--security" id="slide-37" data-label="用 Agent 之前，先知道五件事" aria-labelledby="slide-37-title">
         <div class="slide__content slide__content--chapter-wide">
           <div class="chapter-index"><span class="chapter-badge">STEP 07</span><span class="chapter-large-number" aria-hidden="true">7-7</span></div>
           <div class="chapter-wide-body">
             <p class="eyebrow">BEFORE YOU INSTALL</p>
-            <h2 id="slide-36-title">用 Agent 之前，先知道五件事</h2>
+            <h2 id="slide-37-title">用 Agent 之前，先知道五件事</h2>
             <p class="security-callout">它能幫你做很多事，是因為它有很大的權限。這兩件事是同一件事。</p>
             <ul class="check-list check-list--warn">
               <li>不要關掉確認機制，關掉等於讓它直接改檔案、執行指令</li>
@@ -670,11 +703,11 @@
         </div>
       </section>
 
-      <section class="slide" id="slide-37" data-label="回家自己裝：安裝步驟" aria-labelledby="slide-37-title">
+      <section class="slide" id="slide-38" data-label="回家自己裝：安裝步驟" aria-labelledby="slide-38-title">
         <div class="slide__content slide__content--chapter-wide">
           <div class="chapter-index"><span class="chapter-badge">STEP 07</span><span class="chapter-large-number" aria-hidden="true">7-8</span></div>
           <div class="chapter-wide-body">
-            <h2 id="slide-37-title">回家自己裝：安裝步驟</h2>
+            <h2 id="slide-38-title">回家自己裝：安裝步驟</h2>
             <p class="lede">現場不裝。回家網路穩定、沒人趕時間的時候再裝。</p>
             <ol class="mini-steps">
               <li><span aria-hidden="true">01</span>打開 hermes-agent.nousresearch.com，只認這個網址</li>
@@ -689,23 +722,23 @@
         </div>
       </section>
 
-      <section class="slide slide--chapter" id="slide-38" data-label="下午場：換你動手排程發文" aria-labelledby="slide-38-title">
+      <section class="slide slide--chapter" id="slide-39" data-label="下午場：換你動手排程發文" aria-labelledby="slide-39-title">
         <div class="slide__content slide__content--chapter">
           <p class="chapter-kicker eyebrow">下午場 · 全班實作</p>
           <p class="chapter-number" aria-hidden="true">08</p>
           <div class="chapter-copy">
-            <h2 id="slide-38-title">下午場：換你動手排程發文</h2>
+            <h2 id="slide-39-title">下午場：換你動手排程發文</h2>
             <p>接下來每個人打開自己的筆電，我們一起做完一週的內容排程。</p>
           </div>
           <p class="slide-summary">這一段大家一起做。</p>
         </div>
       </section>
 
-      <section class="slide" id="slide-39" data-label="Buffer：註冊與連接帳號" aria-labelledby="slide-39-title">
+      <section class="slide" id="slide-40" data-label="Buffer：註冊與連接帳號" aria-labelledby="slide-40-title">
         <div class="slide__content slide__content--chapter-wide">
           <div class="chapter-index"><span class="chapter-badge">STEP 08</span><span class="chapter-large-number" aria-hidden="true">8-1</span></div>
           <div class="chapter-wide-body">
-            <h2 id="slide-39-title">Buffer：註冊與連接帳號</h2>
+            <h2 id="slide-40-title">Buffer：註冊與連接帳號</h2>
             <p class="lede">免費方案就能排 Threads，而且不用信用卡。</p>
             <ol class="mini-steps">
               <li><span aria-hidden="true">01</span>用 Email 註冊，不需要付款資料</li>
@@ -722,11 +755,11 @@
         </div>
       </section>
 
-      <section class="slide slide--prompt" id="slide-40" data-label="一次產出一週內容" aria-labelledby="slide-40-title">
+      <section class="slide slide--prompt" id="slide-41" data-label="一次產出一週內容" aria-labelledby="slide-41-title">
         <div class="slide__content slide__content--chapter-wide">
           <div class="chapter-index"><span class="chapter-badge">STEP 08</span><span class="chapter-large-number" aria-hidden="true">8-2</span></div>
           <div class="chapter-wide-body">
-            <h2 id="slide-40-title">一次產出一週內容</h2>
+            <h2 id="slide-41-title">一次產出一週內容</h2>
             <p class="lede">不要每天早上才想今天要發什麼。一次規劃七天。</p>
             <div class="prompt-card prompt-card--tight">
               <div class="prompt-card__head">
@@ -753,11 +786,11 @@
         </div>
       </section>
 
-      <section class="slide slide--prompt" id="slide-41" data-label="一則內容，三個平台版本" aria-labelledby="slide-41-title">
+      <section class="slide slide--prompt" id="slide-42" data-label="一則內容，三個平台版本" aria-labelledby="slide-42-title">
         <div class="slide__content slide__content--chapter-wide">
           <div class="chapter-index"><span class="chapter-badge">STEP 08</span><span class="chapter-large-number" aria-hidden="true">8-3</span></div>
           <div class="chapter-wide-body">
-            <h2 id="slide-41-title">一則內容，三個平台版本</h2>
+            <h2 id="slide-42-title">一則內容，三個平台版本</h2>
             <p class="lede">同樣一件事，三個平台的說法要不一樣，否則哪邊都不討好。</p>
             <div class="prompt-card prompt-card--tight">
               <div class="prompt-card__head">
@@ -781,11 +814,11 @@
         </div>
       </section>
 
-      <section class="slide" id="slide-42" data-label="配圖從哪裡來" aria-labelledby="slide-42-title">
+      <section class="slide" id="slide-43" data-label="配圖從哪裡來" aria-labelledby="slide-43-title">
         <div class="slide__content slide__content--chapter-wide">
           <div class="chapter-index"><span class="chapter-badge">STEP 08</span><span class="chapter-large-number" aria-hidden="true">8-4</span></div>
           <div class="chapter-wide-body">
-            <h2 id="slide-42-title">配圖從哪裡來</h2>
+            <h2 id="slide-43-title">配圖從哪裡來</h2>
             <p class="lede">Instagram 每篇一定要有圖，所以配圖是必須的。</p>
             <ul class="tool-list">
               <li><strong>Gemini 網頁版</strong><span>免費就能生圖，把剛才的配圖描述貼進去</span></li>
@@ -798,11 +831,11 @@
         </div>
       </section>
 
-      <section class="slide" id="slide-43" data-label="把內容排進 Buffer" aria-labelledby="slide-43-title">
+      <section class="slide" id="slide-44" data-label="把內容排進 Buffer" aria-labelledby="slide-44-title">
         <div class="slide__content slide__content--chapter-wide">
           <div class="chapter-index"><span class="chapter-badge">STEP 08</span><span class="chapter-large-number" aria-hidden="true">8-5</span></div>
           <div class="chapter-wide-body">
-            <h2 id="slide-43-title">把內容排進 Buffer</h2>
+            <h2 id="slide-44-title">把內容排進 Buffer</h2>
             <p class="lede">現在把剛才產出的一週內容，實際排進去。</p>
             <figure class="data-flow data-flow--deploy">
               <figcaption class="sr-only">先用 AI 產出內容，接著產生配圖，貼進排程工具設定時間，由工具自動發布</figcaption>
@@ -817,11 +850,11 @@
         </div>
       </section>
 
-      <section class="slide" id="slide-44" data-label="內容日曆與發文節奏" aria-labelledby="slide-44-title">
+      <section class="slide" id="slide-45" data-label="內容日曆與發文節奏" aria-labelledby="slide-45-title">
         <div class="slide__content slide__content--chapter-wide">
           <div class="chapter-index"><span class="chapter-badge">STEP 08</span><span class="chapter-large-number" aria-hidden="true">8-6</span></div>
           <div class="chapter-wide-body">
-            <h2 id="slide-44-title">內容日曆與發文節奏</h2>
+            <h2 id="slide-45-title">內容日曆與發文節奏</h2>
             <p class="lede">自動化解決的是「有沒有發」，不會自動解決「發得好不好」。</p>
             <ol class="iteration-loop">
               <li>固定節奏<br><small>寧可一週三則穩定，不要一週十則然後停兩個月</small></li>
@@ -833,10 +866,10 @@
         </div>
       </section>
 
-      <section class="slide" id="slide-45" data-label="踩雷清單" aria-labelledby="slide-45-title">
+      <section class="slide" id="slide-46" data-label="踩雷清單" aria-labelledby="slide-46-title">
         <div class="slide__content">
           <p class="eyebrow">KNOWN TRAPS</p>
-          <h2 id="slide-45-title">踩雷清單</h2>
+          <h2 id="slide-46-title">踩雷清單</h2>
           <ul class="check-list check-list--warn">
             <li>Buffer 免費帳號一輩子只能連八個帳號，接了又斷也計入</li>
             <li>Threads 沒設公開、沒連結 Instagram，就是連不上排程工具</li>
@@ -848,10 +881,10 @@
         </div>
       </section>
 
-      <section class="slide" id="slide-46" data-label="想再往前一步，要付什麼" aria-labelledby="slide-46-title">
+      <section class="slide" id="slide-47" data-label="想再往前一步，要付什麼" aria-labelledby="slide-47-title">
         <div class="slide__content">
           <p class="eyebrow">WHAT'S NEXT</p>
-          <h2 id="slide-46-title">想再往前一步，要付什麼</h2>
+          <h2 id="slide-47-title">想再往前一步，要付什麼</h2>
           <ul class="fact-row">
             <li><strong>先不用付</strong><p>今天教的整套流程，免費方案完整跑得完，先做三個月再說。</p></li>
             <li class="is-paid"><strong>要更多社群帳號</strong><p>超過三個帳號、或要排更多則時，再升級排程工具。</p><small>約每個帳號每月 5 美元</small></li>
@@ -861,10 +894,10 @@
         </div>
       </section>
 
-      <section class="slide slide--closing" id="slide-47" data-label="今天你帶走了什麼" aria-labelledby="slide-47-title">
+      <section class="slide slide--closing" id="slide-48" data-label="今天你帶走了什麼" aria-labelledby="slide-48-title">
         <div class="slide__content">
           <p class="eyebrow">TAKE IT HOME</p>
-          <h2 id="slide-47-title">今天你帶走了什麼</h2>
+          <h2 id="slide-48-title">今天你帶走了什麼</h2>
           <ol class="closing-steps">
             <li><span aria-hidden="true">01</span><strong>一個線上網址</strong></li>
             <li><span aria-hidden="true">02</span><strong>一個資料庫</strong></li>
@@ -878,7 +911,7 @@
       </section>
     </main>
 
-    <div class="slide-status" role="status" aria-live="polite" aria-atomic="true"><span data-current-slide>01</span><span aria-hidden="true"> / </span><span class="sr-only">共</span><span data-total-slides>47</span></div>
+    <div class="slide-status" role="status" aria-live="polite" aria-atomic="true"><span data-current-slide>01</span><span aria-hidden="true"> / </span><span class="sr-only">共</span><span data-total-slides>48</span></div>
     <script type="module" src="deck.js"></script>
     <script type="module" src="prompt-card.js"></script>
   </body>

@@ -246,7 +246,7 @@ strong {
 }
 
 .lede {
-  max-width: 28ch;
+  max-width: 44ch;
   margin-top: clamp(24px, 3.2vh, 38px);
   color: var(--muted);
   font-size: clamp(1.2rem, 2.2vw, 2rem);
@@ -2140,6 +2140,198 @@ strong {
   }
 }
 
+/* ===== Prompt 卡片：課堂上直接複製貼上 ===== */
+.prompt-card {
+  display: flex;
+  width: 100%;
+  max-width: 1040px;
+  margin-top: clamp(16px, 2.2vh, 26px);
+  padding: clamp(16px, 1.8vw, 22px) clamp(18px, 2vw, 26px);
+  border: 1px solid rgba(22, 104, 194, 0.22);
+  border-radius: var(--radius-medium);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+  flex-direction: column;
+  gap: 12px;
+}
+
+.prompt-card__head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  justify-content: space-between;
+}
+
+.prompt-card__label {
+  display: inline-flex;
+  min-height: 28px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: var(--surface-blue);
+  align-items: center;
+  color: var(--blue-dark);
+  font-size: clamp(0.78rem, 1.1vw, 0.95rem);
+  font-weight: 720;
+  letter-spacing: 0.02em;
+}
+
+.prompt-card__copy {
+  min-height: 40px;
+  padding: 9px 20px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--blue);
+  color: var(--surface);
+  font: inherit;
+  font-size: clamp(0.86rem, 1.15vw, 1rem);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s var(--ease-out);
+}
+
+.prompt-card__copy:hover {
+  background: var(--blue-dark);
+}
+
+.prompt-card__copy:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 2px;
+}
+
+.prompt-card__copy.is-copied {
+  background: var(--orange-dark);
+}
+
+.prompt-card__body {
+  max-height: clamp(170px, 32vh, 330px);
+  margin: 0;
+  padding: clamp(14px, 1.6vw, 20px);
+  border-radius: 18px;
+  background: var(--surface-blue);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  color: var(--ink);
+  font: inherit;
+  font-size: clamp(0.95rem, 1.15vw, 1.18rem);
+  line-height: 1.68;
+  white-space: pre-wrap;
+  text-align: left;
+}
+
+.prompt-card--tight .prompt-card__body {
+  max-height: clamp(210px, 44vh, 430px);
+  font-size: clamp(1rem, 1.36vw, 1.42rem);
+}
+
+/* 有 prompt 卡的頁面：標題讓位，把空間留給要被複製的內容 */
+.slide--prompt h2 {
+  max-width: 20ch;
+  font-size: clamp(1.9rem, 3.5vw, 3.3rem);
+}
+
+.slide--prompt .lede {
+  max-width: 58ch;
+  margin-top: clamp(12px, 1.6vh, 20px);
+  font-size: clamp(1rem, 1.45vw, 1.32rem);
+  text-wrap: pretty;
+}
+
+.slide--prompt .mini-steps,
+.slide--prompt .iteration-loop {
+  margin-top: clamp(14px, 2vh, 22px);
+}
+
+.prompt-grid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: clamp(16px, 2vw, 26px);
+}
+
+.prompt-grid .prompt-card {
+  max-width: none;
+  margin-top: clamp(14px, 2vh, 22px);
+}
+
+/* ===== 講者備忘：預設隱藏，按 N 切換 ===== */
+.speaker-note {
+  width: 100%;
+  max-width: 900px;
+  margin-top: clamp(14px, 2vh, 22px);
+  padding: 14px 18px;
+  border-left: 4px solid var(--orange);
+  border-radius: 14px;
+  background: var(--surface-orange);
+  color: var(--orange-dark);
+  font-size: clamp(0.86rem, 1.05vw, 1.02rem);
+  line-height: 1.6;
+  text-align: left;
+}
+
+.speaker-note strong {
+  color: var(--ink);
+}
+
+/* ===== 警示清單：踩雷提醒 ===== */
+.check-list--warn li::before {
+  background: var(--orange);
+  content: "!";
+  color: #321303;
+}
+
+.check-list--warn li {
+  color: var(--ink);
+}
+
+/* ===== 事實對照：免費做得到什麼、要錢才有什麼 ===== */
+.fact-row {
+  display: grid;
+  width: 100%;
+  max-width: 1100px;
+  margin-top: clamp(24px, 3.4vh, 40px);
+  list-style: none;
+  grid-template-columns: repeat(auto-fit, minmax(228px, 1fr));
+  gap: clamp(14px, 1.6vw, 20px);
+}
+
+.fact-row li {
+  padding: clamp(20px, 2.4vw, 28px);
+  border-radius: var(--radius-medium);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+  text-align: left;
+}
+
+.fact-row li.is-paid {
+  background: var(--surface-orange);
+}
+
+.fact-row strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--blue-dark);
+  font-size: clamp(1.05rem, 1.6vw, 1.34rem);
+  letter-spacing: -0.02em;
+}
+
+.fact-row li.is-paid strong {
+  color: var(--orange-dark);
+}
+
+.fact-row p {
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(0.9rem, 1.15vw, 1.06rem);
+  line-height: 1.55;
+}
+
+.fact-row small {
+  display: block;
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: clamp(0.78rem, 0.95vw, 0.9rem);
+}
+
 @media print {
   @page {
     size: 16in 9in;
@@ -2197,5 +2389,15 @@ strong {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
+  }
+
+  .prompt-card__copy,
+  .speaker-note {
+    display: none !important;
+  }
+
+  .prompt-card__body {
+    max-height: none;
+    overflow: visible;
   }
 }

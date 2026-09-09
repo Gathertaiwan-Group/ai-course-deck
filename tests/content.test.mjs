@@ -3,41 +3,105 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const requiredSlideTitles = [
-  "用 AI 打造全端網站",
-  "今天做出可被找到的網站",
-  "前置準備",
-  "5 步完成網站",
-  "AI Studio：快速做出前端",
-  "前端完成前，先檢查 3 件事",
+  "AI 零代碼建站 × AI Agent 自動化行銷",
+  "今天的時間表",
+  "現在就做：五個帳號檢查",
+  "前台、後台、資料庫、伺服器",
+  "今天這四個角色由誰扮演",
+  "今天的完整路線",
+  "上午場：用 AI 做出第一版官網",
+  "AI Studio：從一句話開始",
+  "先講清楚需求，再讓 AI 動手",
+  "生成第一版網站",
+  "產出後先檢查三件事",
+  "改版與微調",
+  "上午場：把成果存起來",
   "從 AI Studio 存到 GitHub",
-  "本地端專案資料夾",
-  "Claude Code 或 Codex 連動 repo",
-  "Vercel 部署前端",
-  "Supabase 串資料，持續修改到完成",
-  "讓 Claude Code 或 Codex 協助維護",
-  "設定自動更新（推送即部署）",
-  "網站完成後的三件事",
-  "網站上線後，用 AI 處理安全設定",
-  "完成一個可持續維護的網站",
+  "GitHub 在做的事：時光機",
+  "上午場：讓 AI 幫你部署與維護",
+  "Claude Code 與 Codex 接手",
+  "第一句話：先讀，不要改",
+  "部署到 Vercel",
+  "Vercel 做的事：幫你開店",
+  "接上 Supabase 資料庫",
+  "Supabase 做的事：你的倉庫",
+  "推送即部署",
+  "上午收尾：三個安全動作",
+  "午休：下午讓網站自己說話",
+  "下午的路線：兩件事分開看",
+  "先說清楚：什麼免費，什麼要錢",
+  "Meta 的三個硬限制",
+  "AI Agent 跟 ChatGPT 差在哪",
+  "下午場：Hermes Agent 示範",
+  "Hermes Agent 是什麼",
+  "示範一：讓 AI 記住你的品牌",
+  "建立品牌人設",
+  "示範二：把你的寫法變成技能",
+  "示範三：用一句話設定排程",
+  "示範四：用手機遠端指揮",
+  "用 Agent 之前，先知道五件事",
+  "回家自己裝：安裝步驟",
+  "下午場：換你動手排程發文",
+  "Buffer：註冊與連接帳號",
+  "一次產出一週內容",
+  "一則內容，三個平台版本",
+  "配圖從哪裡來",
+  "把內容排進 Buffer",
+  "內容日曆與發文節奏",
+  "踩雷清單",
+  "想再往前一步，要付什麼",
+  "今天你帶走了什麼",
 ];
 
 const requiredSlideSummaries = [
-  "AI 幫你把想法做成網站。",
-  "做出能用、能分享、能被找到的網站。",
-  "先準備帳號和 key。",
-  "每個工具各做一件事。",
-  "說清楚需求，AI 幫你做畫面。",
-  "確認手機、分享和搜尋都正常。",
+  "今天做出網站，也做出會自己發文的系統。",
+  "上午做網站，下午做自動化。",
+  "現在不檢查，下午一定卡住。",
+  "四個名詞，就是一間餐廳。",
+  "每個工具負責一個角色。",
+  "一條線走完，網站就上線。",
+  "先把畫面做出來。",
+  "用說的，就能做出網站。",
+  "需求講得越清楚，做得越準。",
+  "一次把手機版和分享預覽都要求好。",
+  "讓 AI 自己檢查，再自己修。",
+  "一次只改一個地方。",
+  "存起來，才不會弄丟。",
   "把第一版存到 GitHub。",
-  "在電腦保留專案資料夾。",
-  "讓 AI 先看懂，再幫你改。",
-  "用 Vercel 把網站公開。",
-  "串上資料，持續修改。",
-  "一次改一件事，先測試。",
-  "改好送出去，線上網站就會自己變新。",
-  "接網域、GA 和 Search Console。",
-  "上線後，請 AI 用瀏覽器把安全設定做完。",
-  "網站完成後，持續優化。",
+  "改壞了，隨時回到昨天。",
+  "接下來換 Claude 或 Codex 上場。",
+  "它們能直接動你的專案檔案。",
+  "先讓 AI 看懂，再讓它動手。",
+  "一步一步來，每步都確認。",
+  "伺服器就是讓網站一直開著的地方。",
+  "有了資料庫，網站才記得住東西。",
+  "表單、名單、訂單，都放在這裡。",
+  "改好送出去，線上網站就自己更新。",
+  "密碼和金鑰，永遠自己輸入。",
+  "下午換內容上場。",
+  "產內容是一件事，發出去是另一件事。",
+  "免費做得到很多，但不是全部。",
+  "這三件事，換什麼工具都一樣。",
+  "它會記得、會排程、會自己動手。",
+  "這一段看我操作就好。",
+  "開源、免費、有桌面版。",
+  "記得住品牌調性，才不用每次重講。",
+  "一次設定，之後每篇都照這個寫。",
+  "用說的就能教會它，不用寫程式。",
+  "跟它說時間，它就會準時做。",
+  "人在外面，也能叫它做事。",
+  "方便和風險是同一件事。",
+  "照著這五步，回家就能裝好。",
+  "這一段大家一起做。",
+  "三個免費名額，想清楚再接。",
+  "一次規劃七天，不用天天想。",
+  "同一個訊息，三種說法。",
+  "用網頁版生圖，免費而且夠用。",
+  "排好之後，它會自己發。",
+  "穩定比爆紅重要。",
+  "這些坑，先知道就不會踩。",
+  "免費夠用，要更多再加錢。",
+  "網站會上線，內容會持續。",
 ];
 
 async function loadIndexHtml() {
@@ -150,10 +214,36 @@ function getSlideText(html, slideIndex) {
   return getVisibleText(slide);
 }
 
-test("contains exactly 16 sections with the slide class", async () => {
+test("contains exactly 48 sections with the slide class", async () => {
   const html = await loadIndexHtml();
 
-  assert.equal(getSlideSections(html).length, 16);
+  assert.equal(getSlideSections(html).length, 48);
+  assert.match(html, /data-total-slides>48</);
+});
+
+test("numbers every slide id and heading id sequentially", async () => {
+  const html = await loadIndexHtml();
+  const ids = [...html.matchAll(/<section class="[^"]*slide[^"]*" id="slide-(\d+)"/g)].map(
+    (match) => Number(match[1]),
+  );
+
+  assert.deepEqual(
+    ids,
+    Array.from({ length: 48 }, (_, index) => index + 1),
+  );
+
+  for (const id of ids) {
+    assert.match(
+      html,
+      new RegExp(`aria-labelledby="slide-${id}-title"`),
+      `slide ${id} must point at its own heading`,
+    );
+    assert.match(
+      html,
+      new RegExp(`id="slide-${id}-title"`),
+      `slide ${id} must define its own heading id`,
+    );
+  }
 });
 
 test("places every approved title in its corresponding slide section", async () => {
@@ -169,7 +259,7 @@ test("places every approved title in its corresponding slide section", async () 
   }
 });
 
-test("places a child-friendly summary at the bottom of every slide", async () => {
+test("places a plain-language summary at the bottom of every slide", async () => {
   const slides = getSlideSections(await loadIndexHtml());
 
   assert.equal(slides.length, requiredSlideSummaries.length);
@@ -181,45 +271,65 @@ test("places a child-friendly summary at the bottom of every slide", async () =>
     );
     assert.ok(
       getVisibleText(slides[index]).includes(summary),
-      `slide ${index + 1} must include its child-friendly summary`,
+      `slide ${index + 1} must include its plain-language summary`,
     );
   }
 });
 
-test("lists required Vercel and Supabase credentials before class", async () => {
+test("asks students to prepare every account before the workshop starts", async () => {
   const visibleText = getSlideText(await loadIndexHtml(), 2);
 
-  assert.match(visibleText, /開好 Vercel 帳號/);
-  assert.match(visibleText, /取得 Vercel token/);
-  assert.match(visibleText, /開好 Supabase 帳號/);
-  assert.match(visibleText, /取得 Supabase (?:token|API key)/);
-  assert.doesNotMatch(visibleText, /準備可收驗證信的信箱/);
+  assert.match(visibleText, /Google 帳號/);
+  assert.match(visibleText, /GitHub 帳號/);
+  assert.match(visibleText, /Facebook 粉絲專頁/);
+  assert.match(visibleText, /Instagram 轉成專業帳號/);
+  assert.match(visibleText, /Threads 設為公開/);
 });
 
-test("introduces the five-step website production flow after the outcome", async () => {
+test("explains the four core concepts with a restaurant analogy", async () => {
   const visibleText = getSlideText(await loadIndexHtml(), 3);
 
-  assert.match(visibleText, /(?:5 步|五步驟)/);
-  assert.match(visibleText, /生成前端/);
-  assert.match(visibleText, /存進 GitHub/);
-  assert.match(visibleText, /本地開發/);
-  assert.match(visibleText, /部署完成/);
-  assert.match(visibleText, /持續優化/);
+  assert.match(visibleText, /前台/);
+  assert.match(visibleText, /後台/);
+  assert.match(visibleText, /資料庫/);
+  assert.match(visibleText, /伺服器/);
+  assert.match(visibleText, /餐廳/);
 });
 
 test("uses consistent Step and chapter numbers across every workflow page", async () => {
   const chapters = [
-    [4, "01", "1-1"],
-    [5, "01", "1-2"],
-    [6, "02", "2-1"],
-    [7, "03", "3-1"],
-    [8, "03", "3-2"],
-    [9, "04", "4-1"],
-    [10, "04", "4-2"],
-    [11, "04", "4-3"],
-    [12, "04", "4-4"],
-    [13, "05", "5-1"],
-    [14, "05", "5-2"],
+    [7, "01", "1-1"],
+    [8, "01", "1-2"],
+    [9, "01", "1-3"],
+    [10, "01", "1-4"],
+    [11, "01", "1-5"],
+    [13, "02", "2-1"],
+    [14, "02", "2-2"],
+    [16, "03", "3-1"],
+    [17, "03", "3-2"],
+    [18, "03", "3-3"],
+    [19, "03", "3-4"],
+    [20, "04", "4-1"],
+    [21, "04", "4-2"],
+    [22, "04", "4-3"],
+    [23, "05", "5-1"],
+    [26, "06", "6-1"],
+    [27, "06", "6-2"],
+    [28, "06", "6-3"],
+    [30, "07", "7-1"],
+    [31, "07", "7-2"],
+    [32, "07", "7-3"],
+    [33, "07", "7-4"],
+    [34, "07", "7-5"],
+    [35, "07", "7-6"],
+    [36, "07", "7-7"],
+    [37, "07", "7-8"],
+    [39, "08", "8-1"],
+    [40, "08", "8-2"],
+    [41, "08", "8-3"],
+    [42, "08", "8-4"],
+    [43, "08", "8-5"],
+    [44, "08", "8-6"],
   ];
   const slides = getSlideSections(await loadIndexHtml());
 
@@ -237,17 +347,17 @@ test("uses consistent Step and chapter numbers across every workflow page", asyn
   }
 });
 
-test("checks Meta information, Open Graph, and RWD before storing the frontend", async () => {
-  const visibleText = getSlideText(await loadIndexHtml(), 5);
+test("checks page information, share preview, and mobile layout before storing the frontend", async () => {
+  const visibleText = getSlideText(await loadIndexHtml(), 10);
 
-  assert.match(visibleText, /Meta/);
-  assert.match(visibleText, /Open Graph/);
-  assert.match(visibleText, /RWD/);
+  assert.match(visibleText, /頁面資訊/);
+  assert.match(visibleText, /分享預覽/);
+  assert.match(visibleText, /手機版/);
 });
 
 test("explains first-time GitHub authorization from AI Studio", async () => {
   const slides = getSlideSections(await loadIndexHtml());
-  const slideMarkup = slides[6];
+  const slideMarkup = slides[13];
   const visibleText = getVisibleText(slideMarkup);
 
   assert.match(visibleText, /第一次/);
@@ -255,42 +365,85 @@ test("explains first-time GitHub authorization from AI Studio", async () => {
   assert.match(slideMarkup, /assets\/screenshots\/ai-studio-github-authorize\.png/);
 });
 
-test("teaches AI maintenance and Git-driven Vercel deployment", async () => {
-  const slides = getSlideSections(await loadIndexHtml());
-  const localRepoMarkup = slides[8];
-  const claudeMarkup = slides[11];
-  const claudeText = getSlideText(await loadIndexHtml(), 11);
-  const deployText = getSlideText(await loadIndexHtml(), 12);
+test("keeps the morning safety steps about rotating keys and private repositories", async () => {
+  const visibleText = getSlideText(await loadIndexHtml(), 23);
 
-  assert.match(localRepoMarkup, /assets\/logos\/claude\.svg/);
-  assert.match(localRepoMarkup, /assets\/logos\/codex\.svg/);
-  assert.match(claudeMarkup, /assets\/logos\/claude\.svg/);
-  assert.match(claudeMarkup, /assets\/logos\/codex\.svg/);
-  assert.match(claudeText, /Claude Code/);
-  assert.match(claudeText, /(?:測試|檢查)/);
-  assert.match(claudeText, /commit/);
-  assert.match(claudeText, /push/);
-  assert.match(deployText, /本地改完/);
-  assert.match(deployText, /commit \/ push/);
-  assert.match(deployText, /Vercel.*自動更新|Vercel.*自動部署/);
-  assert.match(deployText, /線上網址檢查/);
-  assert.match(deployText, /repository.*Private|repo.*Private/i);
-  assert.match(deployText, /自動部署.*成功|部署.*成功.*repository/i);
+  assert.match(visibleText, /金鑰/);
+  assert.match(visibleText, /重新產生/);
+  assert.match(visibleText, /Private/);
+  assert.match(visibleText, /(?:不要|不可|絕不).*(?:密碼|金鑰)/);
 });
 
-test("uses browser-connected AI to complete all post-launch safety tasks", async () => {
-  const visibleText = getSlideText(await loadIndexHtml(), 14);
+test("states what is free and what costs money before the automation section", async () => {
+  const visibleText = getSlideText(await loadIndexHtml(), 26);
 
-  assert.match(visibleText, /網站上線後/);
-  assert.match(visibleText, /Claude on Chrome/);
-  assert.match(visibleText, /Codex on Chrome/);
-  assert.match(visibleText, /(?:操控|控制).*瀏覽器/);
-  assert.match(visibleText, /我們只要看著/);
-  assert.match(visibleText, /(?:重新產生|換新).*key/);
-  assert.match(visibleText, /Vercel/);
-  assert.match(visibleText, /GitHub Actions Secrets/);
-  assert.match(visibleText, /repository.*Private|repo.*Private/i);
-  assert.match(visibleText, /(?:不要|不可|絕不).*token/);
+  assert.match(visibleText, /免費做得到/);
+  assert.match(visibleText, /要錢/);
+  assert.match(visibleText, /不需要信用卡/);
+  assert.match(visibleText, /關機/);
+});
+
+test("warns about the three Meta publishing restrictions", async () => {
+  const visibleText = getSlideText(await loadIndexHtml(), 27);
+
+  assert.match(visibleText, /Instagram 個人帳號不能/);
+  assert.match(visibleText, /Facebook 個人動態不能/);
+  assert.match(visibleText, /25 篇/);
+});
+
+test("points readers at the official Hermes Agent domain only", async () => {
+  const html = await loadIndexHtml();
+  const visibleText = getSlideText(html, 30);
+
+  assert.match(visibleText, /hermes-agent\.nousresearch\.com/);
+  assert.doesNotMatch(html, /hermes-agent\.org/);
+  assert.doesNotMatch(html, /hermes-agent\.ai/);
+  assert.doesNotMatch(html, /hermesagent\.org/);
+});
+
+test("tells students not to install the agent during class", async () => {
+  const visibleText = getSlideText(await loadIndexHtml(), 37);
+
+  assert.match(visibleText, /回家/);
+  assert.match(visibleText, /hermes-agent\.nousresearch\.com/);
+  assert.match(visibleText, /不用信用卡/);
+});
+
+test("warns about the lifetime channel limit before connecting accounts", async () => {
+  const visibleText = getSlideText(await loadIndexHtml(), 39);
+
+  assert.match(visibleText, /八個/);
+  assert.match(visibleText, /Threads 必須設為公開/);
+});
+
+test("provides ten copyable prompt cards wired to existing prompt bodies", async () => {
+  const html = await loadIndexHtml();
+  const targets = [...html.matchAll(/data-copy-target="([^"]+)"/g)].map(
+    (match) => match[1],
+  );
+
+  assert.equal(targets.length, 10);
+  assert.equal(new Set(targets).size, 10);
+
+  for (const targetId of targets) {
+    assert.match(
+      html,
+      new RegExp(`class="prompt-card__body" id="${targetId}"`),
+      `prompt body ${targetId} must exist for its copy button`,
+    );
+  }
+
+  assert.match(html, /<script type="module" src="prompt-card\.js"><\/script>/);
+});
+
+test("hides speaker notes from the projected slide by default", async () => {
+  const html = await loadIndexHtml();
+  const notes = [...html.matchAll(/<aside class="speaker-note"([^>]*)>/g)];
+
+  assert.ok(notes.length > 0, "deck must carry at least one speaker note");
+  for (const [, attributes] of notes) {
+    assert.match(attributes, /\bhidden\b/, "every speaker note must start hidden");
+  }
 });
 
 test("omits prohibited brand names from visible content", async () => {

@@ -304,15 +304,26 @@
         </div>
       </section>
 
-      <section class="slide slide--prompt" id="slide-17" data-label="第一句話：先讀，不要改" aria-labelledby="slide-17-title">
+      <section class="slide slide--prompt" id="slide-17" data-label="先接上 repo，再讓 AI 讀專案" aria-labelledby="slide-17-title">
         <div class="slide__content slide__content--chapter-wide">
           <div class="chapter-index"><span class="chapter-badge">STEP 03</span><span class="chapter-large-number" aria-hidden="true">3-2</span></div>
           <div class="chapter-wide-body">
-            <h2 id="slide-17-title">第一句話：先讀，不要改</h2>
-            <p class="lede">一開始就叫它改東西，它會改壞你看不懂的地方。先讓它看懂。</p>
+            <h2 id="slide-17-title">先接上 repo，再讓 AI 讀專案</h2>
+            <p class="lede">先讓 Claude 或 Codex 連上你的 repo，再叫它改東西——不然它會改壞你看不懂的地方。</p>
             <div class="prompt-card prompt-card--tight">
               <div class="prompt-card__head">
-                <span class="prompt-card__label">Prompt 04 · 開場第一句</span>
+                <span class="prompt-card__label">第一步 · 先接上 repo</span>
+                <button type="button" class="prompt-card__copy" data-copy-target="p-00">複製</button>
+              </div>
+              <pre class="prompt-card__body" id="p-00">你在本地幫我開一個資料夾，叫做：（幫網站取個資料夾名稱，例如 my-brand-site）
+
+並用 git clone 連接這個 repo：（貼上你剛剛在 AI Studio 存的那個 GitHub repo 網址）
+
+複製過去之後跟我說一聲，並告訴我這個資料夾實際在電腦的哪個路徑。</pre>
+            </div>
+            <div class="prompt-card prompt-card--tight">
+              <div class="prompt-card__head">
+                <span class="prompt-card__label">Prompt 04 · 接上 repo 之後</span>
                 <button type="button" class="prompt-card__copy" data-copy-target="p-04">複製</button>
               </div>
               <pre class="prompt-card__body" id="p-04">這是我用 AI Studio 產生的網站專案。請你先做以下三件事，先不要修改任何檔案：
@@ -324,7 +335,7 @@
 看完再回報，我確認後才開始改。</pre>
             </div>
           </div>
-          <p class="slide-summary">先讓 AI 看懂，再讓它動手。</p>
+          <p class="slide-summary">先接上 repo，再讓 AI 看懂專案。</p>
         </div>
       </section>
 
@@ -859,7 +870,7 @@
             <li><span aria-hidden="true">02</span><strong>一個資料庫</strong></li>
             <li><span aria-hidden="true">03</span><strong>一組品牌語氣</strong></li>
             <li><span aria-hidden="true">04</span><strong>一週排好的貼文</strong></li>
-            <li><span aria-hidden="true">05</span><strong>九則可重複使用的 prompt</strong></li>
+            <li><span aria-hidden="true">05</span><strong>十則可重複使用的 prompt</strong></li>
           </ol>
           <p class="closing-line">回家第一件事：把這份簡報加入書籤，明天照著發第一則。</p>
           <p class="slide-summary">網站會上線，內容會持續。</p>

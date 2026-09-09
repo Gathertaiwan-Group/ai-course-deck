@@ -19,7 +19,7 @@ const requiredSlideTitles = [
   "GitHub 在做的事：時光機",
   "上午場：讓 AI 幫你部署與維護",
   "Claude Code 與 Codex 接手",
-  "第一句話：先讀，不要改",
+  "先接上 repo，再讓 AI 讀專案",
   "部署到 Vercel",
   "Vercel 做的事：幫你開店",
   "接上 Supabase 資料庫",
@@ -69,7 +69,7 @@ const requiredSlideSummaries = [
   "改壞了，隨時回到昨天。",
   "接下來換 Claude 或 Codex 上場。",
   "它們能直接動你的專案檔案。",
-  "先讓 AI 看懂，再讓它動手。",
+  "先接上 repo，再讓 AI 看懂專案。",
   "一步一步來，每步都確認。",
   "伺服器就是讓網站一直開著的地方。",
   "有了資料庫，網站才記得住東西。",
@@ -413,14 +413,14 @@ test("warns about the lifetime channel limit before connecting accounts", async 
   assert.match(visibleText, /Threads 必須設為公開/);
 });
 
-test("provides nine copyable prompt cards wired to existing prompt bodies", async () => {
+test("provides ten copyable prompt cards wired to existing prompt bodies", async () => {
   const html = await loadIndexHtml();
   const targets = [...html.matchAll(/data-copy-target="([^"]+)"/g)].map(
     (match) => match[1],
   );
 
-  assert.equal(targets.length, 9);
-  assert.equal(new Set(targets).size, 9);
+  assert.equal(targets.length, 10);
+  assert.equal(new Set(targets).size, 10);
 
   for (const targetId of targets) {
     assert.match(

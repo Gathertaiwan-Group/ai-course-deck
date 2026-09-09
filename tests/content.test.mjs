@@ -31,17 +31,17 @@ const requiredSlideTitles = [
   "下午的路線：兩件事分開看",
   "先說清楚：什麼免費，什麼要錢",
   "Meta 的三個硬限制",
-  "AI Agent 跟 ChatGPT 差在哪",
-  "下午場：Hermes Agent 示範",
-  "Hermes Agent 是什麼",
+  "ChatGPT 已經不是你以為的聊天機器人",
+  "下午場：ChatGPT 桌面版示範",
+  "ChatGPT 桌面版是什麼",
   "示範一：讓 AI 記住你的品牌",
   "建立品牌人設",
-  "示範二：把你的寫法變成技能",
-  "示範三：用一句話設定排程",
-  "示範四：用手機遠端指揮",
-  "用 Agent 之前，先知道五件事",
-  "回家自己裝：安裝步驟",
-  "下午場：換你動手排程發文",
+  "示範二：用 Scheduled Tasks 自動找選題",
+  "示範三：接上 Zapier，讓它真的能動手發文",
+  "示範四：審核過了才真的發出去",
+  "用這套自動化之前，先知道五件事",
+  "回家自己裝：進階自動化設定步驟",
+  "下午場：換你動手，用 ChatGPT 產文排程發文",
   "Buffer：註冊與連接帳號",
   "一次產出一週內容",
   "一則內容，三個平台版本",
@@ -80,18 +80,18 @@ const requiredSlideSummaries = [
   "部署 token 用完就收回，金錢相關的密碼永遠自己輸入。",
   "下午換內容上場。",
   "產內容是一件事，發出去是另一件事。",
-  "免費做得到很多，但不是全部。",
+  "核心流程全部免費，自動發布才要升級。",
   "這三件事，換什麼工具都一樣。",
-  "它會記得、會排程、會自己動手。",
+  "它現在會記得、會排程、也能真的動手。",
   "這一段看我操作就好。",
-  "開源、免費、有桌面版。",
+  "基本功能免費，接外部工具才要 Plus。",
   "記得住品牌調性，才不用每次重講。",
   "一次設定，之後每篇都照這個寫。",
-  "用說的就能教會它，不用寫程式。",
-  "跟它說時間，它就會準時做。",
-  "人在外面，也能叫它做事。",
+  "跟它說時間，它就會準時做，而且不用你的電腦開著。",
+  "接上 Zapier，ChatGPT 才能真的動手做事。",
+  "AI 產文、你把關、核准了才發。",
   "方便和風險是同一件事。",
-  "照著這五步，回家就能裝好。",
+  "照著這五步，回家就能升級成自動發布。",
   "這一段大家一起做。",
   "三個免費名額，想清楚再接。",
   "一次規劃七天，不用天天想。",
@@ -100,7 +100,7 @@ const requiredSlideSummaries = [
   "排好之後，它會自己發。",
   "穩定比爆紅重要。",
   "這些坑，先知道就不會踩。",
-  "免費夠用，要更多再加錢。",
+  "免費夠用，要自動發布再加錢，但不用再租主機。",
   "網站會上線，內容會持續。",
 ];
 
@@ -380,7 +380,7 @@ test("states what is free and what costs money before the automation section", a
   assert.match(visibleText, /免費做得到/);
   assert.match(visibleText, /要錢/);
   assert.match(visibleText, /不需要信用卡/);
-  assert.match(visibleText, /關機/);
+  assert.match(visibleText, /ChatGPT Plus/);
 });
 
 test("warns about the three Meta publishing restrictions", async () => {
@@ -391,22 +391,20 @@ test("warns about the three Meta publishing restrictions", async () => {
   assert.match(visibleText, /25 篇/);
 });
 
-test("points readers at the official Hermes Agent domain only", async () => {
+test("points readers at the official ChatGPT download link", async () => {
   const html = await loadIndexHtml();
   const visibleText = getSlideText(html, 30);
 
-  assert.match(visibleText, /hermes-agent\.nousresearch\.com/);
-  assert.doesNotMatch(html, /hermes-agent\.org/);
-  assert.doesNotMatch(html, /hermes-agent\.ai/);
-  assert.doesNotMatch(html, /hermesagent\.org/);
+  assert.match(visibleText, /chatgpt\.com\/download/);
+  assert.doesNotMatch(html, /hermes-agent\.nousresearch\.com/);
 });
 
-test("tells students not to install the agent during class", async () => {
+test("tells students the advanced setup waits until they are home", async () => {
   const visibleText = getSlideText(await loadIndexHtml(), 37);
 
   assert.match(visibleText, /回家/);
-  assert.match(visibleText, /hermes-agent\.nousresearch\.com/);
-  assert.match(visibleText, /不用信用卡/);
+  assert.match(visibleText, /ChatGPT Plus/);
+  assert.match(visibleText, /Zapier/);
 });
 
 test("warns about the lifetime channel limit before connecting accounts", async () => {

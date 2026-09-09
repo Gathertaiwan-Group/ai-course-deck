@@ -153,7 +153,27 @@ function applySpeakerNoteState(isVisible) {
   }
 }
 
+export function markScrollablePrompts(root = document) {
+  for (const body of root.querySelectorAll(".prompt-card__body")) {
+    const card = body.closest(".prompt-card");
+
+    if (!card) {
+      continue;
+    }
+
+    card.classList.toggle(
+      "is-scrollable",
+      body.scrollHeight > body.clientHeight + 2,
+    );
+  }
+}
+
 function initializePromptCards() {
+  markScrollablePrompts();
+  window.addEventListener("load", () => markScrollablePrompts());
+  window.addEventListener("resize", () => markScrollablePrompts());
+  document.fonts?.ready?.then?.(() => markScrollablePrompts());
+
   document.addEventListener("click", (event) => {
     const button = event.target?.closest?.(".prompt-card__copy");
 

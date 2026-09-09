@@ -2175,6 +2175,12 @@ strong {
   letter-spacing: 0.02em;
 }
 
+.prompt-card.is-scrollable .prompt-card__label::after {
+  content: " · 內容較長，可在框內捲動";
+  font-weight: 600;
+  opacity: 0.72;
+}
+
 .prompt-card__copy {
   min-height: 40px;
   padding: 9px 20px;

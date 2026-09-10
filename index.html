@@ -554,32 +554,32 @@
         </div>
       </section>
 
-      <section class="slide slide--chapter" id="slide-30" data-label="下午場：ChatGPT 桌面版示範" aria-labelledby="slide-30-title">
+      <section class="slide slide--chapter" id="slide-30" data-label="下午場：Claude 產內容，Codex 架自動發布系統" aria-labelledby="slide-30-title">
         <div class="slide__content slide__content--chapter">
           <p class="chapter-kicker eyebrow">下午場 · 講師示範</p>
           <p class="chapter-number" aria-hidden="true">07</p>
           <div class="chapter-copy">
-            <h2 id="slide-30-title">下午場：ChatGPT 桌面版示範</h2>
-            <p>這一段先看我操作。進階設定步驟在後面，看你要不要現場跟或回家裝。</p>
+            <h2 id="slide-30-title">下午場：Claude 產內容，Codex 架自動發布系統</h2>
+            <p>這一段先看我操作。接下來換你自己的 Codex 動手架一套系統。</p>
           </div>
           <p class="slide-summary">這一段看我操作就好。</p>
-          <aside class="speaker-note" hidden><strong>講者備忘：</strong>這段可以邊講邊讓大家跟著開 ChatGPT 桌面版——基本操作免費，只有接 Buffer 那步驟需要 Plus，沒有 Plus 的人看示範就好。安裝／設定 SOP 在第 38 張。</aside>
+          <aside class="speaker-note" hidden><strong>講者備忘：</strong>這段開始整個下午的核心工具鏈都換了：Claude 產文（不生圖）、Codex 透過 MCP 架系統、Buffer 負責發布。⚠️ 委託 Codex 自主建置這段流程今天才第一次設計，還沒有實際跑過，開課前有空檔務必自己先測一次，並準備好『退回人工貼 Buffer』這個保底方案，萬一現場卡住不要慌。</aside>
         </div>
       </section>
 
-      <section class="slide" id="slide-31" data-label="ChatGPT 桌面版是什麼" aria-labelledby="slide-31-title">
+      <section class="slide" id="slide-31" data-label="Claude 桌面版是什麼，MCP 又是什麼" aria-labelledby="slide-31-title">
         <div class="slide__content slide__content--chapter-wide">
           <div class="chapter-index"><span class="chapter-badge">STEP 07</span><span class="chapter-large-number" aria-hidden="true">7-1</span></div>
           <div class="chapter-wide-body">
-            <h2 id="slide-31-title">ChatGPT 桌面版是什麼</h2>
-            <p class="lede">OpenAI 官方應用，2026 年新增了記憶、排程、連接外部工具的能力。</p>
+            <h2 id="slide-31-title">Claude 桌面版是什麼，MCP 又是什麼</h2>
+            <p class="lede">同樣是 AI 助理，但接外部工具的方式更簡單。</p>
             <ul class="tool-list">
               <li><strong>免費就能用</strong><span>基本對話、Projects 記住品牌語氣，免費帳號就有</span></li>
-              <li><strong>進階要 Plus</strong><span>Developer Mode 接外部工具，今天示範接 Buffer 會用到</span></li>
-              <li><strong>官方下載</strong><span>chatgpt.com/download</span></li>
+              <li><strong>MCP 是什麼</strong><span>讓 AI 直接連上其他服務的標準做法，登入點允許就好，不用貼 token</span></li>
+              <li><strong>官方下載</strong><span>claude.ai/download</span></li>
             </ul>
           </div>
-          <p class="slide-summary">基本功能免費，接外部工具才要 Plus。</p>
+          <p class="slide-summary">MCP 讓 AI 連外部工具，比貼 token 更簡單。</p>
         </div>
       </section>
 
@@ -604,7 +604,7 @@
           <div class="chapter-index"><span class="chapter-badge">STEP 07</span><span class="chapter-large-number" aria-hidden="true">7-3</span></div>
           <div class="chapter-wide-body">
             <h2 id="slide-33-title">建立品牌人設</h2>
-            <p class="lede">這則 prompt 貼進 ChatGPT 的 Project 設定，或任何 AI 都能用。</p>
+            <p class="lede">這則 prompt 貼進 Claude 的 Project 設定，或任何 AI 都能用。</p>
             <div class="prompt-card prompt-card--tight">
               <div class="prompt-card__head">
                 <span class="prompt-card__label">Prompt 07 · 品牌語氣設定</span>
@@ -632,55 +632,56 @@
         </div>
       </section>
 
-      <section class="slide" id="slide-34" data-label="示範二：用 Scheduled Tasks 自動找選題" aria-labelledby="slide-34-title">
+      <section class="slide" id="slide-34" data-label="示範二：接上 Buffer 的官方連接" aria-labelledby="slide-34-title">
         <div class="slide__content slide__content--chapter-wide">
           <div class="chapter-index"><span class="chapter-badge">STEP 07</span><span class="chapter-large-number" aria-hidden="true">7-4</span></div>
           <div class="chapter-wide-body">
-            <h2 id="slide-34-title">示範二：用 Scheduled Tasks 自動找選題</h2>
-            <p class="lede">不用自己想今天要發什麼，讓它排時間自動做。</p>
-            <ol class="mini-steps">
-              <li><span aria-hidden="true">01</span>跟它說「每天早上九點，幫我找三個今天適合發的主題」</li>
-              <li><span aria-hidden="true">02</span>它會排進 Scheduled 頁面，時間到自動執行，不用你的電腦開著</li>
-              <li><span aria-hidden="true">03</span>做完會用推播通知你，結果等你審核</li>
-            </ol>
-            <p class="browser-note">這是 ChatGPT 內建功能，免費帳號也能用，執行是在雲端跑，不受你電腦影不影響。</p>
-          </div>
-          <p class="slide-summary">跟它說時間，它就會準時做，而且不用你的電腦開著。</p>
-        </div>
-      </section>
-
-      <section class="slide" id="slide-35" data-label="示範三：接上 Buffer 的官方連接" aria-labelledby="slide-35-title">
-        <div class="slide__content slide__content--chapter-wide">
-          <div class="chapter-index"><span class="chapter-badge">STEP 07</span><span class="chapter-large-number" aria-hidden="true">7-5</span></div>
-          <div class="chapter-wide-body">
-            <h2 id="slide-35-title">示範三：接上 Buffer 的官方連接</h2>
+            <h2 id="slide-34-title">示範二：接上 Buffer 的官方連接</h2>
             <p class="lede">Buffer 自己就有給 AI 用的連接方式，不用再多繞一個工具。</p>
             <ul class="tool-list">
-              <li><strong>設定 → 開發者模式</strong><span>Developer Mode，要 Plus 才有這個選項</span></li>
+              <li><strong>設定 → Connectors</strong><span>Claude 免費版就能加這個連接（限 1 個），不用升級付費方案</span></li>
               <li><strong>新增連接</strong><span>貼上 Buffer 官方的連接位址，登入 Buffer 帳號授權</span></li>
               <li><strong>先問它排程狀況</strong><span>「幫我看一下這週還有哪些時段是空的」</span></li>
             </ul>
-            <p class="browser-note">⚠️ 這一步需要 ChatGPT Plus。目前查到的資料顯示：接上之後確定能「讀取」Buffer 的排程狀況，但「直接幫你建立或發布貼文」這塊還在演進中，不承諾一定做得到，示範以讀取為主。</p>
+            <p class="browser-note">接上之後確定能「讀取」Buffer 的排程狀況，但「直接幫你建立或發布貼文」這塊還在演進中，不承諾一定做得到，示範以讀取為主。</p>
           </div>
-          <p class="slide-summary">接上 Buffer，讓 ChatGPT 讀懂你的排程狀況。</p>
+          <p class="slide-summary">接上 Buffer，讓 Claude 讀懂你的排程狀況。</p>
         </div>
       </section>
 
-      <section class="slide" id="slide-36" data-label="示範四：讓 ChatGPT 幫你檢查排程" aria-labelledby="slide-36-title">
+      <section class="slide" id="slide-35" data-label="示範三：讓 Claude 幫你檢查排程" aria-labelledby="slide-35-title">
         <div class="slide__content slide__content--chapter-wide">
-          <div class="chapter-index"><span class="chapter-badge">STEP 07</span><span class="chapter-large-number" aria-hidden="true">7-6</span></div>
+          <div class="chapter-index"><span class="chapter-badge">STEP 07</span><span class="chapter-large-number" aria-hidden="true">7-5</span></div>
           <div class="chapter-wide-body">
-            <h2 id="slide-36-title">示範四：讓 ChatGPT 幫你檢查排程</h2>
+            <h2 id="slide-35-title">示範三：讓 Claude 幫你檢查排程</h2>
             <p class="lede">接上之後，直接在對話裡問它現在排程排得怎麼樣。</p>
             <ol class="mini-steps">
               <li><span aria-hidden="true">01</span>問它「這週 Threads、IG、FB 各排了幾則，哪天沒排到」</li>
               <li><span aria-hidden="true">02</span>它讀取現在的排程狀況，直接回報給你，還能給補位建議</li>
-              <li><span aria-hidden="true">03</span>缺的部分，回到核心流程：ChatGPT 產文 → 自己貼進 Buffer</li>
+              <li><span aria-hidden="true">03</span>缺的部分，回到核心流程：Claude 產文 → 自己貼進 Buffer</li>
             </ol>
             <p class="browser-note">真正「讓它自己動手建立貼文」這塊，個人帳號的權限還在演進中，發布的動作目前建議還是自己按，比較保險。</p>
           </div>
           <p class="slide-summary">先讓它幫你看懂排程，發布的按鈕還是自己按。</p>
           <aside class="speaker-note" hidden><strong>講者備忘：</strong>這段示範重點是「讀取」的體感——直接在對話裡問它排程狀況，讓大家看到它真的讀得到 Buffer 裡的東西。不要過度承諾「它會自己發文」，這塊還沒有把握，現場網路不穩就用錄好的畫面備用。</aside>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-36" data-label="示範四：接上 Supabase 跟 Vercel，讓 Codex 動手架系統" aria-labelledby="slide-36-title">
+        <div class="slide__content slide__content--chapter-wide">
+          <div class="chapter-index"><span class="chapter-badge">STEP 07</span><span class="chapter-large-number" aria-hidden="true">7-6</span></div>
+          <div class="chapter-wide-body">
+            <h2 id="slide-36-title">示範四：接上 Supabase 跟 Vercel，讓 Codex 動手架系統</h2>
+            <p class="lede">連上這兩個 MCP，Codex 就能自己開資料庫、寫程式、部署，不用你自己動手寫程式碼。</p>
+            <ul class="tool-list">
+              <li><strong>Supabase MCP</strong><span>讓 Codex 建資料庫、存圖片、寫自動發布的程式碼</span></li>
+              <li><strong>Vercel MCP</strong><span>讓 Codex 做一個簡單的網頁表單給你填內容用</span></li>
+              <li><strong>都是 OAuth 授權</strong><span>瀏覽器跳出來點允許，不用複製貼上任何一段 token</span></li>
+            </ul>
+            <p class="browser-note">⚠️ 這是今天新設計的流程，比較進階，接下來 STEP08 會帶大家一步步現場做。</p>
+          </div>
+          <p class="slide-summary">接上 MCP，Codex 就能自己架好整套系統。</p>
+          <aside class="speaker-note" hidden><strong>講者備忘：</strong>這張是純概念鋪陳，先讓學員知道『接下來要做的事情大概是什麼』，實際動手在下一個 STEP。⚠️ 這個 Codex 透過 MCP 自主架設 Supabase＋Vercel 系統的具體流程，今天才第一次設計，還沒有實際跑過驗證，開課前建議務必自己先測一次。</aside>
         </div>
       </section>
 
@@ -692,43 +693,43 @@
             <h2 id="slide-37-title">用這套自動化之前，先知道五件事</h2>
             <p class="security-callout">它能幫你做很多事，是因為它拿到了權限。這兩件事是同一件事。</p>
             <ul class="check-list check-list--warn">
-              <li>目前個人帳號能不能讓它「自己發文」還不確定，不要當成全自動來用</li>
-              <li>接上 Buffer 的授權是你整個帳號，確認清單裡只勾你要用的權限</li>
-              <li>Developer Mode 是進階功能，之後想關掉要先確認不會影響其他對話</li>
-              <li>它讀到的網頁和文件可能藏有指令，做社群蒐集資料時特別要注意</li>
-              <li>這一段需要 ChatGPT Plus，先想清楚要不要現在升級</li>
+              <li>MCP 授權範圍很大，能動到你整個 Supabase／Vercel 帳號，只在真的需要的時候才連</li>
+              <li>Codex 架的系統會真的動用你的雲端資源，做完記得檢查一下有沒有多餘的東西</li>
+              <li>呼叫 Buffer 用的 Access Token 不要寫死在程式碼裡，一定要用環境變數</li>
+              <li>Instagram 圖片長寬比要在 3:4 到 1.91:1 之間，超出範圍會直接被拒絕</li>
+              <li>先設定成「加入佇列」不要「立即發布」，讓自己有機會在 Buffer 確認過一次再放行</li>
             </ul>
           </div>
           <p class="slide-summary">方便和風險是同一件事。</p>
         </div>
       </section>
 
-      <section class="slide" id="slide-38" data-label="回家自己裝：進階自動化設定步驟" aria-labelledby="slide-38-title">
+      <section class="slide" id="slide-38" data-label="下午的完整路線圖" aria-labelledby="slide-38-title">
         <div class="slide__content slide__content--chapter-wide">
           <div class="chapter-index"><span class="chapter-badge">STEP 07</span><span class="chapter-large-number" aria-hidden="true">7-8</span></div>
           <div class="chapter-wide-body">
-            <h2 id="slide-38-title">回家自己裝：進階自動化設定步驟</h2>
-            <p class="lede">現場先不裝這一段，回家網路穩定、有空的時候再設定。</p>
+            <h2 id="slide-38-title">下午的完整路線圖</h2>
+            <p class="lede">接下來換你自己動手，四個步驟走完一次。</p>
             <ol class="mini-steps">
-              <li><span aria-hidden="true">01</span>升級 ChatGPT Plus（如果還沒有）</li>
-              <li><span aria-hidden="true">02</span>打開 Developer Mode（設定 → Security and login）</li>
-              <li><span aria-hidden="true">03</span>新增連接，貼上 Buffer 官方的連接位址</li>
-              <li><span aria-hidden="true">04</span>登入 Buffer 帳號授權連接</li>
-              <li><span aria-hidden="true">05</span>先問它幾個排程狀況的問題，確認真的讀得到資料</li>
+              <li><span aria-hidden="true">01</span>連上三個 MCP：Supabase、Vercel、Buffer</li>
+              <li><span aria-hidden="true">02</span>跟 Codex 說一句話，讓它把整套系統架起來</li>
+              <li><span aria-hidden="true">03</span>用 Claude 產文字，Gemini 網頁版產圖</li>
+              <li><span aria-hidden="true">04</span>把內容存進系統，剩下的它自己來</li>
             </ol>
-            <p class="browser-note">沒有 Plus 也完全不影響今天學到的核心流程——ChatGPT 產文、人工貼 Buffer 一樣能穩定跑。</p>
+            <p class="browser-note">沒有 Codex 或卡在任何一步都沒關係，回到「Claude 產文、人工貼 Buffer」這個核心流程一樣能穩定跑完今天。</p>
           </div>
-          <p class="slide-summary">照著這五步，回家就能讓 ChatGPT 讀懂你的排程。</p>
+          <p class="slide-summary">四個步驟，接下來一步步做。</p>
+          <aside class="speaker-note" hidden><strong>講者備忘：</strong>這是承接 STEP08 的路線圖，四個步驟對應接下來的投影片。⚠️ 步驟二「跟 Codex 說一句話架好系統」這段委託流程今天才第一次設計，還沒有實際跑過驗證，開課前務必自己先測一次；學員卡關就退回「Claude 產文、人工貼 Buffer」的保底流程。</aside>
         </div>
       </section>
 
-      <section class="slide slide--chapter" id="slide-39" data-label="下午場：換你動手，用 ChatGPT 產文排程發文" aria-labelledby="slide-39-title">
+      <section class="slide slide--chapter" id="slide-39" data-label="下午場：換你動手，架一套自動發布系統" aria-labelledby="slide-39-title">
         <div class="slide__content slide__content--chapter">
           <p class="chapter-kicker eyebrow">下午場 · 全班實作</p>
           <p class="chapter-number" aria-hidden="true">08</p>
           <div class="chapter-copy">
-            <h2 id="slide-39-title">下午場：換你動手，用 ChatGPT 產文排程發文</h2>
-            <p>接下來每個人打開自己的 ChatGPT，我們一起做完一週的內容排程。</p>
+            <h2 id="slide-39-title">下午場：換你動手，架一套自動發布系統</h2>
+            <p>接下來每個人自己動手，把 STEP07 看到的系統真的架起來。</p>
           </div>
           <p class="slide-summary">這一段大家一起做。</p>
         </div>
@@ -755,12 +756,55 @@
         </div>
       </section>
 
-      <section class="slide slide--prompt" id="slide-41" data-label="一次產出一週內容" aria-labelledby="slide-41-title">
+      <section class="slide slide--prompt" id="slide-41" data-label="連上三個 MCP，委託 Codex 架好系統" aria-labelledby="slide-41-title">
         <div class="slide__content slide__content--chapter-wide">
           <div class="chapter-index"><span class="chapter-badge">STEP 08</span><span class="chapter-large-number" aria-hidden="true">8-2</span></div>
           <div class="chapter-wide-body">
-            <h2 id="slide-41-title">一次產出一週內容</h2>
-            <p class="lede">不要每天早上才想今天要發什麼。打開 ChatGPT，一次規劃七天。</p>
+            <h2 id="slide-41-title">連上三個 MCP，委託 Codex 架好系統</h2>
+            <p class="lede">先接上三個服務，再用一段話請 Codex 把整套系統建起來。</p>
+
+            <div class="prompt-card prompt-card--tight">
+              <div class="prompt-card__head">
+                <span class="prompt-card__label">第一步 · 在終端機貼上，各自登入允許</span>
+                <button type="button" class="prompt-card__copy" data-copy-target="p-mcp-connect">複製</button>
+              </div>
+              <pre class="prompt-card__body" id="p-mcp-connect">codex mcp add supabase --url https://mcp.supabase.com/mcp
+codex mcp add vercel --url https://mcp.vercel.com
+codex mcp add buffer --url https://mcp.buffer.com/mcp</pre>
+            </div>
+
+            <div class="prompt-card prompt-card--tight">
+              <div class="prompt-card__head">
+                <span class="prompt-card__label">第二步 · 貼進 Codex</span>
+                <button type="button" class="prompt-card__copy" data-copy-target="p-build-system">複製</button>
+              </div>
+              <pre class="prompt-card__body" id="p-build-system">我要做一個「自動發文系統」：我把文字和圖片存進去，系統就會自動幫我發到 Threads 和 Instagram。
+
+請用 Supabase MCP 和 Vercel MCP 幫我把整套系統建起來，照以下規格做：
+
+1. 建立一個新的 Supabase 專案（免費方案），區域選離台灣近的
+2. 建一個 public 的 Storage bucket，用來放我要發的圖片
+3. 建一張資料表，欄位包含：文字內容、圖片路徑、要發哪個平台、排程時間、目前狀態
+4. 寫一個 Edge Function，當資料表有新資料時自動觸發，呼叫 Buffer 的 API（https://api.buffer.com，GraphQL），把內容建立成一則貼文送進 Buffer 排程佇列，用「加入佇列」模式，不要設定成立即發布，讓我自己到 Buffer 確認一次比較安全
+5. 注意：Instagram 貼文一定要附圖片，且圖片長寬比要在 3:4 到 1.91:1 之間，超出範圍會被拒絕；Threads 純文字就可以，不用附圖
+6. 呼叫 Buffer API 需要一把 Access Token，我會自己去 Buffer 申請，請把程式碼寫成「從環境變數讀取」，不要寫死在程式碼裡，寫完後告訴我環境變數的名稱、以及我要怎麼設定進去
+7. 幫我用 Vercel 做一個簡單的網頁表單，讓我可以直接在網頁上填文字、上傳圖片、選平台，按送出就存進剛才那張資料表，不用我自己打 SQL
+8. 做完之後，給我這個網頁表單的網址，並告訴我怎麼測試整套流程有沒有正常運作
+
+每做完一步先跟我確認，我說繼續你才做下一步。</pre>
+            </div>
+          </div>
+          <p class="slide-summary">接上三個 MCP，說一句話，系統自己架起來。</p>
+          <aside class="speaker-note" hidden><strong>講者備忘：</strong>⚠️ 這個委託 prompt 是今天新設計的，還沒有實際跑過驗證。開課前務必自己先測一次，記錄真實需要的時間跟可能卡住的地方；現場如果有學員卡住，隨時可以退回『Claude 產文、人工貼 Buffer』這個保底流程，不用勉強大家一定要做完全自動化這一段。</aside>
+        </div>
+      </section>
+
+      <section class="slide slide--prompt" id="slide-42" data-label="用 Claude 產一週內容" aria-labelledby="slide-42-title">
+        <div class="slide__content slide__content--chapter-wide">
+          <div class="chapter-index"><span class="chapter-badge">STEP 08</span><span class="chapter-large-number" aria-hidden="true">8-3</span></div>
+          <div class="chapter-wide-body">
+            <h2 id="slide-42-title">用 Claude 產一週內容</h2>
+            <p class="lede">打開 Claude，一次規劃七天，Threads 跟 Instagram 兩個版本一起要。</p>
             <div class="prompt-card prompt-card--tight">
               <div class="prompt-card__head">
                 <span class="prompt-card__label">Prompt 08 · 接在品牌人設之後用</span>
@@ -773,44 +817,15 @@
 
 每一天請給我：
 - 主題（一句話）
-- Threads 版本：150 字以內，第一句就要讓人想看下去，不要用「大家好」開頭
+- Threads 版本：150 字以內，第一句就要讓人想看下去，不要用「大家好」開頭，也不要放標籤
 - Instagram 版本：有畫面感，開頭三行要能在未展開時就抓住人，結尾放 5 個相關標籤
-- Facebook 版本：完整敘事，可以稍長，適合分享
 - 建議配圖：用一句話描述畫面內容，我會拿去生圖
 - 建議發文時間
 
 請用表格整理，方便我直接複製使用。</pre>
             </div>
           </div>
-          <p class="slide-summary">一次規劃七天，不用天天想。</p>
-        </div>
-      </section>
-
-      <section class="slide slide--prompt" id="slide-42" data-label="一則內容，三個平台版本" aria-labelledby="slide-42-title">
-        <div class="slide__content slide__content--chapter-wide">
-          <div class="chapter-index"><span class="chapter-badge">STEP 08</span><span class="chapter-large-number" aria-hidden="true">8-3</span></div>
-          <div class="chapter-wide-body">
-            <h2 id="slide-42-title">一則內容，三個平台版本</h2>
-            <p class="lede">同樣一件事，三個平台的說法要不一樣，否則哪邊都不討好。貼進 ChatGPT 桌面版一次改寫三份。</p>
-            <div class="prompt-card prompt-card--tight">
-              <div class="prompt-card__head">
-                <span class="prompt-card__label">Prompt 09 · 手上已有內容時用</span>
-                <button type="button" class="prompt-card__copy" data-copy-target="p-09">複製</button>
-              </div>
-              <pre class="prompt-card__body" id="p-09">以下這則內容，請幫我改寫成三個平台的版本，核心訊息不變，但語氣與長度要符合各平台：
-
-原始內容：
-
-
-請給我：
-1. Threads：150 字內，口語、有觀點、第一句就要讓人停下來，不要放標籤
-2. Instagram：有畫面感，前三行是重點，因為未展開時只看得到這些，結尾 5 個標籤
-3. Facebook：完整敘事，可以有前因後果，適合被分享與留言討論
-
-三個版本都不要出現我的品牌禁用詞。改完後，告訴我哪個版本最有機會被互動，為什麼。</pre>
-            </div>
-          </div>
-          <p class="slide-summary">同一個訊息，三種說法。</p>
+          <p class="slide-summary">一次規劃七天，Threads 跟 IG 版本一起產。</p>
         </div>
       </section>
 
@@ -831,22 +846,22 @@
         </div>
       </section>
 
-      <section class="slide" id="slide-44" data-label="把內容排進 Buffer" aria-labelledby="slide-44-title">
+      <section class="slide" id="slide-44" data-label="把內容存進系統" aria-labelledby="slide-44-title">
         <div class="slide__content slide__content--chapter-wide">
           <div class="chapter-index"><span class="chapter-badge">STEP 08</span><span class="chapter-large-number" aria-hidden="true">8-5</span></div>
           <div class="chapter-wide-body">
-            <h2 id="slide-44-title">把內容排進 Buffer</h2>
-            <p class="lede">現在把剛才產出的一週內容，實際排進去。</p>
+            <h2 id="slide-44-title">把內容存進系統</h2>
+            <p class="lede">現在把剛才產出的一週內容，存進你剛架好的系統。</p>
             <figure class="data-flow data-flow--deploy">
-              <figcaption class="sr-only">先用 AI 產出內容，接著產生配圖，貼進排程工具設定時間，由工具自動發布</figcaption>
-              <div class="data-flow__node"><strong>AI 產內容</strong></div>
-              <div class="data-flow__node"><strong>產配圖</strong></div>
-              <div class="data-flow__node data-flow__node--accent"><strong>貼進 Buffer 排時間</strong></div>
-              <div class="data-flow__node"><strong>時間到自動發布</strong></div>
+              <figcaption class="sr-only">先用 Claude 產文字，Gemini 產配圖，存進 Codex 架好的網頁表單，系統自動排進 Buffer 佇列，時間到自動發布</figcaption>
+              <div class="data-flow__node"><strong>Claude 產文字</strong></div>
+              <div class="data-flow__node"><strong>Gemini 產配圖</strong></div>
+              <div class="data-flow__node data-flow__node--accent"><strong>存進系統表單</strong></div>
+              <div class="data-flow__node"><strong>自動排進 Buffer</strong></div>
             </figure>
-            <p class="browser-note">免費方案每個帳號可以排十則。三個帳號各排七天，剛好夠用。</p>
+            <p class="browser-note">存進去之後，系統會自動幫你排進 Buffer 佇列，你再到 Buffer 確認一次就可以放行。</p>
           </div>
-          <p class="slide-summary">排好之後，它會自己發。</p>
+          <p class="slide-summary">存進系統，剩下的它自己排。</p>
         </div>
       </section>
 
@@ -903,7 +918,7 @@
             <li><span aria-hidden="true">02</span><strong>一個資料庫</strong></li>
             <li><span aria-hidden="true">03</span><strong>一組品牌語氣</strong></li>
             <li><span aria-hidden="true">04</span><strong>一週排好的貼文</strong></li>
-            <li><span aria-hidden="true">05</span><strong>十一則可重複使用的 prompt</strong></li>
+            <li><span aria-hidden="true">05</span><strong>十二則可重複使用的 prompt</strong></li>
           </ol>
           <p class="closing-line">回家第一件事：把這份簡報加入書籤，明天照著發第一則。</p>
           <p class="slide-summary">網站會上線，內容會持續。</p>

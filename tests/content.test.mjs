@@ -32,21 +32,21 @@ const requiredSlideTitles = [
   "先說清楚：什麼免費，什麼要錢",
   "Meta 的三個硬限制",
   "ChatGPT 已經不是你以為的聊天機器人",
-  "下午場：ChatGPT 桌面版示範",
-  "ChatGPT 桌面版是什麼",
+  "下午場：Claude 產內容，Codex 架自動發布系統",
+  "Claude 桌面版是什麼，MCP 又是什麼",
   "示範一：讓 AI 記住你的品牌",
   "建立品牌人設",
-  "示範二：用 Scheduled Tasks 自動找選題",
-  "示範三：接上 Buffer 的官方連接",
-  "示範四：讓 ChatGPT 幫你檢查排程",
+  "示範二：接上 Buffer 的官方連接",
+  "示範三：讓 Claude 幫你檢查排程",
+  "示範四：接上 Supabase 跟 Vercel，讓 Codex 動手架系統",
   "用這套自動化之前，先知道五件事",
-  "回家自己裝：進階自動化設定步驟",
-  "下午場：換你動手，用 ChatGPT 產文排程發文",
+  "下午的完整路線圖",
+  "下午場：換你動手，架一套自動發布系統",
   "Buffer：註冊與連接帳號",
-  "一次產出一週內容",
-  "一則內容，三個平台版本",
+  "連上三個 MCP，委託 Codex 架好系統",
+  "用 Claude 產一週內容",
   "配圖從哪裡來",
-  "把內容排進 Buffer",
+  "把內容存進系統",
   "內容日曆與發文節奏",
   "踩雷清單",
   "想再往前一步，要付什麼",
@@ -84,20 +84,20 @@ const requiredSlideSummaries = [
   "這三件事，換什麼工具都一樣。",
   "它現在會記得、會排程、也能讀懂你的排程狀況。",
   "這一段看我操作就好。",
-  "基本功能免費，接外部工具才要 Plus。",
+  "MCP 讓 AI 連外部工具，比貼 token 更簡單。",
   "記得住品牌調性，才不用每次重講。",
   "一次設定，之後每篇都照這個寫。",
-  "跟它說時間，它就會準時做，而且不用你的電腦開著。",
-  "接上 Buffer，讓 ChatGPT 讀懂你的排程狀況。",
+  "接上 Buffer，讓 Claude 讀懂你的排程狀況。",
   "先讓它幫你看懂排程，發布的按鈕還是自己按。",
+  "接上 MCP，Codex 就能自己架好整套系統。",
   "方便和風險是同一件事。",
-  "照著這五步，回家就能讓 ChatGPT 讀懂你的排程。",
+  "四個步驟，接下來一步步做。",
   "這一段大家一起做。",
   "三個免費名額，想清楚再接。",
-  "一次規劃七天，不用天天想。",
-  "同一個訊息，三種說法。",
+  "接上三個 MCP，說一句話，系統自己架起來。",
+  "一次規劃七天，Threads 跟 IG 版本一起產。",
   "用網頁版生圖，免費而且夠用。",
-  "排好之後，它會自己發。",
+  "存進系統，剩下的它自己排。",
   "穩定比爆紅重要。",
   "這些坑，先知道就不會踩。",
   "免費夠用，要接上外部工具再加錢。",
@@ -391,19 +391,19 @@ test("warns about the three Meta publishing restrictions", async () => {
   assert.match(visibleText, /25 篇/);
 });
 
-test("points readers at the official ChatGPT download link", async () => {
+test("points readers at the official Claude download link", async () => {
   const html = await loadIndexHtml();
   const visibleText = getSlideText(html, 30);
 
-  assert.match(visibleText, /chatgpt\.com\/download/);
+  assert.match(visibleText, /claude\.ai\/download/);
   assert.doesNotMatch(html, /hermes-agent\.nousresearch\.com/);
 });
 
-test("tells students the advanced setup waits until they are home", async () => {
+test("walks students through the four-step build-your-own roadmap", async () => {
   const visibleText = getSlideText(await loadIndexHtml(), 37);
 
-  assert.match(visibleText, /回家/);
-  assert.match(visibleText, /ChatGPT Plus/);
+  assert.match(visibleText, /Codex/);
+  assert.match(visibleText, /MCP/);
   assert.match(visibleText, /Buffer/);
 });
 
@@ -414,14 +414,14 @@ test("warns about the lifetime channel limit before connecting accounts", async 
   assert.match(visibleText, /Threads 必須設為公開/);
 });
 
-test("provides eleven copyable prompt cards wired to existing prompt bodies", async () => {
+test("provides twelve copyable prompt cards wired to existing prompt bodies", async () => {
   const html = await loadIndexHtml();
   const targets = [...html.matchAll(/data-copy-target="([^"]+)"/g)].map(
     (match) => match[1],
   );
 
-  assert.equal(targets.length, 11);
-  assert.equal(new Set(targets).size, 11);
+  assert.equal(targets.length, 12);
+  assert.equal(new Set(targets).size, 12);
 
   for (const targetId of targets) {
     assert.match(
